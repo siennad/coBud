@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { View, Text, Picker } from 'react-native';
-import {connect} from 'react-redux';
-import { employeeUpdate } from '../actions';
+import { connect } from 'react-redux';
+import { placeUpdate } from '../actions';
 import { CardSection, Input } from './common';
 
-class EmployeeForm extends Component {
-  render (){
+class PlaceForm extends Component {
+  render() {
     return (
       <View>
         <CardSection>
@@ -13,7 +13,7 @@ class EmployeeForm extends Component {
             label="Location"
             placeholder="name"
             value={this.props.item}
-            onChangeText={value => this.props.employeeUpdate({ prop: 'item', value })}
+            onChangeText={value => this.props.placeUpdate({ prop: 'item', value })}
           />
         </CardSection>
 
@@ -21,18 +21,18 @@ class EmployeeForm extends Component {
           <Input
             label="Address"
             placeholder=""
-            value ={this.props.phone}
-            onChangeText = {value => this.props.employeeUpdate({ prop: 'phone', value})}
+            value={this.props.phone}
+            onChangeText={value => this.props.placeUpdate({ prop: 'phone', value })}
           />
         </CardSection>
 
-        <CardSection style = {{ flexDirection: 'row'}}>
-          <Text style = {styles.pickerTextStyle}>Type</Text>
+        <CardSection style={{ flexDirection: 'row' }}>
+          <Text style={styles.pickerTextStyle}>Type</Text>
           <Picker
-              style={{ flex: 0.7 }}
-              selectedValue = {this.props.shift}
-              onValueChange={value => this.props.employeeUpdate({ prop: 'shift', value})}
-            >
+            style={{ flex: 0.7 }}
+            selectedValue={this.props.shift}
+            onValueChange={value => this.props.placeUpdate({ prop: 'shift', value })}
+          >
             <Picker.Item label="Restaurant" value="GameCopy" />
             <Picker.Item label="Bar" value="PCComponents" />
             <Picker.Item label="Monitor" value="Monitor" />
@@ -57,9 +57,9 @@ const styles = {
 };
 
 const mapStateToProps = (state) => {
-  const {item, phone, shift} = state.employeeForm;
+  const { item, phone, shift } = state.placeForm;
 
-  return {item, phone, shift};
+  return { item, phone, shift };
 };
 
-export default connect (mapStateToProps, { employeeUpdate }) (EmployeeForm);
+export default connect(mapStateToProps, { placeUpdate })(PlaceForm);

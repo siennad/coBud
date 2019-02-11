@@ -13,7 +13,7 @@ const INITIAL_STATE = {
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case BUDDY_UPDATE:
-      return { ...state, [action.payload.prop]: action.payload.value};
+      return { ...state, [action.payload.prop]: action.payload.value };
     case BUDDY_CREATE:
       return INITIAL_STATE;
     case BUDDIES_SAVE_SUCCESS:

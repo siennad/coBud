@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import React, { Component } from 'react';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import { ListView } from 'react-native';
 import { buddyFetch } from '../actions';
 import ListItem from './ListItem';
@@ -38,18 +38,16 @@ class BuddyList extends Component {
       <ListView
         enableEmptySections
         dataSource={this.dataSource}
-        renderRow = {this.renderRow}
+        renderRow={this.renderRow}
       />
     );
   }
 }
 
 const mapStateToProps = state => {
-  const buddies = _.map(state.buddies, (val, uid) => {
-      return { ...val, uid };
-  });
+  const buddies = _.map(state.buddies, (val, uid) => ({ ...val, uid }));
 
   return { buddies };
 };
 
-export default connect(mapStateToProps, { buddiesFetch })(BuddyList);
+export default connect(mapStateToProps, { buddyFetch })(BuddyList);

@@ -1,43 +1,43 @@
 import _ from 'lodash';
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
-import Communications from 'react-native-communications';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { Communications } from 'react-native-communications';
 import BuddyForm from './BuddyForm';
-import {buddyUpdate, buddySave, buddyDelete} from '../actions';
+import { buddyUpdate, buddySave, buddyDelete } from '../actions';
 import { Card, CardSection, Button, Confirm } from './common';
 
 class BuddyEdit extends Component {
-  state = { showModal: false};
+  state = { showModal: false };
 
-  componentWillMount(){
+  componentWillMount() {
     _.each(this.props.buddy, (value, prop) => {
-      this.props.buddyUpdate({prop, value});
+      this.props.buddyUpdate({ prop, value });
     });
   }
 
-  onButtonPress(){
-    const {item, phone , platform} = this.props;
+  onButtonPress() {
+    const { item, phone, platform } = this.props;
 
-    this.props.buddySave({item, phone, platform, uid: this.props.buddy.uid})
+    this.props.buddySave({ item, phone, platform, uid: this.props.buddy.uid });
   }
 
-  onTextPress(){
-    const {phone, platform} = this.props;
+  onTextPress() {
+    const { phone, platform } = this.props;
 
     Communications.text(phone, `You have a buddy on ${shift}`);
   }
 
-  onAccept(){
+  onAccept() {
     const { uid } = this.props.buddy;
 
     this.props.buddyDelete({ uid });
   }
 
-  onDecline(){
+  onDecline() {
     this.setState({ showModal: false });
   }
 
-  render (){
+  render() {
     return (
       <Card>
         <BuddyForm />
@@ -62,8 +62,8 @@ class BuddyEdit extends Component {
 
         <Confirm
           visible={this.state.showModal}
-          onAccept = {this.onAccept.bind(this)}
-          onDecline = {this.onDecline.bind(this)}
+          onAccept={this.onAccept.bind(this)}
+          onDecline={this.onDecline.bind(this)}
         >
           Are you sure you want to delete this?
         </Confirm>
@@ -80,4 +80,4 @@ const mapStateToProps = (state) => {
 
 export default connect(mapStateToProps, {
   buddyUpdate, buddySave, buddyDelete
-}) (BuddyEdit);
+})(BuddyEdit);

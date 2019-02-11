@@ -1,46 +1,46 @@
 import _ from 'lodash';
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
-import Communications from 'react-native-communications';
-import EmployeeForm from './EmployeeForm';
-import {employeeUpdate, employeeSave, employeeDelete} from '../actions';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { Communications } from 'react-native-communications';
+import PlaceForm from './PlaceForm';
+import { placeUpdate, placeSave, placeDelete } from '../actions';
 import { Card, CardSection, Button, Confirm } from './common';
 
-class EmployeeEdit extends Component {
-  state = { showModal: false};
+class PlaceEdit extends Component {
+  state = { showModal: false };
 
-  componentWillMount(){
-    _.each(this.props.employee, (value, prop) => {
-      this.props.employeeUpdate({prop, value});
+  componentWillMount() {
+    _.each(this.props.place, (value, prop) => {
+      this.props.placeUpdate({ prop, value });
     });
   }
 
-  onButtonPress(){
-    const {item, phone , shift} = this.props;
+  onButtonPress() {
+    const { item, phone, shift } = this.props;
 
-    this.props.employeeSave({item, phone, shift, uid: this.props.employee.uid})
+    this.props.placeSave({ item, phone, shift, uid: this.props.place.uid });
   }
 
-  onTextPress(){
-    const {phone, shift} = this.props;
+  onTextPress() {
+    const { phone, shift } = this.props;
 
     Communications.text(phone, `Your upcoming shift is on ${shift}`);
   }
 
-  onAccept(){
-    const { uid } = this.props.employee;
+  onAccept() {
+    const { uid } = this.props.place;
 
-    this.props.employeeDelete({ uid });
+    this.props.placeDelete({ uid });
   }
 
-  onDecline(){
+  onDecline() {
     this.setState({ showModal: false });
   }
 
-  render (){
+  render() {
     return (
       <Card>
-        <EmployeeForm />
+        <PlaceForm />
 
         <CardSection>
           <Button onPress={this.onButtonPress.bind(this)}>
@@ -62,8 +62,8 @@ class EmployeeEdit extends Component {
 
         <Confirm
           visible={this.state.showModal}
-          onAccept = {this.onAccept.bind(this)}
-          onDecline = {this.onDecline.bind(this)}
+          onAccept={this.onAccept.bind(this)}
+          onDecline={this.onDecline.bind(this)}
         >
           Are you sure you want to delete this?
         </Confirm>
@@ -73,11 +73,11 @@ class EmployeeEdit extends Component {
 }
 
 const mapStateToProps = (state) => {
-  const { item, phone, shift } = state.employeeForm;
+  const { item, phone, shift } = state.placeForm;
 
   return { item, phone, shift };
 };
 
 export default connect(mapStateToProps, {
-  employeeUpdate, employeeSave, employeeDelete
-}) (EmployeeEdit);
+  placeUpdate, placeSave, placeDelete
+})(PlaceEdit);
