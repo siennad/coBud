@@ -1,12 +1,13 @@
 
 import React from 'react';
 import { View } from 'react-native';
+import { withTheme } from 'react-native-material-ui';
 
 const CardSection = (props) => (
-    <View style={[styles.containerStyle, props.style]}>
-      {props.children}
-    </View>
-  );
+  <View style={[styles.containerStyle, props.style]}>
+    {props.children}
+  </View>
+);
 
 const styles = {
   containerStyle: {
@@ -20,4 +21,4 @@ const styles = {
   }
 };
 
-export { CardSection };
+export default withTheme(CardSection);

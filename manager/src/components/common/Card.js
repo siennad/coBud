@@ -1,12 +1,13 @@
 
 import React from 'react';
 import { View } from 'react-native';
+import { withTheme } from 'react-native-material-ui';
 
 const Card = (props) => (
-    <View style={styles.containerStyle}>
-      {props.children}
-    </View>
-  );
+  <View style={styles.containerStyle}>
+    {props.children}
+  </View>
+);
 
 const styles = {
   containerStyle: {
@@ -25,4 +26,4 @@ const styles = {
   }
 };
 
-export { Card };
+export default withTheme(Card);

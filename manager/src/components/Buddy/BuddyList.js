@@ -1,3 +1,5 @@
+//This is the index.js / Connections component
+
 import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';

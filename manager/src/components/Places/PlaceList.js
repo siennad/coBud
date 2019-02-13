@@ -1,15 +1,17 @@
+//This is the index.js file
 import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { ListView } from 'react-native';
 import { placesFetch } from '../../actions';
-import ListItem from './PlaceListItem';
+import PlaceListItem from './PlaceListItem';
 
 class PlaceList extends Component {
-  componentWillMount() {
-    this.props.placesFetch();
+  constructor(props) {
+    super(props);
+    props.placesFetch();
 
-    this.createDataSource(this.props);
+    this.createDataSource(props);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -29,13 +31,13 @@ class PlaceList extends Component {
   }
 
   renderRow(place) {
-    return <ListItem place={place} />;
+    return <PlaceListItem place={place} />;
   }
 
   render() {
     console.log(this.props);
     return (
-      <ListView
+      <PlaceListItem
         enableEmptySections
         dataSource={this.dataSource}
         renderRow={this.renderRow}

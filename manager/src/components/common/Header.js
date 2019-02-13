@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { Text, View } from 'react-native';
+import { withTheme } from 'react-native-material-ui';
 
 const Header = (props) => {
   const { textStyle } = styles;
@@ -32,4 +33,4 @@ const styles = {
   }
 };
 
-export { Header };
+export default withTheme(Header);

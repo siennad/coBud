@@ -1,10 +1,14 @@
 import React, { Component } from 'react';
-import { Provider } from 'react-redux';
+// import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import firebase from 'firebase';
 import ReduxThunk from 'redux-thunk';
+import { ThemeContext, getTheme } from 'react-native-material-ui';
+
 import reducers from './reducers';
 import Router from './Router';
+
+import { uiTheme } from './components/common/commonStyle';
 
 class App extends Component {
   componentWillMount() {
@@ -23,9 +27,9 @@ class App extends Component {
     const store = createStore(reducers, {}, applyMiddleware(ReduxThunk));
 
     return (
-      <Provider store={store}>
+      <ThemeContext.Provider store={store} value={getTheme(uiTheme)}>
         <Router />
-      </Provider>
+      </ThemeContext.Provider>
     );
   }
 }

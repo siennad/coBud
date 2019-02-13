@@ -1,3 +1,4 @@
+//This is the index.js file
 import React, { Component } from 'react';
 import { Text } from 'react-native';
 import { connect } from 'react-redux';

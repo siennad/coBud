@@ -1,5 +1,6 @@
 import React from 'react';
 import { TextInput, View, Text } from 'react-native';
+import { withTheme } from 'react-native-material-ui';
 
 const Input = ({ label, value, onChangeText, placeholder, secureTextEntry }) => {
   const { inputStyle, labelStyle, containerStyle } = styles;
@@ -42,4 +43,4 @@ const styles = {
   }
 };
 
-export { Input };
+export default withTheme(Input);

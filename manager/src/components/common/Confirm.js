@@ -1,5 +1,7 @@
 import React from 'react';
 import { Text, View, Modal } from 'react-native';
+import { withTheme } from 'react-native-material-ui';
+
 import { CardSection } from './CardSection';
 import { Button } from './Button';
 
@@ -47,4 +49,4 @@ const styles = {
   }
 };
 
-export { Confirm };
+export default withTheme(Confirm);

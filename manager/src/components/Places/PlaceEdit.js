@@ -7,11 +7,14 @@ import { placeUpdate, placeSave, placeDelete } from '../../actions';
 import { Card, CardSection, Button, Confirm } from '../common';
 
 class PlaceEdit extends Component {
-  state = { showModal: false };
 
-  componentWillMount() {
-    _.each(this.props.place, (value, prop) => {
-      this.props.placeUpdate({ prop, value });
+  constructor(props) {
+    super(props);
+
+    this.state = { showModal: false };
+
+    _.each(props.place, (value, prop) => {
+      props.placeUpdate({ prop, value });
     });
   }
 
