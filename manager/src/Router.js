@@ -5,8 +5,7 @@ import PlaceList from './components/PlaceList';
 import PlaceCreate from './components/PlaceCreate';
 import PlaceEdit from './components/PlaceEdit';
 
-const RouterComponent = () => {
-  return (
+const RouterComponent = () => (
     <Router sceneStyle={{ paddingTop: 65 }}>
       <Scene key="auth">
         <Scene key="login" component={LoginForm} title="Login" />
@@ -26,6 +25,5 @@ const RouterComponent = () => {
       </Scene>
     </Router>
   );
-}
 
 export default RouterComponent;

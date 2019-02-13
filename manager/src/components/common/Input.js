@@ -8,12 +8,12 @@ const Input = ({ label, value, onChangeText, placeholder, secureTextEntry }) => 
     <View style={containerStyle}>
       <Text style={labelStyle}>{label}</Text>
       <TextInput
-        secureTextEntry = {secureTextEntry}
-        placeholder = {placeholder}
+        secureTextEntry={secureTextEntry}
+        placeholder={placeholder}
         underlineColorAndroid='transparent'
-        autoCorrect = {false}
-        style = {inputStyle}
-        value = {value}
+        autoCorrect={false}
+        style={inputStyle}
+        value={value}
         onChangeText={onChangeText}
       />
     </View>

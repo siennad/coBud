@@ -7,14 +7,12 @@ import {
   BUDDIES_SAVE_SUCCESS
 } from './types';
 
-export const buddyUpdate = ({ prop, value }) => {
-  return {
+export const buddyUpdate = ({ prop, value }) => ({
     type: BUDDY_UPDATE,
     payload: { prop, value }
-  };
-};
+  });
 
-export const buddyCreate = ({ item, phone, platform }) =>{
+export const buddyCreate = ({ item, phone, platform }) => {
   const { currentUser } = firebase.auth();
 
   return (dispatch) => {
@@ -41,7 +39,7 @@ export const buddiesFetch = () => {
 export const buddySave = ({ item, phone, platform, uid }) => {
   const { currentUser } = firebase.auth();
 
-  return (dispatch) =>{
+  return (dispatch) => {
     firebase.database().ref(`/users/${currentUser.uid}/buddies/${uid}`)
       .set({ item, phone, platform })
       .then(() => {

@@ -4,14 +4,14 @@ import { CardSection } from './CardSection';
 import { Button } from './Button';
 
 const Confirm = ({ children, visible, onAccept, onDecline }) => {
-  const {containerStyle, textStyle, cardSectionStyle } = styles;
+  const { containerStyle, textStyle, cardSectionStyle } = styles;
 
   return (
     <Modal
       visible={visible}
       transparent
       animationType="slide"
-      onRequestClose={() => {}}
+      onRequestClose={() => { }}
     >
       <View style={containerStyle}>
         <CardSection style={cardSectionStyle}>
@@ -30,7 +30,7 @@ const Confirm = ({ children, visible, onAccept, onDecline }) => {
 };
 
 const styles = {
-  cardSectionStyle:{
+  cardSectionStyle: {
     justifyContent: 'center'
   },
   textStyle: {
