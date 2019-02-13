@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
 import { Text, TouchableWithoutFeedback, View } from 'react-native';
-import {Actions} from 'react-native-router-flux';
+import { Actions } from 'react-native-router-flux';
 import { CardSection } from './common';
 
 class ListItem extends Component {
   onRowPress() {
-    Actions.employeeEdit({employee: this.props.employee});
+    Actions.placeEdit({ place: this.props.place });
   }
 
   render() {
-    const { item } = this.props.employee;
-    const { phone } = this.props.employee;
+    const { item } = this.props.place;
+    const { phone } = this.props.place;
 
     return (
       <TouchableWithoutFeedback onPress={this.onRowPress.bind(this)}>

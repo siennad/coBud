@@ -4,11 +4,11 @@ import React from 'react';
 import { Text, View } from 'react-native';
 
 const Header = (props) => {
-  const {textStyle} = styles;
+  const { textStyle } = styles;
 
   return (
-    <View style = {styles.viewStyle}>
-      <Text style = {textStyle}>{props.headerText}</Text>
+    <View style={styles.viewStyle}>
+      <Text style={textStyle}>{props.headerText}</Text>
     </View>
   );
 };
@@ -23,13 +23,13 @@ const styles = {
     position: 'relative',
     elevation: 4,
     shadowColor: 'red',
-    shadowOffset: {width: 10, height: 10},
+    shadowOffset: { width: 10, height: 10 },
     shadowOpacity: 0.5,
     shadowRadius: 10,
   },
-  textStyle:{
+  textStyle: {
     fontSize: 20,
   }
 };
 
-export {Header};
+export { Header };

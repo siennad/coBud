@@ -4,7 +4,7 @@ export const LOGIN_USER_SUCCESS = 'login_user_success';
 export const LOGIN_USER_FAIL = 'login_user_fail';
 export const LOGIN_USER = 'login_user';
 
-export const EMPLOYEE_UPDATE = 'employee_update';
-export const EMPLOYEE_CREATE = 'employee_create';
-export const EMPLOYEES_FETCH_SUCCESS = 'employees_fetch_success';
-export const EMPLOYEES_SAVE_SUCCESS = 'employees_save_success';
+export const PLACE_UPDATE = 'place_update';
+export const PLACE_CREATE = 'place_create';
+export const PLACES_FETCH_SUCCESS = 'places_fetch_success';
+export const PLACES_SAVE_SUCCESS = 'places_save_success';

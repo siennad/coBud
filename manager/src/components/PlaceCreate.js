@@ -1,20 +1,20 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { buddyUpdate, buddyCreate } from '../actions';
+import { placeUpdate, placeCreate } from '../actions';
 import { Card, CardSection, Button } from './common';
-import BuddyForm from './BuddyForm';
+import PlaceForm from './PlaceForm';
 
-class BuddyCreate extends Component {
+class PlaceCreate extends Component {
   onButtonPress() {
-    const { item, phone, platform } = this.props;
+    const { item, phone, shift } = this.props;
 
-    this.props.buddyCreate({ item, phone, platform: platform || 'Facebook' });
+    this.props.placeCreate({ item, phone, shift: shift || 'Game Copy' });
   }
 
   render() {
     return (
       <Card>
-        <BuddyForm {...this.props} />
+        <PlaceForm {...this.props} />
         <CardSection>
           <Button onPress={this.onButtonPress.bind(this)}>
             Create
@@ -26,11 +26,11 @@ class BuddyCreate extends Component {
 }
 
 const mapStateToProps = (state) => {
-  const { item, phone, platform } = state.buddyForm;
+  const { item, phone, shift } = state.placeForm;
 
-  return { item, phone, platform };
+  return { item, phone, shift };
 };
 
 export default connect(mapStateToProps, {
-  buddyUpdate, buddyCreate
-})(BuddyCreate);
+  placeUpdate, placeCreate
+})(PlaceCreate);
