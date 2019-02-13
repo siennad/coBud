@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { buddyUpdate, buddyCreate } from '../actions';
-import { Card, CardSection, Button } from './common';
+import { buddyUpdate, buddyCreate } from '../../actions';
+import { Card, CardSection, Button } from '../common';
 import BuddyForm from './BuddyForm';
 
 class BuddyCreate extends Component {

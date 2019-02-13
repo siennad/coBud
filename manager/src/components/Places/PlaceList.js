@@ -2,12 +2,12 @@ import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { ListView } from 'react-native';
-import { buddyFetch } from '../actions';
-import ListItem from './ListItem';
+import { placesFetch } from '../../actions';
+import ListItem from './PlaceListItem';
 
-class BuddyList extends Component {
+class PlaceList extends Component {
   componentWillMount() {
-    this.props.buddiesFetch();
+    this.props.placesFetch();
 
     this.createDataSource(this.props);
   }
@@ -20,16 +20,16 @@ class BuddyList extends Component {
     this.createDataSource(nextProps);
   }
 
-  createDataSource({ buddies }) {
+  createDataSource({ places }) {
     const ds = new ListView.DataSource({
       rowHasChanged: (r1, r2) => r1 !== r2
     });
 
-    this.dataSource = ds.cloneWithRows(buddies);
+    this.dataSource = ds.cloneWithRows(places);
   }
 
-  renderRow(buddy) {
-    return <ListItem buddy={buddy} />;
+  renderRow(place) {
+    return <ListItem place={place} />;
   }
 
   render() {
@@ -45,9 +45,9 @@ class BuddyList extends Component {
 }
 
 const mapStateToProps = state => {
-  const buddies = _.map(state.buddies, (val, uid) => ({ ...val, uid }));
+  const places = _.map(state.places, (val, uid) => ({ ...val, uid }));
 
-  return { buddies };
+  return { places };
 };
 
-export default connect(mapStateToProps, { buddyFetch })(BuddyList);
+export default connect(mapStateToProps, { placesFetch })(PlaceList);

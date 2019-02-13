@@ -3,8 +3,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Communications } from 'react-native-communications';
 import PlaceForm from './PlaceForm';
-import { placeUpdate, placeSave, placeDelete } from '../actions';
-import { Card, CardSection, Button, Confirm } from './common';
+import { placeUpdate, placeSave, placeDelete } from '../../actions';
+import { Card, CardSection, Button, Confirm } from '../common';
 
 class PlaceEdit extends Component {
   state = { showModal: false };
