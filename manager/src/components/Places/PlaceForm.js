@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { View, Text, Picker } from 'react-native';
 import { connect } from 'react-redux';
-import { placeUpdate } from '../actions';
-import { CardSection, Input } from './common';
+import { placeUpdate } from '../../actions';
+import { CardSection, Input } from '../common';
 
 class PlaceForm extends Component {
   render() {

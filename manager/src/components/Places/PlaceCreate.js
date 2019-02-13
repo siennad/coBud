@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { placeUpdate, placeCreate } from '../actions';
-import { Card, CardSection, Button } from './common';
+import { placeUpdate, placeCreate } from '../../actions';
+import { Card, CardSection, Button } from '../common';
 import PlaceForm from './PlaceForm';
 
 class PlaceCreate extends Component {

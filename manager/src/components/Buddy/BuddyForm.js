@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { View, Text, Picker } from 'react-native';
 import { connect } from 'react-redux';
-import { buddyUpdate } from '../actions';
-import { CardSection, Input } from './common';
+import { buddyUpdate } from '../../actions';
+import { CardSection, Input } from '../common';
 
 class BuddyForm extends Component {
   render() {

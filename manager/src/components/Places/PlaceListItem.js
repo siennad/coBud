@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { Text, TouchableWithoutFeedback, View } from 'react-native';
 import { Actions } from 'react-native-router-flux';
-import { CardSection } from './common';
+import { CardSection } from '../common';
 
-class ListItem extends Component {
+class PlaceListItem extends Component {
   onRowPress() {
     Actions.placeEdit({ place: this.props.place });
   }
@@ -38,4 +38,4 @@ const styles = {
   }
 };
 
-export default ListItem;
+export default PlaceListItem;

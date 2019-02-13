@@ -3,8 +3,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Communications } from 'react-native-communications';
 import BuddyForm from './BuddyForm';
-import { buddyUpdate, buddySave, buddyDelete } from '../actions';
-import { Card, CardSection, Button, Confirm } from './common';
+import { buddyUpdate, buddySave, buddyDelete } from '../../actions';
+import { Card, CardSection, Button, Confirm } from '../common';
 
 class BuddyEdit extends Component {
   state = { showModal: false };
@@ -24,7 +24,7 @@ class BuddyEdit extends Component {
   onTextPress() {
     const { phone, platform } = this.props;
 
-    Communications.text(phone, `You have a buddy on ${shift}`);
+    Communications.text(phone, `You have a buddy on ${platform}`);
   }
 
   onAccept() {
