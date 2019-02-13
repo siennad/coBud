@@ -9,34 +9,38 @@ import {
   LOGOUT_USER
 } from './types';
 
-export const emailChanged = (text) => ({
+export const emailChanged = text => ({
   type: EMAIL_CHANGED,
   payload: text
 });
 
-export const passwordChanged = (text) => ({
+export const passwordChanged = text => ({
   type: PASSWORD_CHANGED,
   payload: text
 });
 
-export const loginUser = ({ email, password }) => (dispatch) => {
+export const loginUser = ({ email, password }) => dispatch => {
   dispatch({ type: LOGIN_USER });
 
-  firebase.auth().signInWithEmailAndPassword(email, password)
+  firebase
+    .auth()
+    .signInWithEmailAndPassword(email, password)
     .then(user => loginUserSuccess(dispatch, user))
-    .catch((e) => {
+    .catch(e => {
       console.log(e);
-      return firebase.auth().createUserWithEmailAndPassword(email, password)
+      return firebase
+        .auth()
+        .createUserWithEmailAndPassword(email, password)
 
         .then(user => loginUserSuccess(dispatch, user))
-        .catch((err) => {
+        .catch(err => {
           console.log(err);
           return loginUserFail(dispatch);
         });
     });
 };
 
-const loginUserFail = (dispatch) => {
+const loginUserFail = dispatch => {
   dispatch({ type: LOGIN_USER_FAIL });
 };
 
@@ -48,12 +52,16 @@ const loginUserSuccess = async (dispatch, user) => {
   Actions.main();
 };
 
-export const logoutUser = () => (dispatch) => {
+export const logoutUser = () => dispatch => {
   dispatch({ type: LOGOUT_USER });
 
-  firebase.auth().signOut().then(() => {
-    Actions.auth();
-  }).catch((error) => {
-    console.log(error);
-  });
+  firebase
+    .auth()
+    .signOut()
+    .then(() => {
+      Actions.auth();
+    })
+    .catch(error => {
+      console.log(error);
+    });
 };
