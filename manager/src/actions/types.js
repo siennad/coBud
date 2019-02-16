@@ -8,3 +8,9 @@ export const PLACE_UPDATE = 'place_update';
 export const PLACE_CREATE = 'place_create';
 export const PLACES_FETCH_SUCCESS = 'places_fetch_success';
 export const PLACES_SAVE_SUCCESS = 'places_save_success';
+
+export const ON_HOME = 'on_home';
+export const ON_MAP = 'on_map';
+export const ON_CONNECTION = 'on_connection';
+export const ON_NOTIFICATION = 'on_notification';
+export const ON_MENU = 'on_menu';
