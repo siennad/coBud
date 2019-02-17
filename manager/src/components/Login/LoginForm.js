@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 import { Text } from 'react-native';
 import { connect } from 'react-redux';
+import { Form, Input, Label, Item, Button, Container } from 'native-base';
+
 import { emailChanged, passwordChanged, loginUser } from '../../actions';
-import { Card, CardSection, Input, Button, Spinner } from '../common';
+//import { Card, CardSection, Input, Button, Spinner } from '../common';
+import { Spinner } from '../common';
 
 class LoginForm extends Component {
   onEmailChange(text) {
@@ -15,52 +18,46 @@ class LoginForm extends Component {
 
   onButtonPress() {
     const { email, password } = this.props;
-
+    console.log('login user');
     this.props.loginUser({ email, password });
   }
 
-  renderButton() {
-    if (this.props.loading) {
-      return <Spinner size="large" />;
-    }
-
-    return (
-      <Button onPress={this.onButtonPress.bind(this)}>
-        Login
-      </Button>
-    );
-  }
-
   render() {
+    const { email, password, error, loading } = this.props;
     return (
-      <Card>
-        <CardSection>
-          <Input
-            label="Email"
-            placeholder="example@gmail.com"
-            onChangeText={this.onEmailChange.bind(this)}
-            value={this.props.email}
-          />
-        </CardSection>
+      <Container>
+        <Form>
+          <Item floatingLabel>
+            <Label>Email</Label>
+            <Input
 
-        <CardSection>
-          <Input
-            secureTextEntry
-            label="Password"
-            placeholder="password"
-            onChangeText={this.onPasswordChange.bind(this)}
-            value={this.props.password}
-          />
-        </CardSection>
+              onChangeText={this.onEmailChange.bind(this)}
+              value={email}
+            />
+          </Item>
+          <Item floatingLabel last>
+            <Label>Password</Label>
+            <Input
+              secureTextEntry
+              onChangeText={this.onPasswordChange.bind(this)}
+              value={password}
+            />
+          </Item>
+          <Text style={styles.errorTextStyle}>
+            {error}
+          </Text>
 
-        <Text style={styles.errorTextStyle}>
-          {this.props.error}
-        </Text>
 
-        <CardSection>
-          {this.renderButton()}
-        </CardSection>
-      </Card>
+          {
+            (loading)
+              ? <Spinner size="large" />
+              : <Button primary rounded full onPress={this.onButtonPress.bind(this)} >
+                <Text style={{ color: 'white' }}>Login</Text>
+              </Button>
+          }
+
+        </Form>
+      </Container>
     );
   }
 }

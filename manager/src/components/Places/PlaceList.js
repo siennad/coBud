@@ -6,13 +6,13 @@ import { placesFetch } from '../../actions';
 import ListItem from './PlaceListItem';
 
 class PlaceList extends Component {
-  componentWillMount() {
+  componentDidMount() {
     this.props.placesFetch();
 
     this.createDataSource(this.props);
   }
 
-  componentWillReceiveProps(nextProps) {
+  getDerivedStateFromProps(nextProps) {
     // nextProps are the next set of props that this component
     // will be rendered with
     // this.props us stull the old set of props

@@ -9,7 +9,7 @@ import { Card, CardSection, Button, Confirm } from '../common';
 class BuddyEdit extends Component {
   state = { showModal: false };
 
-  componentWillMount() {
+  componentDidMount() {
     _.each(this.props.buddy, (value, prop) => {
       this.props.buddyUpdate({ prop, value });
     });
