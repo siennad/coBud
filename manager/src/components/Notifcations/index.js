@@ -3,12 +3,12 @@ import { Container, Content, Header, Item, Icon, Input, Text } from 'native-base
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 import MainFooterBar from '../common/MainFooterBar';
-import { navigateToHome } from '../../actions/NavigationActions';
+import { navigateToNotifications } from '../../actions/NavigationActions';
 
-class Home extends Component {
+class Notifications extends Component {
 
   componentDidMount() {
-    navigateToHome();
+    navigateToNotifications();
   }
 
   componentWillUnmount() {
@@ -26,7 +26,7 @@ class Home extends Component {
         </Header>
         <Content>
           <Item>
-            <Text>home</Text>
+            <Text>Notifications Page: Coming up later!</Text>
           </Item>
         </Content>
         <MainFooterBar />
@@ -35,4 +35,4 @@ class Home extends Component {
   }
 }
 
-export default connect(undefined, { navigateToHome })(Home);
+export default connect(undefined, { navigateToNotifications })(Notifications);

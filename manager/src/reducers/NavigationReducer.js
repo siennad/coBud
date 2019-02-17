@@ -12,32 +12,27 @@ export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case ON_MAP:
       return {
-        ...INITIAL_STATE,
         isOnMap: true
       };
 
     case ON_CONNECTION:
       return {
-        ...INITIAL_STATE,
         isOnConnection: true
       };
 
     case ON_NOTIFICATION:
       return {
-        ...INITIAL_STATE,
         isOnNotification: true
       };
 
     case ON_MENU:
       return {
-        ...INITIAL_STATE,
         isOnMenu: true
       };
 
     case ON_HOME:
     default:
       return {
-        ...INITIAL_STATE,
         isOnHome: true
       };
   }

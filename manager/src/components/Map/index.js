@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import { Container, Content, Header, Item, Icon, Input, Text } from 'native-base';
-import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
+import { connect } from 'react-redux';
 import MainFooterBar from '../common/MainFooterBar';
-import { navigateToHome } from '../../actions/NavigationActions';
+import { navigateToMap } from '../../actions/NavigationActions';
 
-class Home extends Component {
+class Map extends Component {
 
   componentDidMount() {
-    navigateToHome();
+    navigateToMap();
   }
 
   componentWillUnmount() {
@@ -26,7 +26,7 @@ class Home extends Component {
         </Header>
         <Content>
           <Item>
-            <Text>home</Text>
+            <Text>map</Text>
           </Item>
         </Content>
         <MainFooterBar />
@@ -35,4 +35,4 @@ class Home extends Component {
   }
 }
 
-export default connect(undefined, { navigateToHome })(Home);
+export default connect(undefined, { navigateToMap })(Map);
