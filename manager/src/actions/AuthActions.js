@@ -32,11 +32,11 @@ const loginUserFail = (dispatch) => {
   dispatch({ type: LOGIN_USER_FAIL });
 };
 
-const loginUserSuccess = (dispatch, user) => {
-  dispatch({
+const loginUserSuccess = async (dispatch, user) => {
+  await dispatch({
     type: LOGIN_USER_SUCCESS,
     payload: user
   });
 
-  Actions.main();
+  Actions.home();
 };

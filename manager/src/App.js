@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
-//import { StyleProvider } from 'native-base';
+import { StyleProvider } from 'native-base';
 import firebase from 'firebase';
 import ReduxThunk from 'redux-thunk';
 import reducers from './reducers';
 import Router from './Router';
-//import getTheme from '../native-base-theme/components';
-//import material from '../native-base-theme/variables/material';
+import getTheme from '../native-base-theme/components';
+import material from '../native-base-theme/variables/material';
 
 class App extends Component {
   constructor(props) {
@@ -29,9 +29,9 @@ class App extends Component {
 
     return (
       <Provider store={store}>
-        {/* <StyleProvider style={getTheme(material)}>*/}
-        <Router />
-        {/*</StyleProvider>*/}
+        <StyleProvider style={getTheme(material)}>
+          <Router />
+        </StyleProvider>
       </Provider>
     );
   }
