@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import firebase from 'firebase';
 import { Container, Content, Header, Item, Icon, Input, Text } from 'native-base';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
@@ -9,6 +10,7 @@ class Home extends Component {
 
   componentDidMount() {
     navigateToHome();
+    console.log(firebase.auth().currentUser);
   }
 
   componentWillUnmount() {
@@ -29,7 +31,7 @@ class Home extends Component {
             <Text>home</Text>
           </Item>
         </Content>
-        <MainFooterBar />
+        <MainFooterBar page={this.props.sceneKey} />
       </Container>
     );
   }

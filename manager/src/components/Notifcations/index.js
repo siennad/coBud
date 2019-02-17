@@ -29,7 +29,7 @@ class Notifications extends Component {
             <Text>Notifications Page: Coming up later!</Text>
           </Item>
         </Content>
-        <MainFooterBar />
+        <MainFooterBar page={this.props.sceneKey} />
       </Container>
     );
   }

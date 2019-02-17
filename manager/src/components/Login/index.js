@@ -1,13 +1,15 @@
+/* eslint-disable no-extra-boolean-cast */
 import firebase from 'firebase';
 import { Actions } from 'react-native-router-flux';
 import React, { Component } from 'react';
-import { Container, Content, Card } from 'native-base';
+import { Container, Content, Grid, Row } from 'native-base';
 import LoginForm from './LoginForm';
 
 class Login extends Component {
 
   componentDidMount() {
-    if (firebase.auth()) {
+    console.log(firebase.auth().currentUser);
+    if (firebase.auth().currentUser) {
       Actions.main();
     }
   }
@@ -16,12 +18,14 @@ class Login extends Component {
     return (
       <Container >
         <Content style={{ flex: 1, }} >
-          <Card
-            padder
-            style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}
-          >
-            <LoginForm />
-          </Card>
+          <Grid>
+            <Row />
+            <Row>
+              <LoginForm />
+            </Row>
+            <Row />
+          </Grid>
+
         </Content>
       </Container>
     );
