@@ -7,6 +7,11 @@ import { navigateToMap } from '../../actions/NavigationActions';
 
 class Map extends Component {
 
+  constructor(props) {
+    super(props);
+    console.log(props);
+  }
+
   componentDidMount() {
     navigateToMap();
   }
@@ -29,7 +34,7 @@ class Map extends Component {
             <Text>map</Text>
           </Item>
         </Content>
-        <MainFooterBar />
+        <MainFooterBar page={this.props.sceneKey} />
       </Container>
     );
   }

@@ -29,7 +29,7 @@ class Connections extends Component {
             <Text>connections</Text>
           </Item>
         </Content>
-        <MainFooterBar />
+        <MainFooterBar page={this.props.sceneKey} />
       </Container>
     );
   }

@@ -5,7 +5,8 @@ import {
   PASSWORD_CHANGED,
   LOGIN_USER_SUCCESS,
   LOGIN_USER_FAIL,
-  LOGIN_USER
+  LOGIN_USER,
+  LOGOUT_USER
 } from './types';
 
 export const emailChanged = (text) => ({
@@ -23,9 +24,16 @@ export const loginUser = ({ email, password }) => (dispatch) => {
 
   firebase.auth().signInWithEmailAndPassword(email, password)
     .then(user => loginUserSuccess(dispatch, user))
-    .catch(() => firebase.auth().createUserWithEmailAndPassword(email, password)
-      .then(user => loginUserSuccess(dispatch, user))
-      .catch(() => loginUserFail(dispatch)));
+    .catch((e) => {
+      console.log(e);
+      return firebase.auth().createUserWithEmailAndPassword(email, password)
+
+        .then(user => loginUserSuccess(dispatch, user))
+        .catch((err) => {
+          console.log(err);
+          return loginUserFail(dispatch);
+        });
+    });
 };
 
 const loginUserFail = (dispatch) => {
@@ -37,6 +45,16 @@ const loginUserSuccess = async (dispatch, user) => {
     type: LOGIN_USER_SUCCESS,
     payload: user
   });
+  Actions.main();
+};
 
-  Actions.home();
+export const logoutUser = () => (dispatch) => {
+  console.log('log out');
+  dispatch({ type: LOGOUT_USER });
+
+  firebase.auth().signOut().then(() => {
+    Actions.auth();
+  }).catch((error) => {
+    console.log(error);
+  });
 };

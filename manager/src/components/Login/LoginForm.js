@@ -8,6 +8,11 @@ import { emailChanged, passwordChanged, loginUser } from '../../actions';
 import { Spinner } from '../common';
 
 class LoginForm extends Component {
+
+  componentWillUnmount() {
+
+  }
+
   onEmailChange(text) {
     this.props.emailChanged(text);
   }
@@ -30,7 +35,6 @@ class LoginForm extends Component {
           <Item floatingLabel>
             <Label>Email</Label>
             <Input
-
               onChangeText={this.onEmailChange.bind(this)}
               value={email}
             />
