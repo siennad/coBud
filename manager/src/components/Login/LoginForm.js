@@ -22,18 +22,6 @@ class LoginForm extends Component {
     this.props.loginUser({ email, password });
   }
 
-  renderButton() {
-    if (this.props.loading) {
-      return <Spinner size="large" />;
-    }
-
-    return (
-      <Button primary rounded full onPress={this.onButtonPress.bind(this)} >
-        <Text style={{ color: 'white' }}>Login</Text>
-      </Button>
-    );
-  }
-
   render() {
     const { email, password, error, loading } = this.props;
     return (
