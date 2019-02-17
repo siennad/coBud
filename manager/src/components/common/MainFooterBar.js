@@ -11,15 +11,15 @@ class MainFooterBar extends Component {
           <Button active={this.props.isOnHome}>
             <Icon
               active={this.props.isOnHome}
-              name={this.props.isOnHome ? 'home' : 'home-outline'}
-              type="MaterialCommunityIcons"
+              name="home"
+              type="Entypo"
             />
           </Button>
           <Button active={this.props.isOnMap}>
             <Icon
               active={this.props.isOnMap}
-              name={this.props.isOnMap ? 'map-marked-alt' : 'map'}
-              type="FontAwesome"
+              name="map"
+              type="MaterialIcons"
             />
           </Button>
           <Button active={this.props.isOnConnection}>
@@ -39,8 +39,8 @@ class MainFooterBar extends Component {
           <Button active={this.props.isOnMenu}>
             <Icon
               active={this.props.isOnMenu}
-              name={this.props.isOnMenu ? 'menu-open' : 'menu'}
-              type="MaterialCommunityIcons"
+              name='menu'
+              type="MaterialIcons"
             />
           </Button>
         </FooterTab>

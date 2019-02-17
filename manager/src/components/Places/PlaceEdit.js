@@ -9,7 +9,7 @@ import { Card, CardSection, Button, Confirm } from '../common';
 class PlaceEdit extends Component {
   state = { showModal: false };
 
-  componentWillMount() {
+  componentDidMount() {
     _.each(this.props.place, (value, prop) => {
       this.props.placeUpdate({ prop, value });
     });
