@@ -75,6 +75,7 @@ class Connections extends Component {
       </List>
     );
   }
+  
   render() {
     return (
       <Container>
