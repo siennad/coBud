@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Container, Content, Header, Item, Icon, Input, Text } from 'native-base';
 import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
+import { Keyboard } from 'react-native';
+
 import MainFooterBar from '../common/MainFooterBar';
 import { navigateToMap } from '../../actions/NavigationActions';
 
@@ -13,7 +15,8 @@ class Map extends Component {
   }
 
   componentDidMount() {
-    navigateToMap();
+    this.props.navigateToMap();
+    Keyboard.dismiss();
   }
 
   componentWillUnmount() {

@@ -2,13 +2,16 @@ import React, { Component } from 'react';
 import { Container, Content, Header, Item, Icon, Input, Text } from 'native-base';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
+import { Keyboard } from 'react-native';
+
 import MainFooterBar from '../common/MainFooterBar';
 import { navigateToNotifications } from '../../actions/NavigationActions';
 
 class Notifications extends Component {
 
   componentDidMount() {
-    navigateToNotifications();
+    this.props.navigateToNotifications();
+    Keyboard.dismiss();
   }
 
   componentWillUnmount() {

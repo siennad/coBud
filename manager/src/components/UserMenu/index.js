@@ -16,6 +16,8 @@ import {
 } from 'native-base';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
+import { Keyboard } from 'react-native';
+
 import { logoutUser } from '../../actions/AuthActions';
 import MainFooterBar from '../common/MainFooterBar';
 import { navigateToMenu } from '../../actions/NavigationActions';
@@ -23,7 +25,8 @@ import { navigateToMenu } from '../../actions/NavigationActions';
 class UserMenu extends Component {
 
   componentDidMount() {
-    navigateToMenu();
+    this.props.navigateToMenu();
+    Keyboard.dismiss();
   }
 
   componentWillUnmount() {
@@ -32,6 +35,10 @@ class UserMenu extends Component {
 
   render() {
     const url = 'https://googlechrome.github.io/samples/picture-element/images/butterfly.webp'; //change later to user avatar
+
+    const { user } = this.props;
+    console.log(user);
+
     return (
       <Container>
         <Header searchBar rounded>
@@ -54,7 +61,7 @@ class UserMenu extends Component {
               <Right />
             </ListItem>
 
-            <ListItem button>
+            <ListItem button onPress={() => Actions.viewprofile({ user })}>
               <Left>
                 <Text>My Profiles</Text>
               </Left>
@@ -129,9 +136,12 @@ class UserMenu extends Component {
           </List>
         </Content>
         <MainFooterBar page={this.props.sceneKey} />
-      </Container>
+      </Container >
     );
   }
 }
 
-export default connect(undefined, { navigateToMenu, logoutUser })(UserMenu);
+const mapStateToProps = (state) =>
+  ({ user: state.auth.user, });
+
+export default connect(mapStateToProps, { navigateToMenu, logoutUser })(UserMenu);

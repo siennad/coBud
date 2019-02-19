@@ -18,48 +18,51 @@ class MainFooterBar extends Component {
       <Footer>
         <FooterTab>
           <Button
-            active={this.props.page === 'home' || this.props.isOnHome}
-            onPress={() => Actions.home()}
+            active={this.props.isOnHome || this.props.page.startsWith('index' || 'home')}
+            onPress={() => Actions.index()}
           >
             <Icon
-              active={this.props.page === 'home'}
+              active={this.props.isOnHome || this.props.page.startsWith('index' || 'home')}
               name="home"
               type="Entypo"
             />
           </Button>
           <Button
-            active={this.props.page === 'map' || this.props.isOnMap}
+            active={this.props.isOnMap || this.props.page.startsWith('map')}
             onPress={() => Actions.map()}
           >
             <Icon
-              active={this.props.page === 'map'}
+              active={this.props.isOnMap || this.props.page.startsWith('map')}
               name="map"
               type="MaterialIcons"
             />
           </Button>
-          <Button active={this.props.page === 'connections'} onPress={() => Actions.connections()}>
+          <Button
+            active={this.props.isOnConnection || this.props.page.startsWith('connections')}
+            onPress={() => Actions.connections()}
+          >
             <Icon
-              active={this.props.page === 'connections'}
-              name={this.props.page === 'connections' ? 'people' : 'people-outline'}
+              active={this.props.isOnConnection || this.props.page.startsWith('connections')}
+              name={this.props.isOnConnection ? 'people' : 'people-outline'}
               type="MaterialIcons"
             />
           </Button>
           <Button
-            active={this.props.page === 'notifications'}
+            active={this.props.isOnNotification || this.props.page.startsWith('notifications')}
             onPress={() => Actions.notifications()}
           >
             <Icon
-              active={this.props.page === 'notifications'}
-              name={this.props.page === 'notifications' ? 'notifications' : 'notifications-none'}
+              active={this.props.isOnNotification || this.props.page.startsWith('notifications')}
+              name={this.props.isOnNotification ? 'notifications' : 'notifications-none'}
               type="MaterialIcons"
             />
           </Button>
           <Button
-            active={this.props.page === 'usermenu' || this.props.isOnMenu}
+            active={this.props.isOnMenu || this.props.page.startsWith('usermenu')}
             onPress={() => Actions.usermenu()}
           >
             <Icon
-              active={!!this.props.isOnMenu}
+              active={this.props.isOnMenu || this.props.page.startsWith('usermenu')}
               name='menu'
               type="MaterialIcons"
             />
