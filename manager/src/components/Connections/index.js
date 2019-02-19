@@ -1,16 +1,14 @@
 import React, { Component } from 'react';
-import firebase from 'firebase';
 import { Container, Content, Header, Item, Icon, Input, Text } from 'native-base';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 import MainFooterBar from '../common/MainFooterBar';
-import { navigateToHome } from '../../actions/NavigationActions';
+import { navigateToConnections } from '../../actions/NavigationActions';
 
-class Home extends Component {
+class Connections extends Component {
 
   componentDidMount() {
-    navigateToHome();
-    console.log(firebase.auth().currentUser);
+    navigateToConnections();
   }
 
   componentWillUnmount() {
@@ -28,7 +26,7 @@ class Home extends Component {
         </Header>
         <Content>
           <Item>
-            <Text>home</Text>
+            <Text>connections</Text>
           </Item>
         </Content>
         <MainFooterBar page={this.props.sceneKey} />
@@ -37,4 +35,4 @@ class Home extends Component {
   }
 }
 
-export default connect(undefined, { navigateToHome })(Home);
+export default connect(undefined, { navigateToConnections })(Connections);
