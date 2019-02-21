@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
-import {
-  Container, Content, Header, Item, Icon, Input, Text,
-  List, ListItem, Left, Body, Right, Thumbnail,
-} from 'native-base';
-import { ListView, TouchableOpacity, StyleSheet, View } from 'react-native';
+import { Container, Content, Header, Item, Icon, Input, Text,
+         List, ListItem, Left, Body, Right, Thumbnail, Button } from 'native-base';
+import { Alert, ListView, TouchableOpacity, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 import MainFooterBar from '../common/MainFooterBar';
@@ -39,14 +37,13 @@ const data = [{
   image: image4
 }];
 
-const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
-
 class Connections extends Component {
   constructor(props) {
     super(props);
-
+    this.ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
     this.state = {
-      dataSource: ds.cloneWithRows(data),
+      basic: true,
+      listViewData: data,
     };
   }
 
@@ -58,22 +55,15 @@ class Connections extends Component {
     Actions.pop();
   }
 
-  eachMessage(x) {
-    return (
-      <List>
-        <TouchableOpacity>
-          <ListItem avatar>
-            <Left>
-              <Thumbnail source={x.image} />
-            </Left>
-            <Body>
-              <Text>{x.first_name}</Text>
-              <Text note>{x.message}</Text>
-            </Body>
-          </ListItem>
-        </TouchableOpacity>
-      </List>
-    );
+  deleteRow(secId, rowId, rowMap) {
+    rowMap[`${secId}${rowId}`].props.closeRow();
+    const newData = [...this.state.listViewData];
+    newData.splice(rowId, 1);
+    this.setState({ listViewData: newData });
+  }
+
+  aler(msg) {
+    console.log(msg);
   }
   
   render() {
@@ -88,18 +78,59 @@ class Connections extends Component {
         <Content>
           <Item>
             <Left>
-              <Text style={styles.textStyle}>My Connections</Text>
+              <Text style={styles.textTitle}>My Connections</Text>
             </Left>
             <Right>
-              <Icon name="person-add" />
+              <Button transparent primary style={{ marginRight: 19 }}>
+                <Icon name="person-add" />
+              </Button>
             </Right>
           </Item>
-          <View style={{ flex: 1 }}>
-            <ListView
-              dataSource={this.state.dataSource}
-              renderRow={(rowData) => this.eachMessage(rowData)}
-            />
-          </View>
+          <List
+            leftOpenValue={75}
+            rightOpenValue={-75}
+            dataSource={this.ds.cloneWithRows(this.state.listViewData)}
+            renderRow={rowData =>
+            <TouchableOpacity style={{ marginHorizontal: 28 }}>
+            <ListItem avatar>
+            <Left>
+              <Thumbnail source={rowData.image} />
+            </Left>
+            <Body>
+              <Text>{rowData.first_name}</Text>
+              <Text note>{rowData.message}</Text>
+            </Body>
+            </ListItem>
+            </TouchableOpacity>}
+            renderLeftHiddenRow={rowData =>
+              <Button 
+                full success
+                onPress={() => Alert.alert(
+                  'User info',
+                  rowData.first_name,
+                  [
+                    { text: 'OK', onPress: () => console.log('OK Pressed!') },
+                  ],
+                )}
+              >
+                <Icon active name="information-circle" />
+              </Button>}
+            renderRightHiddenRow={(rowData, secId, rowId, rowMap) =>
+              <Button 
+                full 
+                danger onPress={() => Alert.alert(
+                  'Warning',
+                  'Do you want to delete it ?',
+                  [
+                    { text: 'Cancel', onPress: () => console.log('Cancel Pressed!') },
+                    { text: 'OK', onPress: () => this.deleteRow(secId, rowId, rowMap) },
+                  ],
+                  { cancelable: true }
+                )}
+              >
+                <Icon active name="trash" />
+              </Button>}
+          />
         </Content>
         <MainFooterBar page={this.props.sceneKey} />
       </Container>
@@ -108,12 +139,14 @@ class Connections extends Component {
 }
 
 const styles = StyleSheet.create({
-  textStyle: {
+  textTitle: {
     flex: 1,
+    color: '#3F51B5',
     fontWeight: 'bold',
     fontSize: 18,
     textAlign: 'left',
-    lineHeight: 40
+    lineHeight: 40,
+    marginLeft: 28,
   }
 });
 
