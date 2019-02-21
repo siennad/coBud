@@ -1,17 +1,23 @@
 import React, { Component } from 'react';
 import { Text } from 'react-native';
 import { connect } from 'react-redux';
-import { Form, Input, Label, Item, Button, Container } from 'native-base';
+import {
+  Form,
+  Input,
+  Label,
+  Item,
+  Button,
+  Container,
+  Grid,
+  Row
+} from 'native-base';
 
 import { emailChanged, passwordChanged, loginUser } from '../../actions';
 //import { Card, CardSection, Input, Button, Spinner } from '../common';
 import { Spinner } from '../common';
 
 class LoginForm extends Component {
-
-  componentWillUnmount() {
-
-  }
+  componentWillUnmount() {}
 
   onEmailChange(text) {
     this.props.emailChanged(text);
@@ -32,34 +38,50 @@ class LoginForm extends Component {
     return (
       <Container>
         <Form>
-          <Item floatingLabel>
-            <Label>Email</Label>
-            <Input
-              onChangeText={this.onEmailChange.bind(this)}
-              value={email}
-            />
-          </Item>
-          <Item floatingLabel last>
-            <Label>Password</Label>
-            <Input
-              secureTextEntry
-              onChangeText={this.onPasswordChange.bind(this)}
-              value={password}
-            />
-          </Item>
-          <Text style={styles.errorTextStyle}>
-            {error}
-          </Text>
+          <Grid style={{ width: '100%', padding: 10 }}>
+            <Row style={{ height: 50, width: '100%', marginBottom: 10 }}>
+              <Item last padder rounded style={{ width: '100%' }}>
+                <Input
+                  onChangeText={this.onEmailChange.bind(this)}
+                  value={email}
+                  placeholder="Email"
+                  placeholderTextColor="rgba(0,0,0,0.5)"
+                />
+              </Item>
+            </Row>
+            <Row style={{ height: 50, width: '100%', marginBottom: 10 }}>
+              <Item last padder rounded style={{ width: '100%' }}>
+                <Input
+                  secureTextEntry
+                  onChangeText={this.onPasswordChange.bind(this)}
+                  value={password}
+                  placeholderTextColor="rgba(0,0,0,0.5)"
+                  placeholder="Password"
+                />
+              </Item>
+            </Row>
+            {!!error && (
+              <Row style={{ height: 50, width: '100%', marginBottom: 10 }}>
+                <Text style={styles.errorTextStyle}>{error}</Text>
+              </Row>
+            )}
 
-
-          {
-            (loading)
-              ? <Spinner size="large" />
-              : <Button primary rounded full onPress={this.onButtonPress.bind(this)} >
-                <Text style={{ color: 'white' }}>Login</Text>
-              </Button>
-          }
-
+            <Row style={{ height: 70, width: '100%', marginBottom: 10 }}>
+              {loading ? (
+                <Spinner size="large" style={{ width: '100%' }} />
+              ) : (
+                <Button
+                  primary
+                  rounded
+                  full
+                  onPress={this.onButtonPress.bind(this)}
+                  style={{ width: '100%' }}
+                >
+                  <Text style={{ color: 'white' }}>Login</Text>
+                </Button>
+              )}
+            </Row>
+          </Grid>
         </Form>
       </Container>
     );
@@ -80,6 +102,11 @@ const mapStateToProps = ({ auth }) => {
   return { email, password, error, loading };
 };
 
-export default connect(mapStateToProps, {
-  emailChanged, passwordChanged, loginUser
-})(LoginForm);
+export default connect(
+  mapStateToProps,
+  {
+    emailChanged,
+    passwordChanged,
+    loginUser
+  }
+)(LoginForm);

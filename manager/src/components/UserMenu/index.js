@@ -49,19 +49,18 @@ class UserMenu extends Component {
         </Header>
         <Content>
           <List>
-            <ListItem>
+            <ListItem thumbnail>
               <Left>
                 <Thumbnail source={{ uri: url }} />
               </Left>
               <Body>
                 <Text>
-                  Sienna
+                  {user.user.displayName ? user.user.displayName : user.user.email}
                 </Text>
               </Body>
-              <Right />
             </ListItem>
 
-            <ListItem button onPress={() => Actions.viewprofile({ user })}>
+            <ListItem button onPress={() => Actions.viewprofile({ uid: user.user.uid })}>
               <Left>
                 <Text>My Profiles</Text>
               </Left>

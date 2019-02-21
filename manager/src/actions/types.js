@@ -15,3 +15,10 @@ export const ON_MAP = 'on_map';
 export const ON_CONNECTION = 'on_connection';
 export const ON_NOTIFICATION = 'on_notification';
 export const ON_MENU = 'on_menu';
+
+export const UPDATE_PROFILE = 'update_profile';
+export const GET_PROFILE = 'get_profile';
+
+export const FETCH_ERROR = 'fetch_error';
+export const UPDATE_ERROR = 'update_error';
+export const ON_PROCESS = 'on_process';
