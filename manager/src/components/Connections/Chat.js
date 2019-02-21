@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import {
   Container,
   Content,
@@ -7,7 +7,7 @@ import {
   Icon,
   Input,
   Text
-} from 'native-base';
+} from "native-base";
 
 class Chat extends Component {
   componentDidMount() {}

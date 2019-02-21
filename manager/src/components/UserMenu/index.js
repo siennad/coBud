@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import {
   Container,
   Content,
@@ -12,13 +12,13 @@ import {
   Right,
   Body,
   Text
-} from 'native-base';
-import { connect } from 'react-redux';
-import { Actions } from 'react-native-router-flux';
-import { Keyboard } from 'react-native';
-import UserAvatar from 'react-native-user-avatar';
+} from "native-base";
+import { connect } from "react-redux";
+import { Actions } from "react-native-router-flux";
+import { Keyboard } from "react-native";
+import UserAvatar from "react-native-user-avatar";
 
-import { logoutUser, getUserProfile } from '../../actions/AuthActions';
+import { logoutUser, getUserProfile } from "../../actions/AuthActions";
 
 class UserMenu extends Component {
   async componentDidMount() {
@@ -59,7 +59,7 @@ class UserMenu extends Component {
             <ListItem thumbnail>
               <Left>
                 <UserAvatar
-                  colors={['#ccc', '#fafafa', '#ccaabb']}
+                  colors={["#ccc", "#fafafa", "#ccaabb"]}
                   name={
                     userProfile
                       ? userProfile.name && userProfile.name

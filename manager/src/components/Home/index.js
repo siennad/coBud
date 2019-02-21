@@ -1,7 +1,7 @@
 /* eslint-disable no-mixed-operators */
 /* eslint-disable prefer-const */
-import React, { Component } from 'react';
-import firebase from 'firebase';
+import React, { Component } from "react";
+import firebase from "firebase";
 import {
   Container,
   Content,
@@ -12,7 +12,7 @@ import {
   Input,
   Card,
   CardItem
-} from 'native-base';
+} from "native-base";
 import {
   Keyboard,
   Image,
@@ -20,10 +20,10 @@ import {
   ScrollView,
   Animated,
   StyleSheet
-} from 'react-native';
-import { Actions } from 'react-native-router-flux';
-import { viewportWidth, viewportHeight } from '../common/constVar';
-import { placeBanner, placeData } from '../PlaceData/placeData';
+} from "react-native";
+import { Actions } from "react-native-router-flux";
+import { viewportWidth, viewportHeight } from "../common/constVar";
+import { placeBanner, placeData } from "../PlaceData/placeData";
 
 const FIXED_BAR_WIDTH = 280;
 const BAR_SPACE = 10;
@@ -64,7 +64,7 @@ class Home extends Component {
       const scrollBarVal = this.animVal.interpolate({
         inputRange: [viewportWidth * (i - 1), viewportWidth * (i + 1)],
         outputRange: [-this.itemWidth, this.itemWidth],
-        extrapolate: 'clamp'
+        extrapolate: "clamp"
       });
 
       const thisBar = (
@@ -123,7 +123,7 @@ class Home extends Component {
           <Item>
             <Text>Most popular</Text>
           </Item>
-          <View style={{ flexWrap: 'wrap', flexDirection: 'row' }}>
+          <View style={{ flexWrap: "wrap", flexDirection: "row" }}>
             {this.state.listData.map((item, index) => (
               <Card
                 key={index}
@@ -131,8 +131,8 @@ class Home extends Component {
                   flex: 0,
                   width: viewportWidth / 2 - 10,
                   height: viewportHeight / 3 - 20,
-                  alignItems: 'center',
-                  justifyContent: 'center',
+                  alignItems: "center",
+                  justifyContent: "center",
                   margin: 15
                 }}
               >
@@ -143,7 +143,7 @@ class Home extends Component {
                   />
                 </CardItem>
                 <CardItem>
-                  <Text style={{ textAlign: 'center', fontSize: 15 }}>
+                  <Text style={{ textAlign: "center", fontSize: 15 }}>
                     {item.name}
                   </Text>
                 </CardItem>
@@ -159,25 +159,25 @@ class Home extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
     margin: 10
   },
   barContainer: {
-    position: 'absolute',
+    position: "absolute",
     zIndex: 2,
     top: viewportHeight / 4 + 40,
-    flexDirection: 'row'
+    flexDirection: "row"
   },
   track: {
-    backgroundColor: '#ccc',
-    overflow: 'hidden',
+    backgroundColor: "#ccc",
+    overflow: "hidden",
     height: 2
   },
   bar: {
-    backgroundColor: '#5294d6',
+    backgroundColor: "#5294d6",
     height: 2,
-    position: 'absolute',
+    position: "absolute",
     left: 0,
     top: 0
   }
