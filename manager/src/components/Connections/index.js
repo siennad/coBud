@@ -4,6 +4,8 @@ import { Container, Content, Header, Item, Icon, Input, Text,
 import { Alert, ListView, TouchableOpacity, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
+import { Keyboard } from 'react-native';
+
 import MainFooterBar from '../common/MainFooterBar';
 import { navigateToConnections } from '../../actions/NavigationActions';
 
@@ -48,7 +50,8 @@ class Connections extends Component {
   }
 
   componentDidMount() {
-    navigateToConnections();
+    this.props.navigateToConnections();
+    Keyboard.dismiss();
   }
 
   componentWillUnmount() {

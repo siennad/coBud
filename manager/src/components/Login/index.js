@@ -2,11 +2,14 @@
 import firebase from 'firebase';
 import { Actions } from 'react-native-router-flux';
 import React, { Component } from 'react';
-import { Container, Content, Grid, Row } from 'native-base';
+import { Image } from 'react-native';
+import { Container, Content, Item } from 'native-base';
+import { Grid, Row } from 'react-native-easy-grid';
 import LoginForm from './LoginForm';
 
-class Login extends Component {
+import { viewportHeight } from '../common/constVar';
 
+class Login extends Component {
   componentDidMount() {
     console.log(firebase.auth().currentUser);
     if (firebase.auth().currentUser) {
@@ -15,17 +18,43 @@ class Login extends Component {
   }
 
   render() {
-    return (
-      <Container >
-        <Content style={{ flex: 1, }} >
-          <Grid>
-            <Row />
-            <Row>
-              <LoginForm />
-            </Row>
-            <Row />
-          </Grid>
+    const url =
+      'http://i0.wp.com/sgtravelconnect.com/wp-content/uploads/2018/06/cropped-TravelConnect.sg-Logo-V3-1.jpg?fit=512%2C512'; //change later to img
 
+    return (
+      <Container>
+        <Content>
+          <Grid>
+            <Row
+              style={{
+                height: 400
+              }}
+              size={2}
+            >
+              <Image source={{ uri: url }} style={{ width: '100%' }} />
+            </Row>
+
+            <Row
+              style={{
+                backgroundColor: 'rgba(0,0,0,0.05)',
+                height: viewportHeight - 400,
+                paddingTop: 100
+              }}
+              size={1}
+            >
+              <Item
+                style={{
+                  position: 'absolute',
+                  top: 50,
+                  width: '100%',
+                  padding: 10
+                }}
+                padder
+              >
+                <LoginForm />
+              </Item>
+            </Row>
+          </Grid>
         </Content>
       </Container>
     );
