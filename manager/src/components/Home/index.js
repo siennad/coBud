@@ -20,8 +20,6 @@ class Home extends Component {
   componentDidMount() {
     this.props.navigateToHome();
     Keyboard.dismiss();
-    console.log(firebase.auth().onAuthStateChanged(a => console.log(a)));
-    console.log('home');
     if (!firebase.auth().currentUser) {
       Actions.auth();
     }

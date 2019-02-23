@@ -11,26 +11,29 @@ import {
   Left,
   Right,
   Body,
-  Thumbnail,
   Text
 } from 'native-base';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 import { Keyboard } from 'react-native';
+import UserAvatar from 'react-native-user-avatar';
 
-import { logoutUser } from '../../actions/AuthActions';
+import { logoutUser, getUserProfile } from '../../actions/AuthActions';
 import MainFooterBar from '../common/MainFooterBar';
 import { navigateToMenu } from '../../actions/NavigationActions';
 
 class UserMenu extends Component {
-  componentDidMount() {
+  async componentDidMount() {
     this.props.navigateToMenu();
     Keyboard.dismiss();
+    await this.props.getUserProfile(this.props.user.user.uid);
+    this.setState({
+      userProf: this.props.userProfile ? this.props.userProfile : null
+    });
   }
 
   shouldComponentUpdate(nextProps, nextState, nextContext) {
     if (!nextProps.user) {
-      console.log(nextProps);
       Actions.main();
       return false;
     }
@@ -42,11 +45,7 @@ class UserMenu extends Component {
   }
 
   render() {
-    const url =
-      'https://googlechrome.github.io/samples/picture-element/images/butterfly.webp'; //change later to user avatar
-
-    const { user } = this.props;
-    console.log(user);
+    const { user, userProfile } = this.props;
 
     return (
       <Container>
@@ -60,12 +59,20 @@ class UserMenu extends Component {
           <List>
             <ListItem thumbnail>
               <Left>
-                <Thumbnail source={{ uri: url }} />
+                <UserAvatar
+                  colors={['#ccc', '#fafafa', '#ccaabb']}
+                  name={
+                    userProfile
+                      ? userProfile.name && userProfile.name
+                      : user.user.email
+                  }
+                  size="50"
+                />
               </Left>
               <Body>
                 <Text>
-                  {user.user.displayName
-                    ? user.user.displayName
+                  {userProfile
+                    ? userProfile.name && userProfile.name
                     : user.user.email}
                 </Text>
               </Body>
@@ -150,9 +157,12 @@ class UserMenu extends Component {
   }
 }
 
-const mapStateToProps = state => ({ user: state.auth.user });
+const mapStateToProps = state => ({
+  user: state.auth.user,
+  userProfile: state.userProfile.userinfo
+});
 
 export default connect(
   mapStateToProps,
-  { navigateToMenu, logoutUser }
+  { navigateToMenu, logoutUser, getUserProfile }
 )(UserMenu);
