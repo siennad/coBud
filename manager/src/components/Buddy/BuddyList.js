@@ -33,7 +33,6 @@ class BuddyList extends Component {
   }
 
   render() {
-    console.log(this.props);
     return (
       <ListView
         enableEmptySections
@@ -50,4 +49,7 @@ const mapStateToProps = state => {
   return { buddies };
 };
 
-export default connect(mapStateToProps, { buddyFetch })(BuddyList);
+export default connect(
+  mapStateToProps,
+  { buddyFetch }
+)(BuddyList);

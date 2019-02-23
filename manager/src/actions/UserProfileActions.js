@@ -17,10 +17,9 @@ export const getUserProfile = id => async dispatch => {
     .ref(`/users/${id}/profile`)
     .on('value', data => {
       if (data.exists()) {
-        console.log(data);
-        dispatch({ type: GET_PROFILE, payload: data });
+        return dispatch({ type: GET_PROFILE, payload: data.val() });
       }
-      dispatch({ type: FETCH_ERROR, err: 'Profile not found' });
+      return dispatch({ type: FETCH_ERROR, err: 'Profile not found' });
     });
 };
 
@@ -42,36 +41,10 @@ export const updateProfile = ({ userId, value }) => async dispatch => {
       },
       async err => {
         if (err) {
-          console.log(err);
           await dispatch({ type: UPDATE_ERROR, err });
         }
         await dispatch({ type: UPDATE_PROFILE });
         Actions.viewprofile();
       }
     );
-  /* .then(r => {
-      console.log(r);
-      dispatch({ type: UPDATE_PROFILE });
-      Actions.viewprofile();
-    });*/
-  /*   async err => {
-        if (err) {
-          console.log(err);
-          await dispatch({ type: UPDATE_ERROR, err });
-        }
-        await dispatch({ type: UPDATE_PROFILE });
-        Actions.viewprofile();
-
-        firebase
-          .database()
-          .ref(`/users/${userId}`)
-          .set({
-            username: value.name,
-            displayName: value.name
-          })
-          .then(e => {
-            console.log(e);
-          });
-      }
-    );*/
 };

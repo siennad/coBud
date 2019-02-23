@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import firebase from 'firebase';
 import {
   Container,
   Content,
@@ -15,12 +14,11 @@ import {
   Label,
   Textarea,
   Right,
-  Grid,
-  Row,
   Spinner
 } from 'native-base';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
+import { Keyboard } from 'react-native';
 
 import { accordionBorderColor } from '../../../native-base-theme/variables/commonColor';
 import MainFooterBar from '../common/MainFooterBar';
@@ -76,6 +74,7 @@ class UpdateProfile extends Component {
   }
 
   updateProfile() {
+    Keyboard.dismiss();
     this.props.updateProfile({
       userId: this.props.user.user.uid,
       value: this.state.values
@@ -148,15 +147,9 @@ class UpdateProfile extends Component {
                   value={values.hobby}
                 />
               </Item>
-              <Item style={styles.rootInput} padder>
-                <Button
-                  style={styles.rootInput}
-                  block
-                  onPress={() => this.updateProfile()}
-                >
-                  <Text>Save</Text>
-                </Button>
-              </Item>
+              <Button block onPress={() => this.updateProfile()}>
+                <Text>Save</Text>
+              </Button>
             </Form>
           )}
         </Content>

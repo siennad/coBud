@@ -15,9 +15,11 @@ import {
   Card,
   CardItem
 } from 'native-base';
-import { Dimensions, Image } from 'react-native';
+import { Dimensions } from 'react-native';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
+import UserAvatar from 'react-native-user-avatar';
+
 import { accordionBorderColor } from '../../../native-base-theme/variables/commonColor';
 import MainFooterBar from '../common/MainFooterBar';
 import { navigateToMenu } from '../../actions/NavigationActions';
@@ -46,21 +48,18 @@ const styles = {
 class ViewProfile extends Component {
   componentDidMount() {
     this.props.navigateToMenu();
-    if (this.props.uid) {
-      this.props.getUserProfile(this.props.uid);
-    } else {
-      this.props.getUserProfile(this.props.user.user.uid);
-      console.log(this.props.userProfile);
+    if (!this.props.userProfile) {
+      if (this.props.uid) {
+        this.props.getUserProfile(this.props.uid);
+      } else {
+        this.props.getUserProfile(this.props.user.user.uid);
+        //console.log(this.props.userProfile);
+      }
     }
   }
 
   render() {
-    const url =
-      'https://googlechrome.github.io/samples/picture-element/images/butterfly.webp'; //change later to user avatar
-
     const { uid, userProfile, loading, user } = this.props;
-    console.log(userProfile); //undefined
-    console.log(user);
     const isMyProfile = !uid ? true : user.user.uid === uid;
     return (
       <Container>
@@ -109,9 +108,14 @@ class ViewProfile extends Component {
                   <Body
                     style={{ justifyContent: 'center', alignItems: 'center' }}
                   >
-                    <Image
-                      source={{ uri: url }}
-                      style={{ height: 80, width: 80, flex: 1 }}
+                    <UserAvatar
+                      colors={['#ccc', '#fafafa', '#ccaabb']}
+                      name={
+                        userProfile
+                          ? userProfile.name && userProfile.name
+                          : user.user.email
+                      }
+                      size="50"
                     />
                   </Body>
                 </CardItem>
