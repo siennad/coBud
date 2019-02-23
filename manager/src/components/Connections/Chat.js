@@ -1,22 +1,14 @@
 import React, { Component } from 'react';
 import { Container, Content, Header, Item, Icon, Input, Text } from 'native-base';
-import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
-import { Keyboard } from 'react-native';
-
+import { Actions } from 'react-native-router-flux';
 import MainFooterBar from '../common/MainFooterBar';
-import { navigateToMap } from '../../actions/NavigationActions';
+import { navigateToConnections } from '../../actions/NavigationActions';
 
-class Map extends Component {
-
-  constructor(props) {
-    super(props);
-    console.log(props);
-  }
+class Chat extends Component {
 
   componentDidMount() {
-    this.props.navigateToMap();
-    Keyboard.dismiss();
+    this.props.navigateToConnections();
   }
 
   componentWillUnmount() {
@@ -34,7 +26,7 @@ class Map extends Component {
         </Header>
         <Content>
           <Item>
-            <Text>map</Text>
+            <Text>connections</Text>
           </Item>
         </Content>
         <MainFooterBar page={this.props.sceneKey} />
@@ -43,4 +35,4 @@ class Map extends Component {
   }
 }
 
-export default connect(undefined, { navigateToMap })(Map);
+export default connect(undefined, { navigateToConnections })(Chat);

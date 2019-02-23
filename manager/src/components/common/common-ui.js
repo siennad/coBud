@@ -11,7 +11,7 @@ const withNativebaseTheme = (Component) => (props) => (
 );
 
 const backBtn = () => (
-  <Button iconLeft onPress={() => Actions.pop()}>
+  <Button iconLeft onPress={() => Actions.pop()} transparent>
     <Icon ios="ios-arrow-back" android="md-arrow-back" />
     <Text>Back</Text>
   </Button>

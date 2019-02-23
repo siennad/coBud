@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Provider } from 'react-redux';
-import { createStore, applyMiddleware } from 'redux';
+import { createStore, applyMiddleware, compose } from 'redux';
 import { StyleProvider } from 'native-base';
+import { createLogger } from 'redux-logger';
 import firebase from 'firebase';
 import ReduxThunk from 'redux-thunk';
 import reducers from './reducers';
@@ -25,7 +26,14 @@ class App extends Component {
   }
 
   render() {
-    const store = createStore(reducers, {}, applyMiddleware(ReduxThunk));
+    const composeEnhancers =
+      global.window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+    const store = createStore(
+      reducers,
+      process.env.NODE_ENV === 'production'
+        ? applyMiddleware(ReduxThunk)
+        : composeEnhancers(applyMiddleware(ReduxThunk, createLogger()))
+    );
 
     return (
       <Provider store={store}>
