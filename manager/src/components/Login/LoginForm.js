@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import { Text } from 'react-native';
+import { Keyboard } from 'react-native';
 import { connect } from 'react-redux';
 import {
   Form,
   Input,
-  Label,
+  Text,
   Item,
   Button,
   Container,
@@ -17,24 +17,38 @@ import { emailChanged, passwordChanged, loginUser } from '../../actions';
 import { Spinner } from '../common';
 
 class LoginForm extends Component {
+  state = {
+    email: '',
+    password: ''
+  };
   componentWillUnmount() {}
 
   onEmailChange(text) {
-    this.props.emailChanged(text);
+    this.setState({
+      email: text
+    });
   }
 
   onPasswordChange(text) {
-    this.props.passwordChanged(text);
+    this.setState({
+      password: text
+    });
   }
 
   onButtonPress() {
-    const { email, password } = this.props;
-    console.log('login user');
+    Keyboard.dismiss();
+
+    const email = this.state.email;
+    const password = this.state.password;
+
+    this.props.emailChanged(email);
+    this.props.passwordChanged(password);
+
     this.props.loginUser({ email, password });
   }
 
   render() {
-    const { email, password, error, loading } = this.props;
+    const { error, loading } = this.props;
     return (
       <Container>
         <Form>
@@ -43,7 +57,7 @@ class LoginForm extends Component {
               <Item last padder rounded style={{ width: '100%' }}>
                 <Input
                   onChangeText={this.onEmailChange.bind(this)}
-                  value={email}
+                  value={this.state.email}
                   placeholder="Email"
                   placeholderTextColor="rgba(0,0,0,0.5)"
                 />
@@ -54,7 +68,7 @@ class LoginForm extends Component {
                 <Input
                   secureTextEntry
                   onChangeText={this.onPasswordChange.bind(this)}
-                  value={password}
+                  value={this.state.password}
                   placeholderTextColor="rgba(0,0,0,0.5)"
                   placeholder="Password"
                 />

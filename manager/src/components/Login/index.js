@@ -11,7 +11,6 @@ import { viewportHeight } from '../common/constVar';
 
 class Login extends Component {
   componentDidMount() {
-    console.log(firebase.auth().currentUser);
     if (firebase.auth().currentUser) {
       Actions.main();
     }
@@ -25,22 +24,16 @@ class Login extends Component {
       <Container>
         <Content>
           <Grid>
-            <Row
-              style={{
-                height: 400
-              }}
-              size={2}
-            >
+            <Row style={{ height: viewportHeight * 0.4 }}>
               <Image source={{ uri: url }} style={{ width: '100%' }} />
             </Row>
 
             <Row
               style={{
                 backgroundColor: 'rgba(0,0,0,0.05)',
-                height: viewportHeight - 400,
+                height: viewportHeight * 0.6,
                 paddingTop: 100
               }}
-              size={1}
             >
               <Item
                 style={{

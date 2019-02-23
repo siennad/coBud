@@ -5,6 +5,15 @@ import { Actions } from 'react-native-router-flux';
 
 class MainFooterBar extends Component {
   //TODO : edit later when poping screen without change the whole screen
+  state = {
+    home: false,
+    menu: false,
+    connections: false,
+    notifications: false,
+    map: false
+  };
+
+  componentDidMount() {}
   // Idea about using Native base Tab
   render() {
     return (

@@ -1,4 +1,10 @@
-import { ON_HOME, ON_MAP, ON_CONNECTION, ON_NOTIFICATION, ON_MENU } from '../actions/types';
+import {
+  ON_HOME,
+  ON_MAP,
+  ON_CONNECTION,
+  ON_NOTIFICATION,
+  ON_MENU
+} from '../actions/types';
 
 const INITIAL_STATE = {
   isOnHome: false,
@@ -35,10 +41,11 @@ export default (state = INITIAL_STATE, action) => {
       };
 
     case ON_HOME:
-    default:
       return {
         INITIAL_STATE,
         isOnHome: true
       };
+    default:
+      return state;
   }
 };
