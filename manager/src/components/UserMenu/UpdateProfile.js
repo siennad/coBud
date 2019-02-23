@@ -14,6 +14,9 @@ import {
   Input,
   Label,
   Textarea,
+  Right,
+  Grid,
+  Row,
   Spinner
 } from 'native-base';
 import { connect } from 'react-redux';
@@ -22,7 +25,10 @@ import { Actions } from 'react-native-router-flux';
 import { accordionBorderColor } from '../../../native-base-theme/variables/commonColor';
 import MainFooterBar from '../common/MainFooterBar';
 import { navigateToMenu } from '../../actions/NavigationActions';
-import { updateProfile } from '../../actions/UserProfileActions';
+import {
+  updateProfile,
+  getUserProfile
+} from '../../actions/UserProfileActions';
 
 class UpdateProfile extends Component {
   constructor(props) {
@@ -40,9 +46,9 @@ class UpdateProfile extends Component {
 
   async componentDidMount() {
     this.props.navigateToMenu();
-    console.log(firebase.auth().currentUser);
-    await this.props.getUserProfile(this.props.uid);
+    await this.props.getUserProfile(this.props.user.user.uid);
     if (this.props.userProfile) {
+      console.log('uodate prof yes');
       console.log(this.props.userProfile);
       this.setState({
         ...this.state,
@@ -51,21 +57,31 @@ class UpdateProfile extends Component {
     }
   }
 
+  componentWillReceiveProps(nextProps, nextContext) {
+    console.log(nextProps);
+    console.log(nextContext);
+  }
+
   componentWillUnmount() {
     Actions.pop();
   }
 
   handleChange(props, val) {
+    const values = this.state.values;
+    values[props] = val;
     this.setState({
       formDirty: true,
-      values: {
-        ...this.state.values,
-        props: val
-      }
+      values
     });
   }
 
-  updateProfile() {}
+  updateProfile() {
+    this.props.updateProfile({
+      userId: this.props.user.user.uid,
+      value: this.state.values
+    });
+  }
+
   render() {
     const { values } = this.state;
 
@@ -81,8 +97,13 @@ class UpdateProfile extends Component {
           <Body>
             <Text style={{ color: 'white' }}>Update Profile</Text>
           </Body>
+          <Right>
+            <Button onPress={() => this.updateProfile()}>
+              <Text>Update</Text>
+            </Button>
+          </Right>
         </Header>
-        <Content>
+        <Content padder>
           {this.props.loading && !this.state.formDirty ? (
             <Spinner color={accordionBorderColor} />
           ) : (
@@ -97,7 +118,6 @@ class UpdateProfile extends Component {
                   value={values.name}
                 />
               </Item>
-
               <Item stackedLabel underline={false}>
                 <Label>Address</Label>
                 <Input
@@ -108,31 +128,35 @@ class UpdateProfile extends Component {
                   value={values.address}
                 />
               </Item>
-
               <Item stackedLabel underline={false}>
                 <Label>City</Label>
                 <Input
                   bordered
-                  placeholder="city"
+                  placeholder="City"
                   onChangeText={value => this.handleChange('city', value)}
                   style={styles.rootInput}
                   value={values.city}
                 />
               </Item>
-
               <Item stackedLabel underline={false}>
                 <Label>Hobby</Label>
                 <Textarea
                   rowSpan={3}
-                  bordered
                   placeholder="Your hobbies, favourites"
                   onChangeText={value => this.handleChange('hobby', value)}
                   style={styles.rootInput}
                   value={values.hobby}
                 />
               </Item>
-
-              <Item />
+              <Item style={styles.rootInput} padder>
+                <Button
+                  style={styles.rootInput}
+                  block
+                  onPress={() => this.updateProfile()}
+                >
+                  <Text>Save</Text>
+                </Button>
+              </Item>
             </Form>
           )}
         </Content>
@@ -145,15 +169,21 @@ class UpdateProfile extends Component {
 const styles = {
   rootInput: {
     width: '100%'
+  },
+
+  root: {
+    width: '100%',
+    height: '100%'
   }
 };
 
 const mapStateToProps = state => ({
-  userProfile: state.userProfile.payload,
+  user: state.auth.user,
+  userProfile: state.userProfile.userinfo,
   loading: state.userProfile.loading
 });
 
 export default connect(
   mapStateToProps,
-  { navigateToMenu, updateProfile }
+  { navigateToMenu, updateProfile, getUserProfile }
 )(UpdateProfile);

@@ -49,7 +49,6 @@ const loginUserSuccess = async (dispatch, user) => {
 };
 
 export const logoutUser = () => (dispatch) => {
-  console.log('log out');
   dispatch({ type: LOGOUT_USER });
 
   firebase.auth().signOut().then(() => {

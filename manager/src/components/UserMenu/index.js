@@ -23,10 +23,18 @@ import MainFooterBar from '../common/MainFooterBar';
 import { navigateToMenu } from '../../actions/NavigationActions';
 
 class UserMenu extends Component {
-
   componentDidMount() {
     this.props.navigateToMenu();
     Keyboard.dismiss();
+  }
+
+  shouldComponentUpdate(nextProps, nextState, nextContext) {
+    if (!nextProps.user) {
+      console.log(nextProps);
+      Actions.main();
+      return false;
+    }
+    return true;
   }
 
   componentWillUnmount() {
@@ -34,7 +42,8 @@ class UserMenu extends Component {
   }
 
   render() {
-    const url = 'https://googlechrome.github.io/samples/picture-element/images/butterfly.webp'; //change later to user avatar
+    const url =
+      'https://googlechrome.github.io/samples/picture-element/images/butterfly.webp'; //change later to user avatar
 
     const { user } = this.props;
     console.log(user);
@@ -55,12 +64,14 @@ class UserMenu extends Component {
               </Left>
               <Body>
                 <Text>
-                  {user.user.displayName ? user.user.displayName : user.user.email}
+                  {user.user.displayName
+                    ? user.user.displayName
+                    : user.user.email}
                 </Text>
               </Body>
             </ListItem>
 
-            <ListItem button onPress={() => Actions.viewprofile({ uid: user.user.uid })}>
+            <ListItem button onPress={() => Actions.viewprofile()}>
               <Left>
                 <Text>My Profiles</Text>
               </Left>
@@ -131,16 +142,17 @@ class UserMenu extends Component {
                 <Icon name="arrow-forward" />
               </Right>
             </ListItem>
-
           </List>
         </Content>
         <MainFooterBar page={this.props.sceneKey} />
-      </Container >
+      </Container>
     );
   }
 }
 
-const mapStateToProps = (state) =>
-  ({ user: state.auth.user, });
+const mapStateToProps = state => ({ user: state.auth.user });
 
-export default connect(mapStateToProps, { navigateToMenu, logoutUser })(UserMenu);
+export default connect(
+  mapStateToProps,
+  { navigateToMenu, logoutUser }
+)(UserMenu);

@@ -46,7 +46,12 @@ const styles = {
 class ViewProfile extends Component {
   componentDidMount() {
     this.props.navigateToMenu();
-    this.props.getUserProfile(this.props.uid);
+    if (this.props.uid) {
+      this.props.getUserProfile(this.props.uid);
+    } else {
+      this.props.getUserProfile(this.props.user.user.uid);
+      console.log(this.props.userProfile);
+    }
   }
 
   render() {
@@ -54,9 +59,9 @@ class ViewProfile extends Component {
       'https://googlechrome.github.io/samples/picture-element/images/butterfly.webp'; //change later to user avatar
 
     const { uid, userProfile, loading, user } = this.props;
-    console.log(userProfile);
+    console.log(userProfile); //undefined
     console.log(user);
-    const isMyProfile = user.user.uid === uid;
+    const isMyProfile = !uid ? true : user.user.uid === uid;
     return (
       <Container>
         <Header>
@@ -73,7 +78,7 @@ class ViewProfile extends Component {
                 ellipsizeMode="tail"
                 style={{ color: 'white' }}
               >
-                View {userProfile.name && userProfile.name} Profile
+                View Profile
               </Text>
             )}
             {isMyProfile && (
@@ -82,13 +87,13 @@ class ViewProfile extends Component {
                 ellipsizeMode="tail"
                 style={{ color: 'white' }}
               >
-                View Profile
+                View My Profile
               </Text>
             )}
           </Body>
           <Right>
             {isMyProfile && (
-              <Button iconRight onPress={() => Actions.updateprofile({ uid })}>
+              <Button iconRight onPress={() => Actions.updateprofile()}>
                 <Icon name="edit" type="FontAwesome" />
               </Button>
             )}
@@ -171,7 +176,7 @@ class ViewProfile extends Component {
                       <Button
                         style={{ margin: 'auto' }}
                         iconRight
-                        onPress={() => Actions.updateprofile({ uid })}
+                        onPress={() => Actions.updateprofile()}
                       >
                         <Text>Tap here to update your profile</Text>
                         <Icon name="edit" type="FontAwesome" />
@@ -206,7 +211,7 @@ class ViewProfile extends Component {
 
 const mapStateToProps = state => ({
   user: state.auth.user,
-  userProfile: state.userProfile.payload,
+  userProfile: state.userProfile.userinfo,
   loading: state.userProfile.loading
 });
 
