@@ -66,9 +66,8 @@ export const loadMessages = () => dispatch => {
     .on(
       'value',
       snapshot => {
-        console.log(snapshot.val());
+        // console.log(snapshot.val());
         dispatch(loadMessagesSuccess(snapshot.val()));
-        //console.log(dispatch(loadMessagesSuccess(snapshot.val())));
       },
       errorObject => {
         dispatch(loadMessagesError(errorObject.message));

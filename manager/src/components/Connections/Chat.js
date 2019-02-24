@@ -21,6 +21,7 @@ class Chat extends Component {
   state = { messageInput: '' };
   componentDidMount() {
     this.props.navigateToConnections();
+    this.props.loadMessages();
   }
   componentWillUnmount() {
     Actions.pop();
@@ -34,10 +35,11 @@ class Chat extends Component {
     this.setState({
       messageInput: ''
     });
-    this.props.loadMessages();
+    console.log('on button press event');
+    //this.props.loadMessages();
     console.log(this.props.loadMessages);
     const { messageOutput } = this.props;
-    console.log(messageOutput);
+    // console.log(messageOutput);
   }
 
   UserInputHandle(text) {
@@ -48,7 +50,9 @@ class Chat extends Component {
   render() {
     const { messageInput } = this.state;
     const { messageOutput } = this.props;
-    console.log(messageOutput);
+    // console.log(messageOutput);
+    const data = messageOutput.map(val => <Text>{val.text}</Text>);
+    // console.log(messageOutput);
     //const data = messageOutput.toJSON().map(res => <Text>{res.text}</Text>);
     return (
       <Container>
@@ -75,8 +79,12 @@ class Chat extends Component {
           </Form>
           <Item>
             <Text>Message show here</Text>
-            {/* {data} */}
           </Item>
+          {messageOutput.map(val => (
+            <Item>
+              <Text>{val.text}</Text>
+            </Item>
+          ))}
         </Content>
         <MainFooterBar page={this.props.sceneKey} />
       </Container>
@@ -85,7 +93,6 @@ class Chat extends Component {
 }
 const mapStateToProps = ({ chat }) => {
   const { messageInput, messageOutput } = chat;
-
   return { messageInput, messageOutput };
 };
 export default connect(

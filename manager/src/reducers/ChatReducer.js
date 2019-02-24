@@ -10,12 +10,12 @@ const initialState = {
 };
 
 const ChatReducer = (state = initialState, action) => {
-  console.log('------ reducer');
-  console.log(action);
+  // console.log('------ reducer');
+  // console.log(action);
   switch (action.type) {
     case types.USER_INPUT_HANDLE:
       return { ...state, messageInput: action.payload };
-    case types.LOAD_MESSAGES_SUCCESS:
+    case types.LOAD_MESSAGE_SUCCESS:
       return {
         ...state,
         messageOutput: action.payload,
