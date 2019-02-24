@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 import {
   Container,
   Content,
@@ -14,50 +14,62 @@ import {
   ListItem,
   Card,
   CardItem
-} from "native-base";
-import { Dimensions } from "react-native";
-import { connect } from "react-redux";
-import { Actions } from "react-native-router-flux";
-import UserAvatar from "react-native-user-avatar";
+} from 'native-base';
+import { Dimensions } from 'react-native';
+import { connect } from 'react-redux';
+import { Actions } from 'react-native-router-flux';
+import UserAvatar from 'react-native-user-avatar';
 
-import { accordionBorderColor } from "../../../native-base-theme/variables/commonColor";
-import { getUserProfile } from "../../actions/UserProfileActions";
+import { accordionBorderColor } from '../../../native-base-theme/variables/commonColor';
+import { getUserProfile } from '../../actions/UserProfileActions';
 
-const viewport = Dimensions.get("window").width;
+const viewport = Dimensions.get('window').width;
 
 const styles = {
   listHeader: {
-    backgroundColor: "rgba(0,0,0,0.1)",
+    backgroundColor: 'rgba(0,0,0,0.1)',
     height: 24,
     paddingLeft: 5,
     marginBottom: 5
   },
   link: {
     fontSize: 0.0275 * viewport,
-    fontStyle: "italic",
-    color: "rgba(0,0,0,0.7)"
+    fontStyle: 'italic',
+    color: 'rgba(0,0,0,0.7)'
   },
   textHeader: {
     fontSize: 14,
-    color: "rgba(0,0,0,0.8)"
+    color: 'rgba(0,0,0,0.8)'
   }
 };
 
 class ViewProfile extends Component {
   componentDidMount() {
-    if (!this.props.userProfile) {
-      if (this.props.uid) {
-        this.props.getUserProfile(this.props.uid);
+    const { uid, userProfile, user } = this.props;
+    const isMyProfile = !uid ? true : user.user.uid === uid;
+    /**
+     * Workflow:
+     * if not my profile: get user's profile
+     * if my profile: check if there's exists
+     * if exists, check if there is the record of my profile
+     */
+    if (!isMyProfile) {
+      this.props.getUserProfile(uid);
+    } else if (userProfile) {
+      if (!userProfile._id === user.user.uid) {
+        this.props.getUserProfile(uid);
       } else {
-        this.props.getUserProfile(this.props.user.user.uid);
-        //console.log(this.props.userProfile);
+        this.props.getUserProfile(user.user.uid);
       }
     }
   }
 
   render() {
     const { uid, userProfile, loading, user } = this.props;
+
+    //check if this is view your own profile or other
     const isMyProfile = !uid ? true : user.user.uid === uid;
+
     return (
       <Container>
         <Header>
@@ -72,7 +84,7 @@ class ViewProfile extends Component {
               <Text
                 numberOfLines={1}
                 ellipsizeMode="tail"
-                style={{ color: "white" }}
+                style={{ color: 'white' }}
               >
                 View Profile
               </Text>
@@ -81,7 +93,7 @@ class ViewProfile extends Component {
               <Text
                 numberOfLines={1}
                 ellipsizeMode="tail"
-                style={{ color: "white" }}
+                style={{ color: 'white' }}
               >
                 View My Profile
               </Text>
@@ -103,10 +115,10 @@ class ViewProfile extends Component {
               <Card>
                 <CardItem>
                   <Body
-                    style={{ justifyContent: "center", alignItems: "center" }}
+                    style={{ justifyContent: 'center', alignItems: 'center' }}
                   >
                     <UserAvatar
-                      colors={["#ccc", "#fafafa", "#ccaabb"]}
+                      colors={['#2EDFB7', '#FF484A', '#DA5F8E']}
                       name={
                         userProfile
                           ? userProfile.name && userProfile.name
@@ -134,7 +146,7 @@ class ViewProfile extends Component {
                       <Left>
                         <Text style={styles.textHeader}>Place Visited</Text>
                       </Left>
-                      <Right>
+                      <Right style={{ paddingTop: 5 }}>
                         <Button transparent dark iconRight>
                           <Text style={styles.link}>All</Text>
                           <Icon name="arrow-forward" />
@@ -146,7 +158,7 @@ class ViewProfile extends Component {
                       <Left>
                         <Text style={styles.textHeader}>My Reviews</Text>
                       </Left>
-                      <Right>
+                      <Right style={{ paddingTop: 5 }}>
                         <Button transparent dark iconRight>
                           <Text style={styles.link}> All</Text>
                           <Icon name="arrow-forward" />
@@ -158,7 +170,7 @@ class ViewProfile extends Component {
                       <Left>
                         <Text style={styles.textHeader}>My Place</Text>
                       </Left>
-                      <Right>
+                      <Right style={{ paddingTop: 5 }}>
                         <Button transparent dark iconRight>
                           <Text style={styles.link}> All</Text>
                           <Icon name="arrow-forward" />
@@ -175,7 +187,7 @@ class ViewProfile extends Component {
                     </ListItem>
                     <ListItem>
                       <Button
-                        style={{ margin: "auto" }}
+                        style={{ margin: 'auto' }}
                         iconRight
                         onPress={() => Actions.updateprofile()}
                       >

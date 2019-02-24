@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 import {
   Container,
   Content,
@@ -7,26 +7,36 @@ import {
   Icon,
   Input,
   Text
-} from "native-base";
+} from 'native-base';
+import { View } from 'react-native';
+import { GiftedChat } from 'react-native-gifted-chat';
 
+const messages2 = [
+  {
+    _id: 123,
+    text: 'abc',
+    user: {
+      _id: 123456,
+      name: 'user'
+    }
+  }
+];
 class Chat extends Component {
   componentDidMount() {}
 
   render() {
     return (
-      <Container>
-        <Header searchBar rounded>
-          <Item>
-            <Icon ios="ios-search" android="md-search" />
-            <Input placeholder="Search..." />
-          </Item>
-        </Header>
-        <Content>
-          <Item>
-            <Text> connections </Text>
-          </Item>
-        </Content>
-      </Container>
+      <GiftedChat
+        messages={messages2}
+        onSend={msg => this.onSendMessage(msg)}
+        user={{
+          _id: 12345,
+          name: 'quqhj'
+        }}
+        placeholder="type her"
+        bottomOffset={100}
+        minInputToolbarHeight={50}
+      />
     );
   }
 }

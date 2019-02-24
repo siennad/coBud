@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 import {
   Container,
   Content,
@@ -12,23 +12,34 @@ import {
   Right,
   Body,
   Text
-} from "native-base";
-import { connect } from "react-redux";
-import { Actions } from "react-native-router-flux";
-import { Keyboard } from "react-native";
-import UserAvatar from "react-native-user-avatar";
+} from 'native-base';
+import { connect } from 'react-redux';
+import { Actions } from 'react-native-router-flux';
+import { Keyboard } from 'react-native';
+import UserAvatar from 'react-native-user-avatar';
 
-import { logoutUser, getUserProfile } from "../../actions/AuthActions";
+import { logoutUser } from '../../actions/AuthActions';
+import { getUserProfile } from '../../actions/UserProfileActions';
 
 class UserMenu extends Component {
   async componentDidMount() {
     Keyboard.dismiss();
+
     if (!this.props.userProfile) {
-      this.props.getUserProfile(this.props.user.user.uid);
+      await this.props.getUserProfile(this.props.user.user.uid);
+    } else if (this.props.userProfile._id === this.props.user.user.uid) {
+      await this.setState({
+        userProf: this.props.userProfile
+      });
     }
-    this.setState({
-      userProf: this.props.userProfile ? this.props.userProfile : null
-    });
+  }
+
+  componentWillReceiveProps(nextProps, nextContext) {
+    if (nextProps.userProfile) {
+      this.setState({
+        userProf: nextProps.userProfile
+      });
+    }
   }
 
   shouldComponentUpdate(nextProps, nextState, nextContext) {
@@ -59,7 +70,7 @@ class UserMenu extends Component {
             <ListItem thumbnail>
               <Left>
                 <UserAvatar
-                  colors={["#ccc", "#fafafa", "#ccaabb"]}
+                  colors={['#2EDFB7', '#FF484A', '#DA5F8E']}
                   name={
                     userProfile
                       ? userProfile.name && userProfile.name

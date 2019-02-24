@@ -1,46 +1,31 @@
 import React, { Component } from 'react';
-import {
-  Container,
-  Content,
-  Header,
-  Icon,
-  Left,
-  Body,
-  Button,
-  Text,
-  Spinner
-} from 'native-base';
+import { Spinner, Icon, Text, Container, View } from 'native-base';
 import { Actions } from 'react-native-router-flux';
-import { GiftedChat } from 'react-native-gifted-chat';
+import {
+  GiftedChat,
+  Send,
+  Actions as chatActions
+} from 'react-native-gifted-chat';
 import { connect } from 'react-redux';
-import UserAvatar from 'react-native-user-avatar';
-
+import themeColor from './../../../native-base-theme/variables/material';
 import {
   turnOffChat,
   loadMessages,
   sendMessage
 } from '../../actions/ChatActions';
+import { viewportWidth } from '../common/constVar';
 
-const messages2 = [
-  {
-    _id: 123,
-    text: 'abc',
-    user: {
-      _id: 123456,
-      name: 'user'
-    }
-  }
-];
 class LocalChat extends Component {
-  state = { messages: [], initLoading: false };
+  state = { messages: [], initLoading: true };
 
   componentDidMount() {
+    console.log('did mount');
     const { messages, loading } = this.props;
     this.setState({ initLoading: true });
     this.props.loadMessages(true);
     if (messages) {
       this.setState(prevState => ({
-        messages: GiftedChat.append(prevState.messages, messages)
+        messages
       }));
     }
 
@@ -49,68 +34,86 @@ class LocalChat extends Component {
     }
   }
 
+  componentWillReceiveProps(nextProps, nextContext) {
+    const { loading, messages } = nextProps;
+    console.log(nextProps.messages);
+    if (nextProps.messages) {
+      this.setState(prevState => ({
+        messages
+      }));
+    }
+    if (!loading) {
+      this.setState({ initLoading: false });
+    }
+  }
+
   componentWillUnmount() {
-    //Actions.pop();
+    //Actions.pop()
     turnOffChat();
   }
 
-  onSendMessage(message) {
-    this.props.sendMessage(message, true);
+  onSendMessage(obj) {
+    console.log('--send msg');
+    console.log(obj);
+    //const { messageIdGenerator, user, text } = obj;
+    //console.log('send msg');
+    this.props.sendMessage(obj, true);
   }
+
+  renderInputToolbar() {}
+
+  renderActions() {}
 
   renderChat(messages, user) {
     return (
       <GiftedChat
-        messages={messages2}
-        onSend={msg => this.onSendMessage(msg)}
+        messages={messages}
+        onSend={msg => {
+          console.log(msg);
+          this.onSendMessage(msg);
+        }}
         user={{
           _id: user.user.uid,
           name: user.user.displayName ? user.user.displayName : user.user.email
         }}
-        renderAvatar={() => (
-          <UserAvatar
-            colors={['#ccc', '#fafafa', '#ccaabb']}
-            name={
-              user.user.displayName ? user.user.displayName : user.user.email
-            }
-            size="50"
-          />
-        )}
-        onPressAvatar={() => Actions.viewprofile({ uid: user.user.uid })} // to render view user profile
         renderUsernameOnMessage
         keyboardShouldPersistTaps="never"
         showUserAvatar
+        renderUsernameOnMessage
+        onPressAvatar={thisuser => Actions.viewprofile({ uid: thisuser._id })}
+        renderSend={props => (
+          <Send {...props}>
+            <View
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                width: viewportWidth * 0.2,
+                padding: 5
+              }}
+            >
+              <Icon name="send" type="FontAwesome" />
+            </View>
+          </Send>
+        )}
+        renderLoading={() => (
+          <Container>
+            <Spinner />
+            <Text>Loading messages...</Text>
+          </Container>
+        )}
       />
     );
   }
 
   render() {
-    const { messages, user } = this.props;
-    console.log(this.state);
+    const { user } = this.props;
+    const { messages } = this.state;
+    //console.log(this.state);
     return (
-      <Container>
-        <Header>
-          <Left>
-            <Button iconLeft onPress={() => Actions.pop()} transparent>
-              <Icon ios="ios-arrow-back" android="md-arrow-back" />
-              <Text>Back</Text>
-            </Button>
-          </Left>
-          <Body>
-            <Text style={{ color: 'white', textAlign: 'center' }}>
-              Local Chat
-            </Text>
-          </Body>
-        </Header>
-        <Content
-          style={{
-            backgroundColor: 'rgba(0,0,0,0.1)'
-          }}
-        >
-          {!this.state.initLoading && this.renderChat(messages, user)}
-          {this.state.initLoading && <Spinner />}
-        </Content>
-      </Container>
+      <React.Fragment>
+        {!this.state.initLoading && this.renderChat(messages, user)}
+        {this.state.initLoading && <Spinner />}
+      </React.Fragment>
     );
   }
 }

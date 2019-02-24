@@ -15,8 +15,15 @@ import {
   Thumbnail,
   Button
 } from 'native-base';
-import { Alert, ListView, TouchableOpacity, StyleSheet, Keyboard } from 'react-native';
+import {
+  Alert,
+  ListView,
+  TouchableOpacity,
+  StyleSheet,
+  Keyboard
+} from 'react-native';
 import { Actions } from 'react-native-router-flux';
+import { viewportWidth } from '../common/constVar';
 
 const image1 = require('./images/business.png');
 
@@ -47,7 +54,7 @@ const data = [
   },
   {
     id: 2,
-    first_name: 'Tweeter',
+    first_name: 'Twitter',
     message: 'Hashtag has changed your business',
     image: image4
   }
@@ -92,8 +99,17 @@ class Connections extends Component {
           </Item>
         </Header>
         <Content>
-          <Button block onPress={() => Actions.chat()} iconRight>
-            <Text>Enter Global Chatroom</Text>
+          <Button
+            dark
+            block
+            rounded
+            style={{ marginTop: 15 }}
+            onPress={() => Actions.localChat()}
+            iconRight
+          >
+            <Text style={styles.textTitle} uppercase={false}>
+              Local Chatroom
+            </Text>
             <Icon name="sign-in" type="FontAwesome" />
           </Button>
           <Item>
@@ -101,7 +117,7 @@ class Connections extends Component {
               <Text style={styles.textTitle}>My Connections</Text>
             </Left>
             <Right>
-              <Button transparent primary style={{ marginRight: 19 }}>
+              <Button transparent dark style={{ marginRight: 19 }}>
                 <Icon name="person-add" />
               </Button>
             </Right>
@@ -171,7 +187,6 @@ class Connections extends Component {
 const styles = StyleSheet.create({
   textTitle: {
     flex: 1,
-    color: '#3F51B5',
     fontWeight: 'bold',
     fontSize: 18,
     textAlign: 'left',

@@ -1,5 +1,5 @@
 import firebase from "firebase";
-import { Actions } from "react-native-router-flux";
+import { Actions, ActionConst } from "react-native-router-flux";
 
 import {
   UPDATE_PROFILE,
@@ -32,6 +32,7 @@ export const updateProfile = ({ userId, value }) => async dispatch => {
     .set(
       {
         name: value.name,
+        _id: userId,
         phone: value.phone ? value.phone : "",
         address: value.address ? value.address : "",
         city: value.city ? value.city : "",
@@ -50,7 +51,7 @@ export const updateProfile = ({ userId, value }) => async dispatch => {
           })
           .then(() => {
             dispatch({ type: UPDATE_PROFILE });
-            Actions.viewprofile();
+            Actions.viewprofile({ type: ActionConst.REFRESH });
           });
       }
     );
