@@ -21,7 +21,7 @@ import { Actions } from 'react-native-router-flux';
 import { Keyboard } from 'react-native';
 
 import { accordionBorderColor } from '../../../native-base-theme/variables/commonColor';
-import MainFooterBar from '../common/MainFooterBar';
+
 import {
   updateProfile,
   getUserProfile
@@ -151,7 +151,7 @@ class UpdateProfile extends Component {
             </Form>
           )}
         </Content>
-        <MainFooterBar page={this.props.sceneKey} />
+       
       </Container>
     );
   }
