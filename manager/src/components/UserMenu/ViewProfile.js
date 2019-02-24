@@ -21,8 +21,6 @@ import { Actions } from 'react-native-router-flux';
 import UserAvatar from 'react-native-user-avatar';
 
 import { accordionBorderColor } from '../../../native-base-theme/variables/commonColor';
-import MainFooterBar from '../common/MainFooterBar';
-import { navigateToMenu } from '../../actions/NavigationActions';
 import { getUserProfile } from '../../actions/UserProfileActions';
 
 const viewport = Dimensions.get('window').width;
@@ -47,7 +45,6 @@ const styles = {
 
 class ViewProfile extends Component {
   componentDidMount() {
-    this.props.navigateToMenu();
     if (!this.props.userProfile) {
       if (this.props.uid) {
         this.props.getUserProfile(this.props.uid);
@@ -207,7 +204,6 @@ class ViewProfile extends Component {
             </Content>
           )}
         </Content>
-        <MainFooterBar page={this.props.sceneKey} />
       </Container>
     );
   }
@@ -221,5 +217,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { navigateToMenu, getUserProfile }
+  { getUserProfile }
 )(ViewProfile);

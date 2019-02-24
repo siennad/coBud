@@ -19,14 +19,13 @@ import { Keyboard } from 'react-native';
 import UserAvatar from 'react-native-user-avatar';
 
 import { logoutUser, getUserProfile } from '../../actions/AuthActions';
-import MainFooterBar from '../common/MainFooterBar';
-import { navigateToMenu } from '../../actions/NavigationActions';
 
 class UserMenu extends Component {
   async componentDidMount() {
-    this.props.navigateToMenu();
     Keyboard.dismiss();
-    await this.props.getUserProfile(this.props.user.user.uid);
+    if (!this.props.userProfile) {
+      this.props.getUserProfile(this.props.user.user.uid);
+    }
     this.setState({
       userProf: this.props.userProfile ? this.props.userProfile : null
     });
@@ -41,7 +40,7 @@ class UserMenu extends Component {
   }
 
   componentWillUnmount() {
-    Actions.pop();
+    //Actions.pop();
   }
 
   render() {
@@ -151,7 +150,6 @@ class UserMenu extends Component {
             </ListItem>
           </List>
         </Content>
-        <MainFooterBar page={this.props.sceneKey} />
       </Container>
     );
   }
@@ -164,5 +162,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { navigateToMenu, logoutUser, getUserProfile }
+  { logoutUser, getUserProfile }
 )(UserMenu);
