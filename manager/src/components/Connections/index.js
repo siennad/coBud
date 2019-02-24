@@ -79,6 +79,7 @@ class Connections extends Component {
           </Item>
         </Header>
         <Content>
+        <Button onPress={() => Actions.chat()}><Text>Chat Here</Text></Button>
           <Item>
             <Left>
               <Text style={styles.textTitle}>My Connections</Text>

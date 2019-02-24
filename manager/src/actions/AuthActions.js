@@ -9,34 +9,38 @@ import {
   LOGOUT_USER
 } from './types';
 
-export const emailChanged = (text) => ({
+export const emailChanged = text => ({
   type: EMAIL_CHANGED,
   payload: text
 });
 
-export const passwordChanged = (text) => ({
+export const passwordChanged = text => ({
   type: PASSWORD_CHANGED,
   payload: text
 });
 
-export const loginUser = ({ email, password }) => (dispatch) => {
+export const loginUser = ({ email, password }) => dispatch => {
   dispatch({ type: LOGIN_USER });
 
-  firebase.auth().signInWithEmailAndPassword(email, password)
+  firebase
+    .auth()
+    .signInWithEmailAndPassword(email, password)
     .then(user => loginUserSuccess(dispatch, user))
-    .catch((e) => {
-      console.log(e);
-      return firebase.auth().createUserWithEmailAndPassword(email, password)
+    .catch(e =>
+      // console.log(e);
+      firebase
+        .auth()
+        .createUserWithEmailAndPassword(email, password)
 
         .then(user => loginUserSuccess(dispatch, user))
-        .catch((err) => {
-          console.log(err);
-          return loginUserFail(dispatch);
-        });
-    });
+        .catch(err =>
+          // console.log(err);
+          loginUserFail(dispatch)
+        )
+    );
 };
 
-const loginUserFail = (dispatch) => {
+const loginUserFail = dispatch => {
   dispatch({ type: LOGIN_USER_FAIL });
 };
 
@@ -48,13 +52,17 @@ const loginUserSuccess = async (dispatch, user) => {
   Actions.main();
 };
 
-export const logoutUser = () => (dispatch) => {
+export const logoutUser = () => dispatch => {
   console.log('log out');
   dispatch({ type: LOGOUT_USER });
 
-  firebase.auth().signOut().then(() => {
-    Actions.auth();
-  }).catch((error) => {
-    console.log(error);
-  });
+  firebase
+    .auth()
+    .signOut()
+    .then(() => {
+      Actions.auth();
+    })
+    .catch(error => {
+      console.log(error);
+    });
 };

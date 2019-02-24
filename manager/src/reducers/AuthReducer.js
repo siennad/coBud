@@ -33,3 +33,14 @@ export default (state = INITIAL_STATE, action) => {
       return state;
   }
 };
+
+// {
+//   "rules": {
+//     "users": {
+//       "$uid": {
+//       	".read": "$uid === auth.uid",
+//       	".write": "$uid === auth.uid"
+//       }
+//     }
+// 	}
+// }

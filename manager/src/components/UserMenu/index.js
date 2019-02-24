@@ -135,7 +135,7 @@ class UserMenu extends Component {
           </List>
         </Content>
         <MainFooterBar page={this.props.sceneKey} />
-      </Container >
+      </Container>
     );
   }
 }

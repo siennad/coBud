@@ -5,6 +5,15 @@ export const LOGIN_USER_FAIL = 'login_user_fail';
 export const LOGIN_USER = 'login_user';
 export const LOGOUT_USER = 'logout_user';
 
+//Message
+export const USER_INPUT_HANDLE = 'user_input_handle';
+export const CHAT_MESSAGE_LOADING = 'chat_message_loading';
+export const CHAT_MESSAGE_ERROR = 'chat_message_error';
+export const CHAT_MESSAGE_SUCCESS = 'chat_message_success';
+export const CHAT_MESSAGE_UPDATE = 'chat_message_update';
+export const LOAD_MESSAGE_SUCCESS = 'load_message_success';
+export const LOAD_MESSAGE_ERROR = 'load_message_error';
+
 export const PLACE_UPDATE = 'place_update';
 export const PLACE_CREATE = 'place_create';
 export const PLACES_FETCH_SUCCESS = 'places_fetch_success';

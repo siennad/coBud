@@ -1,16 +1,7 @@
 import React, { Component } from 'react';
 import { Text } from 'react-native';
 import { connect } from 'react-redux';
-import {
-  Form,
-  Input,
-  Label,
-  Item,
-  Button,
-  Container,
-  Grid,
-  Row
-} from 'native-base';
+import { Form, Input, Label, Item, Button, Container, Grid, Row } from 'native-base';
 
 import { emailChanged, passwordChanged, loginUser } from '../../actions';
 //import { Card, CardSection, Input, Button, Spinner } from '../common';
@@ -29,7 +20,7 @@ class LoginForm extends Component {
 
   onButtonPress() {
     const { email, password } = this.props;
-    console.log('login user');
+    // console.log('login user');
     this.props.loginUser({ email, password });
   }
 

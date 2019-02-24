@@ -14,20 +14,31 @@ class App extends Component {
   constructor(props) {
     super(props);
 
+    //   // Initialize Firebase
     const config = {
-      apiKey: 'AIzaSyDfuR6HkFNFAzlSeP30KVU8jRT-KFuPQfo',
-      authDomain: 'manager-bc45f.firebaseapp.com',
-      databaseURL: 'https://manager-bc45f.firebaseio.com',
-      projectId: 'manager-bc45f',
-      storageBucket: 'manager-bc45f.appspot.com',
-      messagingSenderId: '955345807214'
+      apiKey: 'AIzaSyDhXDXGoUlylaALOggGVfHFtzBaQM9GRp0',
+      authDomain: 'example-fd303.firebaseapp.com',
+      databaseURL: 'https://example-fd303.firebaseio.com',
+      projectId: 'example-fd303',
+      storageBucket: 'example-fd303.appspot.com',
+      messagingSenderId: '893002210882'
     };
     firebase.initializeApp(config);
   }
 
+  //   const config = {
+  //     apiKey: 'AIzaSyDfuR6HkFNFAzlSeP30KVU8jRT-KFuPQfo',
+  //     authDomain: 'manager-bc45f.firebaseapp.com',
+  //     databaseURL: 'https://manager-bc45f.firebaseio.com',
+  //     projectId: 'manager-bc45f',
+  //     storageBucket: 'manager-bc45f.appspot.com',
+  //     messagingSenderId: '955345807214'
+  //   };
+  //   firebase.initializeApp(config);
+  // }
+
   render() {
-    const composeEnhancers =
-      global.window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+    const composeEnhancers = global.window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
     const store = createStore(
       reducers,
       process.env.NODE_ENV === 'production'
