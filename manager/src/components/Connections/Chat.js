@@ -1,18 +1,19 @@
 import React, { Component } from 'react';
-import { Container, Content, Header, Item, Icon, Input, Text } from 'native-base';
-import { connect } from 'react-redux';
-import { Actions } from 'react-native-router-flux';
-import MainFooterBar from '../common/MainFooterBar';
-import { navigateToConnections } from '../../actions/NavigationActions';
+import {
+  Container,
+  Content,
+  Header,
+  Item,
+  Icon,
+  Input,
+  Text
+} from 'native-base';
 
 class Chat extends Component {
-
-  componentDidMount() {
-    this.props.navigateToConnections();
-  }
+  componentDidMount() {}
 
   componentWillUnmount() {
-    Actions.pop();
+    //Actions.pop();
   }
 
   render() {
@@ -29,10 +30,9 @@ class Chat extends Component {
             <Text>connections</Text>
           </Item>
         </Content>
-        <MainFooterBar page={this.props.sceneKey} />
       </Container>
     );
   }
 }
 
-export default connect(undefined, { navigateToConnections })(Chat);
+export default Chat;

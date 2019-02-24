@@ -1,5 +1,6 @@
 import React from 'react';
 import { Scene, Router } from 'react-native-router-flux';
+import { Icon } from 'native-base';
 import PlaceList from './components/Places/PlaceList';
 import PlaceCreate from './components/Places/PlaceCreate';
 import PlaceEdit from './components/Places/PlaceEdit';
@@ -13,40 +14,106 @@ import Chat from './components/Connections/Chat';
 import ViewProfile from './components/UserMenu/ViewProfile';
 import UpdateProfile from './components/UserMenu/UpdateProfile';
 
+import themeColor from './../native-base-theme/variables/commonColor';
+
+const TabIcon = ({ name, selected }) => {
+  switch (name) {
+    case 'index':
+      return (
+        <Icon
+          name="home"
+          type="Entypo"
+          style={{
+            color: !selected ? 'rgba(255,255,255,0.3)' : 'rgba(255,255,255,1)'
+          }}
+        />
+      );
+    case 'map':
+      return (
+        <Icon
+          name="map"
+          type="MaterialIcons"
+          style={{
+            color: !selected ? 'rgba(255,255,255,0.3)' : 'rgba(255,255,255,1)'
+          }}
+        />
+      );
+    case 'connections':
+      return (
+        <Icon
+          name={selected ? 'people' : 'people-outline'}
+          type="MaterialIcons"
+          style={{
+            color: !selected ? 'rgba(255,255,255,0.3)' : 'rgba(255,255,255,1)'
+          }}
+        />
+      );
+    case 'notifications':
+      return (
+        <Icon
+          name={selected ? 'notifications' : 'notifications-none'}
+          type="MaterialIcons"
+          style={{
+            color: !selected ? 'rgba(255,255,255,0.3)' : 'rgba(255,255,255,1)'
+          }}
+        />
+      );
+    case 'usermenu':
+      return (
+        <Icon
+          name="menu"
+          type="MaterialIcons"
+          style={{
+            color: !selected ? 'rgba(255,255,255,0.3)' : 'rgba(255,255,255,1)'
+          }}
+        />
+      );
+    default:
+      return null;
+  }
+};
+
 const RouterComponent = () => (
   <Router sceneStyle={{ paddingTop: 0 }}>
     <Scene key="auth">
       <Scene key="login" component={Login} title="Login" hideNavBar="true" />
     </Scene>
 
-    <Scene key="main" hideNavBar="true">
-
-      <Scene key="index" initial hideNavBar="true">
+    <Scene
+      key="main"
+      hideNavBar="true"
+      tabs
+      tabBarStyle={{ backgroundColor: themeColor.brandPrimary }}
+    >
+      <Scene key="index" initial hideNavBar="true" icon={TabIcon}>
         <Scene key="home" component={Home} initial />
-        <Scene
-          key="placeList"
-          component={PlaceList}
-          title="Place List"
-        />
-        <Scene key="placeCreate" component={PlaceCreate} title="Create Location" />
-        <Scene key="placeEdit" component={PlaceEdit} title="Edit Location" />
       </Scene>
 
-      <Scene key="map" component={Map} hideNavBar="true" hideNavBar="true" />
+      <Scene key="map" component={Map} hideNavBar="true" icon={TabIcon} />
 
-      <Scene key="usermenu" hideNavBar="true">
-        <Scene key="mainmenu" component={UserMenu} />
-        <Scene key="updateprofile" component={(props) => <UpdateProfile {...props} />} />
-        <Scene key="viewprofile" component={(props) => <ViewProfile {...props} />} />
-      </Scene>
-
-      <Scene key="connections" hideNavBar="true" >
+      <Scene key="connections" hideNavBar="true" icon={TabIcon}>
         <Scene key="connectionsHome" component={Connections} inital />
         <Scene key="chat" component={Chat} />
       </Scene>
 
-      <Scene key="notifications" component={Notifcations} hideNavBar="true" />
+      <Scene
+        key="notifications"
+        component={Notifcations}
+        hideNavBar="true"
+        icon={TabIcon}
+      />
 
+      <Scene key="usermenu" hideNavBar="true" icon={TabIcon}>
+        <Scene key="mainmenu" component={UserMenu} />
+        <Scene
+          key="updateprofile"
+          component={props => <UpdateProfile {...props} />}
+        />
+        <Scene
+          key="viewprofile"
+          component={props => <ViewProfile {...props} />}
+        />
+      </Scene>
     </Scene>
   </Router>
 );

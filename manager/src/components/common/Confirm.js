@@ -11,13 +11,11 @@ const Confirm = ({ children, visible, onAccept, onDecline }) => {
       visible={visible}
       transparent
       animationType="slide"
-      onRequestClose={() => { }}
+      onRequestClose={() => {}}
     >
       <View style={containerStyle}>
         <CardSection style={cardSectionStyle}>
-          <Text style={textStyle}>
-            {children}
-          </Text>
+          <Text style={textStyle}>{children}</Text>
         </CardSection>
 
         <CardSection>

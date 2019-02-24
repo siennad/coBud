@@ -22,11 +22,6 @@ import {
   StyleSheet,
   Keyboard
 } from 'react-native';
-import { connect } from 'react-redux';
-import { Actions } from 'react-native-router-flux';
-
-import MainFooterBar from '../common/MainFooterBar';
-import { navigateToConnections } from '../../actions/NavigationActions';
 
 const image1 = require('./images/business.png');
 
@@ -74,12 +69,11 @@ class Connections extends Component {
   }
 
   componentDidMount() {
-    this.props.navigateToConnections();
     Keyboard.dismiss();
   }
 
   componentWillUnmount() {
-    Actions.pop();
+    //Actions.pop();
   }
 
   deleteRow(secId, rowId, rowMap) {
@@ -170,7 +164,6 @@ class Connections extends Component {
             )}
           />
         </Content>
-        <MainFooterBar page={this.props.sceneKey} />
       </Container>
     );
   }
@@ -188,7 +181,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default connect(
-  undefined,
-  { navigateToConnections }
-)(Connections);
+export default Connections;

@@ -22,7 +22,6 @@ import { Keyboard } from 'react-native';
 
 import { accordionBorderColor } from '../../../native-base-theme/variables/commonColor';
 import MainFooterBar from '../common/MainFooterBar';
-import { navigateToMenu } from '../../actions/NavigationActions';
 import {
   updateProfile,
   getUserProfile
@@ -43,7 +42,6 @@ class UpdateProfile extends Component {
   }
 
   async componentDidMount() {
-    this.props.navigateToMenu();
     await this.props.getUserProfile(this.props.user.user.uid);
     if (this.props.userProfile) {
       console.log('uodate prof yes');
@@ -61,7 +59,7 @@ class UpdateProfile extends Component {
   }
 
   componentWillUnmount() {
-    Actions.pop();
+    // Actions.pop();
   }
 
   handleChange(props, val) {
@@ -178,5 +176,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { navigateToMenu, updateProfile, getUserProfile }
+  { updateProfile, getUserProfile }
 )(UpdateProfile);
