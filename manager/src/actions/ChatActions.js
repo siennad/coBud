@@ -29,16 +29,20 @@ export const sendMessage = messageInput => dispatch => {
   // console.log(Actions.payload);
   // console.log(messageInput);
   const currentUser = firebase.auth().currentUser;
+  // console.log('currentuser actions');
+  // console.log(currentUser);
+  // console.log(currentUser.email);
   const chatMessage = {
-    text: messageInput,
     time: Date.now(),
     user: {
-      name: currentUser.displayName
+      name: currentUser.email,
+      uid: currentUser.uid,
+      text: messageInput
     }
   };
-  const ref = firebase.database().ref(`users/message/${currentUser.uid}`);
+  // const ref = firebase.database().ref(`users/message/${currentUser.uid}`);
   // .push(chatMessage);
-
+  const ref = firebase.database().ref('users/message/');
   const newref = ref.push(chatMessage);
   // console.log(newref.key);
 
@@ -62,7 +66,8 @@ export const loadMessages = () => dispatch => {
   const currentUser = firebase.auth().currentUser;
   const ref = firebase
     .database()
-    .ref(`users/message/${currentUser.uid}`)
+    // .ref(`users/message/${currentUser.uid}`)
+    .ref('users/message/')
     .on(
       'value',
       snapshot => {

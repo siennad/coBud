@@ -9,7 +9,9 @@ import {
   Text,
   Button,
   Form,
-  Left
+  Left,
+  Label,
+  Row
 } from 'native-base';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
@@ -35,10 +37,11 @@ class Chat extends Component {
     this.setState({
       messageInput: ''
     });
-    console.log('on button press event');
+    this.props.loadMessages();
+    // console.log('on button press event');
     //this.props.loadMessages();
-    console.log(this.props.loadMessages);
-    const { messageOutput } = this.props;
+    // console.log(this.props.loadMessages);
+    // const { messageOutput } = this.props;
     // console.log(messageOutput);
   }
 
@@ -51,9 +54,20 @@ class Chat extends Component {
     const { messageInput } = this.state;
     const { messageOutput } = this.props;
     // console.log(messageOutput);
-    const data = messageOutput.map(val => <Text>{val.text}</Text>);
-    // console.log(messageOutput);
-    //const data = messageOutput.toJSON().map(res => <Text>{res.text}</Text>);
+    const data = messageOutput.map(val => {
+      console.log(val);
+      return (
+        <Row>
+          <Item>
+            <Label>{val.user.name}</Label>
+          </Item>
+          <Item>
+            <Text>{val.user.text}</Text>
+          </Item>
+        </Row>
+      );
+    });
+
     return (
       <Container>
         <Header searchBar rounded>
@@ -80,11 +94,7 @@ class Chat extends Component {
           <Item>
             <Text>Message show here</Text>
           </Item>
-          {messageOutput.map(val => (
-            <Item>
-              <Text>{val.text}</Text>
-            </Item>
-          ))}
+          {data}
         </Content>
         <MainFooterBar page={this.props.sceneKey} />
       </Container>

@@ -21,7 +21,7 @@ const ChatReducer = (state = initialState, action) => {
         messageOutput: action.payload,
         loadMessagesError: null
       };
-    case types.CHAT_LOAD_MESSAGES_ERROR:
+    case types.LOAD_MESSAGE_ERROR:
       return { ...state, messageOutput: null, loadMessagesError: action.error };
     // case CHAT_MESSAGE_LOADING:
     //   return { ...state, sending: true, sendingError: null };
