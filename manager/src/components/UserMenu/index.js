@@ -60,20 +60,12 @@ class UserMenu extends Component {
               <Left>
                 <UserAvatar
                   colors={['#ccc', '#fafafa', '#ccaabb']}
-                  name={
-                    userProfile
-                      ? userProfile.name && userProfile.name
-                      : user.user.email
-                  }
+                  name={userProfile ? userProfile.name && userProfile.name : user.user.email}
                   size="50"
                 />
               </Left>
               <Body>
-                <Text>
-                  {userProfile
-                    ? userProfile.name && userProfile.name
-                    : user.user.email}
-                </Text>
+                <Text>{userProfile ? userProfile.name && userProfile.name : user.user.email}</Text>
               </Body>
             </ListItem>
 

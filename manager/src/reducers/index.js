@@ -6,9 +6,9 @@ import UsersProfileReducer from './UsersProfileReducer';
 import ChatReducer from './ChatReducer';
 
 export default combineReducers({
-  auth: AuthReducer,
-  placeForm: PlaceFormReducer,
-  places: PlaceReducer,
-  userProfile: UsersProfileReducer,
-  chat: ChatReducer
+    auth: AuthReducer,
+    placeForm: PlaceFormReducer,
+    places: PlaceReducer,
+    userProfile: UsersProfileReducer,
+    chat: ChatReducer
 });

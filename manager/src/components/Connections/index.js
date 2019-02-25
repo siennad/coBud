@@ -15,13 +15,7 @@ import {
   Thumbnail,
   Button
 } from 'native-base';
-import {
-  Alert,
-  ListView,
-  TouchableOpacity,
-  StyleSheet,
-  Keyboard
-} from 'react-native';
+import { Alert, ListView, TouchableOpacity, StyleSheet, Keyboard } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 
 const image1 = require('./images/business.png');
@@ -95,8 +89,8 @@ class Connections extends Component {
           <Item>
             <Icon ios="ios-search" android="md-search" />
             <Input placeholder="Search..." />
-          </Item>
-        </Header>
+          </Item>{' '}
+        </Header>{' '}
         <Content>
           <Button block onPress={() => Actions.chat()} iconRight>
             <Text>Enter Global Chatroom</Text>

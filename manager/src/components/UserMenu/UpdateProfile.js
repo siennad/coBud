@@ -22,10 +22,7 @@ import { Keyboard } from 'react-native';
 
 import { accordionBorderColor } from '../../../native-base-theme/variables/commonColor';
 
-import {
-  updateProfile,
-  getUserProfile
-} from '../../actions/UserProfileActions';
+import { updateProfile, getUserProfile } from '../../actions/UserProfileActions';
 
 class UpdateProfile extends Component {
   constructor(props) {
@@ -151,7 +148,6 @@ class UpdateProfile extends Component {
             </Form>
           )}
         </Content>
-       
       </Container>
     );
   }

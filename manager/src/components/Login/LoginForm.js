@@ -1,16 +1,7 @@
 import React, { Component } from 'react';
 import { Keyboard } from 'react-native';
 import { connect } from 'react-redux';
-import {
-  Form,
-  Input,
-  Text,
-  Item,
-  Button,
-  Container,
-  Grid,
-  Row
-} from 'native-base';
+import { Form, Input, Text, Item, Button, Container, Grid, Row } from 'native-base';
 
 import { emailChanged, passwordChanged, loginUser } from '../../actions';
 //import { Card, CardSection, Input, Button, Spinner } from '../common';

@@ -1,13 +1,7 @@
 import firebase from 'firebase';
 import { Actions } from 'react-native-router-flux';
 
-import {
-  UPDATE_PROFILE,
-  GET_PROFILE,
-  FETCH_ERROR,
-  UPDATE_ERROR,
-  ON_PROCESS
-} from './types';
+import { UPDATE_PROFILE, GET_PROFILE, FETCH_ERROR, UPDATE_ERROR, ON_PROCESS } from './types';
 
 export const getUserProfile = id => async dispatch => {
   dispatch({ type: ON_PROCESS });

@@ -1,13 +1,5 @@
 import React, { Component } from 'react';
-import {
-  Container,
-  Content,
-  Header,
-  Item,
-  Icon,
-  Input,
-  Text
-} from 'native-base';
+import { Container, Content, Header, Item, Icon, Input, Text } from 'native-base';
 import { Keyboard } from 'react-native';
 
 class Map extends Component {

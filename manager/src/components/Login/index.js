@@ -3,7 +3,7 @@ import firebase from 'firebase';
 import { Actions } from 'react-native-router-flux';
 import React, { Component } from 'react';
 import { Image } from 'react-native';
-import { Container, Content, Item, Button, Text } from 'native-base';
+import { Container, Content, Item } from 'native-base';
 import { Grid, Row } from 'react-native-easy-grid';
 import LoginForm from './LoginForm';
 

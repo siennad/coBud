@@ -76,7 +76,6 @@ const RouterComponent = () => (
     <Scene key="auth">
       <Scene key="login" component={Login} title="Login" hideNavBar="true" />
     </Scene>
-
     <Scene
       key="main"
       hideNavBar="true"
@@ -86,34 +85,18 @@ const RouterComponent = () => (
       <Scene key="index" initial hideNavBar="true" icon={TabIcon}>
         <Scene key="home" component={Home} initial />
       </Scene>
-
       <Scene key="map" component={Map} hideNavBar="true" icon={TabIcon} />
-
       <Scene key="connections" hideNavBar="true" icon={TabIcon}>
         <Scene key="connectionsHome" component={Connections} inital />
-        <Scene key="chat" component={Chat} />
-        <Scene key="localChat" component={LocalChat} />
+        <Scene key="chat" component={Chat} /> <Scene key="localChat" component={LocalChat} />{' '}
       </Scene>
-
-      <Scene
-        key="notifications"
-        component={Notifcations}
-        hideNavBar="true"
-        icon={TabIcon}
-      />
-
+      <Scene key="notifications" component={Notifcations} hideNavBar="true" icon={TabIcon} />
       <Scene key="usermenu" hideNavBar="true" icon={TabIcon}>
-        <Scene key="mainmenu" component={UserMenu} />
-        <Scene
-          key="updateprofile"
-          component={props => <UpdateProfile {...props} />}
-        />
-        <Scene
-          key="viewprofile"
-          component={props => <ViewProfile {...props} />}
-        />
-      </Scene>
-    </Scene>
+        <Scene key="mainmenu" component={UserMenu} />{' '}
+        <Scene key="updateprofile" component={props => <UpdateProfile {...props} />} />
+        <Scene key="viewprofile" component={props => <ViewProfile {...props} />} />
+      </Scene>{' '}
+    </Scene>{' '}
   </Router>
 );
 
