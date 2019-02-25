@@ -1,9 +1,6 @@
 import React from 'react';
 import { Scene, Router } from 'react-native-router-flux';
 import { Icon } from 'native-base';
-import PlaceList from './components/Places/PlaceList';
-import PlaceCreate from './components/Places/PlaceCreate';
-import PlaceEdit from './components/Places/PlaceEdit';
 import Home from './components/Home/index';
 import Map from './components/Map/index';
 import Login from './components/Login/index';
@@ -15,6 +12,7 @@ import ViewProfile from './components/UserMenu/ViewProfile';
 import UpdateProfile from './components/UserMenu/UpdateProfile';
 
 import themeColor from './../native-base-theme/variables/commonColor';
+import LocalChat from './components/Connections/LocalChat';
 
 const TabIcon = ({ name, selected }) => {
   switch (name) {
@@ -94,6 +92,7 @@ const RouterComponent = () => (
       <Scene key="connections" hideNavBar="true" icon={TabIcon}>
         <Scene key="connectionsHome" component={Connections} inital />
         <Scene key="chat" component={Chat} />
+        <Scene key="localChat" component={LocalChat} />
       </Scene>
 
       <Scene

@@ -18,6 +18,7 @@ class Home extends Component {
     if (!firebase.auth().currentUser) {
       Actions.auth();
     }
+    console.log(firebase.auth().currentUser);
   }
 
   componentWillUnmount() {

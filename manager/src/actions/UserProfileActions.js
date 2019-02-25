@@ -43,8 +43,15 @@ export const updateProfile = ({ userId, value }) => async dispatch => {
         if (err) {
           await dispatch({ type: UPDATE_ERROR, err });
         }
-        await dispatch({ type: UPDATE_PROFILE });
-        Actions.viewprofile();
+        firebase
+          .auth()
+          .currentUser.updateProfile({
+            displayName: value.name
+          })
+          .then(() => {
+            dispatch({ type: UPDATE_PROFILE });
+            Actions.viewprofile();
+          });
       }
     );
 };

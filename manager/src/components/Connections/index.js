@@ -22,6 +22,7 @@ import {
   StyleSheet,
   Keyboard
 } from 'react-native';
+import { Actions } from 'react-native-router-flux';
 
 const image1 = require('./images/business.png');
 
@@ -97,6 +98,10 @@ class Connections extends Component {
           </Item>
         </Header>
         <Content>
+          <Button block onPress={() => Actions.chat()} iconRight>
+            <Text>Enter Global Chatroom</Text>
+            <Icon name="sign-in" type="FontAwesome" />
+          </Button>
           <Item>
             <Left>
               <Text style={styles.textTitle}>My Connections</Text>

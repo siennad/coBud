@@ -3,6 +3,7 @@
   "rules": {
     "no-underscore-dangle": "off",
     "no-undef": "warn",
-    "no-unused-vars": "warn"
+    "no-unused-vars": "warn",
+    "max-len": "warn"
   }
 }
