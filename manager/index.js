@@ -6,7 +6,8 @@ YellowBox.ignoreWarnings([
   'Warning: componentWillReceiveProps',
   'Warning: componentWillUpdate',
   'Setting a timer for a long period of time, ',
-  'Remote debugger'
+  'Remote debugger',
+  'Possible Unhandled'
 ]);
 
 AppRegistry.registerComponent('manager', () => App);
