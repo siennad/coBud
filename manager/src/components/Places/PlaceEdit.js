@@ -7,8 +7,6 @@ import { placeUpdate, placeSave, placeDelete } from '../../actions';
 import { Card, CardSection, Button, Confirm } from '../common';
 
 class PlaceEdit extends Component {
-  state = { showModal: false };
-
   componentDidMount() {
     _.each(this.props.place, (value, prop) => {
       this.props.placeUpdate({ prop, value });
@@ -43,19 +41,17 @@ class PlaceEdit extends Component {
         <PlaceForm />
 
         <CardSection>
-          <Button onPress={this.onButtonPress.bind(this)}>
-            Save Changes
-          </Button>
+          <Button onPress={this.onButtonPress.bind(this)}>Save Changes</Button>
         </CardSection>
 
         <CardSection>
-          <Button onPress={this.onTextPress.bind(this)}>
-            Text Schedule
-          </Button>
+          <Button onPress={this.onTextPress.bind(this)}>Text Schedule</Button>
         </CardSection>
 
         <CardSection>
-          <Button onPress={() => this.setState({ showModal: !this.state.showModal })}>
+          <Button
+            onPress={() => this.setState({ showModal: !this.state.showModal })}
+          >
             Delete
           </Button>
         </CardSection>
@@ -72,12 +68,17 @@ class PlaceEdit extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   const { item, phone, shift } = state.placeForm;
 
   return { item, phone, shift };
 };
 
-export default connect(mapStateToProps, {
-  placeUpdate, placeSave, placeDelete
-})(PlaceEdit);
+export default connect(
+  mapStateToProps,
+  {
+    placeUpdate,
+    placeSave,
+    placeDelete
+  }
+)(PlaceEdit);

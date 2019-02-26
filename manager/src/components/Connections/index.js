@@ -15,7 +15,13 @@ import {
   Thumbnail,
   Button
 } from 'native-base';
-import { Alert, ListView, TouchableOpacity, StyleSheet, Keyboard } from 'react-native';
+import {
+  Alert,
+  ListView,
+  TouchableOpacity,
+  StyleSheet,
+  Keyboard
+} from 'react-native';
 import { Actions } from 'react-native-router-flux';
 
 const image1 = require('./images/business.png');
@@ -40,13 +46,13 @@ const data = [
     image: image2
   },
   {
-    id: 2,
+    id: 3,
     first_name: 'LinkedIn',
     message: 'I got a new connection for you',
     image: image3
   },
   {
-    id: 2,
+    id: 4,
     first_name: 'Tweeter',
     message: 'Hashtag has changed your business',
     image: image4
@@ -67,10 +73,6 @@ class Connections extends Component {
     Keyboard.dismiss();
   }
 
-  componentWillUnmount() {
-    //Actions.pop();
-  }
-
   deleteRow(secId, rowId, rowMap) {
     rowMap[`${secId}${rowId}`].props.closeRow();
     const newData = [...this.state.listViewData];
@@ -89,8 +91,8 @@ class Connections extends Component {
           <Item>
             <Icon ios="ios-search" android="md-search" />
             <Input placeholder="Search..." />
-          </Item>{' '}
-        </Header>{' '}
+          </Item>
+        </Header>
         <Content>
           <Button block onPress={() => Actions.chat()} iconRight>
             <Text>Enter Global Chatroom</Text>
