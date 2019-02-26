@@ -5,9 +5,9 @@ import { StyleProvider } from 'native-base';
 import { createLogger } from 'redux-logger';
 import firebase from 'firebase';
 import ReduxThunk from 'redux-thunk';
-import getTheme from '../native-base-theme/components';
 import reducers from './reducers';
 import Router from './Router';
+import getTheme from '../native-base-theme/components';
 import material from '../native-base-theme/variables/material';
 
 class App extends Component {
