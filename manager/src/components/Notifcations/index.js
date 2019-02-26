@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+<<<<<<< HEAD
 import {
   Container,
   Content,
@@ -9,9 +10,22 @@ import {
   Text
 } from 'native-base';
 import { Keyboard } from 'react-native';
+=======
+import { Container, Content, Header, Item, Icon, Input, Text } from 'native-base';
+import { connect } from 'react-redux';
+import { Actions } from 'react-native-router-flux';
+import { Keyboard } from 'react-native';
+
+import MainFooterBar from '../common/MainFooterBar';
+import { navigateToNotifications } from '../../actions/NavigationActions';
+>>>>>>> c18f4eea... Add Chat, routes, navigations
 
 class Notifications extends Component {
   componentDidMount() {
+<<<<<<< HEAD
+=======
+    this.props.navigateToNotifications();
+>>>>>>> c18f4eea... Add Chat, routes, navigations
     Keyboard.dismiss();
   }
 

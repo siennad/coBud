@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import {
   Container,
   Content,
@@ -7,8 +7,8 @@ import {
   Icon,
   Input,
   Text
-} from 'native-base';
-import { Keyboard } from 'react-native';
+} from "native-base";
+import { Keyboard } from "react-native";
 
 class Map extends Component {
   constructor(props) {
