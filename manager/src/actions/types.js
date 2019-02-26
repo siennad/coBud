@@ -4,7 +4,8 @@ export const LOGIN_USER_SUCCESS = 'login_user_success';
 export const LOGIN_USER_FAIL = 'login_user_fail';
 export const LOGIN_USER = 'login_user';
 export const LOGOUT_USER = 'logout_user';
-
+export const LOAD_USER_LIST = 'load_user_list';
+export const SAVE_USER_DETAIL = 'save_user_detail';
 //Message
 export const USER_INPUT_HANDLE = 'user_input_handle';
 export const CHAT_MESSAGE_LOADING = 'chat_message_loading';
@@ -31,3 +32,4 @@ export const GET_PROFILE = 'get_profile';
 export const FETCH_ERROR = 'fetch_error';
 export const UPDATE_ERROR = 'update_error';
 export const ON_PROCESS = 'on_process';
+export const FETCH_SUCCESS = 'fetch_success';

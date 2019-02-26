@@ -20,10 +20,10 @@ import { navigateToConnections } from '../../actions/NavigationActions';
 import { UserInputHandle, sendMessage, loadMessages } from '../../actions';
 
 class Chat extends Component {
-  state = { messageInput: '' };
+  state = { messageInput: '', uid: '6NYDC1ugsGRUNNtMfaJJI438iGG3' };
   componentDidMount() {
     this.props.navigateToConnections();
-    this.props.loadMessages();
+    this.props.loadMessages(this.props.uid);
   }
   componentWillUnmount() {
     Actions.pop();
@@ -32,17 +32,14 @@ class Chat extends Component {
   onButtonPress() {
     const { messageInput } = this.state;
     // console.log('login user');
+    const { uid } = this.props;
+
     // this.props.UserInputHandle(messageInput);
-    this.props.sendMessage(messageInput);
+    this.props.sendMessage(messageInput, uid);
     this.setState({
       messageInput: ''
     });
-    this.props.loadMessages();
-    // console.log('on button press event');
-    //this.props.loadMessages();
-    // console.log(this.props.loadMessages);
-    // const { messageOutput } = this.props;
-    // console.log(messageOutput);
+    this.props.loadMessages(uid);
   }
 
   UserInputHandle(text) {
@@ -50,6 +47,7 @@ class Chat extends Component {
       messageInput: text
     });
   }
+
   render() {
     const { messageInput } = this.state;
     const { messageOutput } = this.props;

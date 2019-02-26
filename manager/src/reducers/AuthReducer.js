@@ -4,7 +4,12 @@ import {
   LOGIN_USER_SUCCESS,
   LOGIN_USER_FAIL,
   LOGIN_USER,
-  LOGOUT_USER
+  LOGOUT_USER,
+  SAVE_USER_DETAIL,
+  LOAD_USER_LIST,
+  ON_PROCESS,
+  FETCH_ERROR,
+  FETCH_SUCCESS
 } from '../actions/types';
 
 const INITIAL_STATE = {
@@ -12,7 +17,8 @@ const INITIAL_STATE = {
   password: '',
   user: null,
   error: '',
-  loading: false
+  loading: false,
+  userDetails: []
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -25,6 +31,8 @@ export default (state = INITIAL_STATE, action) => {
       return { ...state, loading: true, error: '' };
     case LOGIN_USER_SUCCESS:
       return { ...state, user: action.payload, error: '', loading: false };
+    case SAVE_USER_DETAIL:
+      return { ...state, userDetails: action.payload };
     case LOGIN_USER_FAIL:
       return { ...state, error: 'Authentication Failed.', password: '', loading: false };
     case LOGOUT_USER:

@@ -3,35 +3,35 @@ import * as _ from 'lodash';
 
 import { Actions } from 'react-native-router-flux';
 import * as types from './types';
+
 // export const UserInputHandle = text => ({
 //   type: types.USER_INPUT_HANDLE,
 //   payload: text
 // });
 
-export const loadMessagesSuccess = messageArray => {
-  console.log('------ actions');
+export const loadMessagesSuccess = messageArray =>
+  // console.log('------ actions');
 
-  console.log(messageArray);
-  console.log('------End actions');
-  return {
+  // console.log(messageArray);
+  // console.log('------End actions');
+  ({
     type: types.LOAD_MESSAGE_SUCCESS,
     payload: _.values(messageArray)
-  };
-};
+  });
 
 export const loadMessagesError = error => ({
   type: types.LOAD_MESSAGE_ERROR,
   error
 });
+const generateRoomToken = (currentUserId, uid) => {
+  const roomToken1 = `${currentUserId}-${uid}`;
+  const roomToken2 = `${uid}-${currentUserId}`;
+  return currentUserId > uid ? roomToken1 : roomToken2;
+};
 
-export const sendMessage = messageInput => dispatch => {
+export const sendMessage = (messageInput, uid) => dispatch => {
   dispatch({ type: types.USER_INPUT_HANDLE });
-  // console.log(Actions.payload);
-  // console.log(messageInput);
   const currentUser = firebase.auth().currentUser;
-  // console.log('currentuser actions');
-  // console.log(currentUser);
-  // console.log(currentUser.email);
   const chatMessage = {
     time: Date.now(),
     user: {
@@ -40,34 +40,21 @@ export const sendMessage = messageInput => dispatch => {
       text: messageInput
     }
   };
-  // const ref = firebase.database().ref(`users/message/${currentUser.uid}`);
-  // .push(chatMessage);
-  const ref = firebase.database().ref('users/message/');
+  const refUid = generateRoomToken(currentUser.uid, uid);
+  const ref = firebase.database().ref(`users/message/${refUid}`);
   const newref = ref.push(chatMessage);
-  // console.log(newref.key);
-
-  // const readUserData = ref.on('value', snapshot => {
-  //   console.log(snapshot.val());
-  //   const animals = [];
-  //   snapshot.forEach(doc => {
-  //     animals.push({
-  //       key: doc.key,
-  //       text: doc.toJSON().text
-  //     });
-  //     console.log('doc.toJSON.text here-----');
-  //   });
-  //   console.log(animals);
-  // });
 };
 
 // FetchMessage
 
-export const loadMessages = () => dispatch => {
+export const loadMessages = uid => dispatch => {
   const currentUser = firebase.auth().currentUser;
+  const refUid = generateRoomToken(currentUser.uid, uid);
+  // const check = checkUid(currentUser.uid, uid1, uid2);
   const ref = firebase
     .database()
     // .ref(`users/message/${currentUser.uid}`)
-    .ref('users/message/')
+    .ref(`users/message/${refUid}`)
     .on(
       'value',
       snapshot => {

@@ -4,17 +4,21 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import { StyleProvider } from 'native-base';
 import { createLogger } from 'redux-logger';
 import firebase from 'firebase';
+// import * as admin from 'firebase-admin';
 import ReduxThunk from 'redux-thunk';
 import reducers from './reducers';
 import Router from './Router';
 import getTheme from '../native-base-theme/components';
 import material from '../native-base-theme/variables/material';
 
+//const admin = require('firebase-admin');
+//const serviceAccount = require('../env/exampleKey.json');
+
 class App extends Component {
   constructor(props) {
     super(props);
 
-    //   // Initialize Firebase
+    // Initialize Firebase
     const config = {
       apiKey: 'AIzaSyDhXDXGoUlylaALOggGVfHFtzBaQM9GRp0',
       authDomain: 'example-fd303.firebaseapp.com',
@@ -24,6 +28,10 @@ class App extends Component {
       messagingSenderId: '893002210882'
     };
     firebase.initializeApp(config);
+    // admin.initializeApp({
+    //   credential: admin.credential.cert(serviceAccount),
+    //   databaseURL: 'https://example-fd303.firebaseio.com'
+    // });
   }
 
   //   const config = {
