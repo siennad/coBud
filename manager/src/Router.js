@@ -87,16 +87,28 @@ const RouterComponent = () => (
       </Scene>
       <Scene key="map" component={Map} hideNavBar="true" icon={TabIcon} />
       <Scene key="connections" hideNavBar="true" icon={TabIcon}>
-        <Scene key="connectionsHome" component={Connections} inital />
-        <Scene key="chat" component={Chat} /> <Scene key="localChat" component={LocalChat} />{' '}
+        <Scene key="connectionsHome" component={Connections} initial />
+        <Scene key="chat" component={Chat} />
+        <Scene key="localChat" component={LocalChat} />
       </Scene>
-      <Scene key="notifications" component={Notifcations} hideNavBar="true" icon={TabIcon} />
+      <Scene
+        key="notifications"
+        component={Notifcations}
+        hideNavBar="true"
+        icon={TabIcon}
+      />
       <Scene key="usermenu" hideNavBar="true" icon={TabIcon}>
-        <Scene key="mainmenu" component={UserMenu} />{' '}
-        <Scene key="updateprofile" component={props => <UpdateProfile {...props} />} />
-        <Scene key="viewprofile" component={props => <ViewProfile {...props} />} />
-      </Scene>{' '}
-    </Scene>{' '}
+        <Scene key="mainmenu" component={UserMenu} initial />
+        <Scene
+          key="updateprofile"
+          component={props => <UpdateProfile {...props} />}
+        />
+        <Scene
+          key="viewprofile"
+          component={props => <ViewProfile {...props} />}
+        />
+      </Scene>
+    </Scene>
   </Router>
 );
 
