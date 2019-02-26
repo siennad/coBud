@@ -1,6 +1,14 @@
-import React, { Component } from 'react';
-import { Container, Content, Header, Item, Icon, Input, Text } from 'native-base';
-import { Keyboard } from 'react-native';
+import React, { Component } from "react";
+import {
+  Container,
+  Content,
+  Header,
+  Item,
+  Icon,
+  Input,
+  Text
+} from "native-base";
+import { Keyboard } from "react-native";
 
 class Map extends Component {
   constructor(props) {
@@ -10,10 +18,6 @@ class Map extends Component {
 
   componentDidMount() {
     Keyboard.dismiss();
-  }
-
-  componentWillUnmount() {
-    // Actions.pop();
   }
 
   render() {

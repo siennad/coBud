@@ -1,5 +1,5 @@
-import firebase from 'firebase';
-import { Actions } from 'react-native-router-flux';
+import firebase from "firebase";
+import { Actions } from "react-native-router-flux";
 import {
   EMAIL_CHANGED,
   PASSWORD_CHANGED,
@@ -7,36 +7,40 @@ import {
   LOGIN_USER_FAIL,
   LOGIN_USER,
   LOGOUT_USER
-} from './types';
+} from "./types";
 
-export const emailChanged = (text) => ({
+export const emailChanged = text => ({
   type: EMAIL_CHANGED,
-  payload: text
+  payload: text.trim()
 });
 
-export const passwordChanged = (text) => ({
+export const passwordChanged = text => ({
   type: PASSWORD_CHANGED,
-  payload: text
+  payload: text.trim()
 });
 
-export const loginUser = ({ email, password }) => (dispatch) => {
+export const loginUser = ({ email, password }) => dispatch => {
   dispatch({ type: LOGIN_USER });
 
-  firebase.auth().signInWithEmailAndPassword(email, password)
+  firebase
+    .auth()
+    .signInWithEmailAndPassword(email.trim(), password)
     .then(user => loginUserSuccess(dispatch, user))
-    .catch((e) => {
+    .catch(e => {
       console.log(e);
-      return firebase.auth().createUserWithEmailAndPassword(email, password)
+      return firebase
+        .auth()
+        .createUserWithEmailAndPassword(email.trim(), password)
 
         .then(user => loginUserSuccess(dispatch, user))
-        .catch((err) => {
+        .catch(err => {
           console.log(err);
           return loginUserFail(dispatch);
         });
     });
 };
 
-const loginUserFail = (dispatch) => {
+const loginUserFail = dispatch => {
   dispatch({ type: LOGIN_USER_FAIL });
 };
 
@@ -45,15 +49,20 @@ const loginUserSuccess = async (dispatch, user) => {
     type: LOGIN_USER_SUCCESS,
     payload: user
   });
+
   Actions.main();
 };
 
-export const logoutUser = () => (dispatch) => {
+export const logoutUser = () => dispatch => {
   dispatch({ type: LOGOUT_USER });
 
-  firebase.auth().signOut().then(() => {
-    Actions.auth();
-  }).catch((error) => {
-    console.log(error);
-  });
+  firebase
+    .auth()
+    .signOut()
+    .then(() => {
+      Actions.auth();
+    })
+    .catch(error => {
+      console.log(error);
+    });
 };

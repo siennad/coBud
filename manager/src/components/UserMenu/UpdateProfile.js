@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import {
   Container,
   Content,
@@ -15,24 +15,27 @@ import {
   Textarea,
   Right,
   Spinner
-} from 'native-base';
-import { connect } from 'react-redux';
-import { Actions } from 'react-native-router-flux';
-import { Keyboard } from 'react-native';
+} from "native-base";
+import { connect } from "react-redux";
+import { Actions } from "react-native-router-flux";
+import { Keyboard } from "react-native";
 
-import { accordionBorderColor } from '../../../native-base-theme/variables/commonColor';
+import { accordionBorderColor } from "../../../native-base-theme/variables/commonColor";
 
-import { updateProfile, getUserProfile } from '../../actions/UserProfileActions';
+import {
+  updateProfile,
+  getUserProfile
+} from "../../actions/UserProfileActions";
 
 class UpdateProfile extends Component {
   constructor(props) {
     super(props);
     this.state = {
       values: {
-        name: '',
-        address: '',
-        city: '',
-        hobby: ''
+        name: "",
+        address: "",
+        city: "",
+        hobby: ""
       },
       formDirty: false
     };
@@ -41,7 +44,7 @@ class UpdateProfile extends Component {
   async componentDidMount() {
     await this.props.getUserProfile(this.props.user.user.uid);
     if (this.props.userProfile) {
-      console.log('uodate prof yes');
+      console.log("uodate prof yes");
       console.log(this.props.userProfile);
       this.setState({
         ...this.state,
@@ -89,7 +92,7 @@ class UpdateProfile extends Component {
             </Button>
           </Left>
           <Body>
-            <Text style={{ color: 'white' }}>Update Profile</Text>
+            <Text style={{ color: "white" }}>Update Profile</Text>
           </Body>
           <Right>
             <Button onPress={() => this.updateProfile()}>
@@ -107,7 +110,7 @@ class UpdateProfile extends Component {
                 <Input
                   bordered
                   placeholder="Full name"
-                  onChangeText={value => this.handleChange('name', value)}
+                  onChangeText={value => this.handleChange("name", value)}
                   style={styles.rootInput}
                   value={values.name}
                 />
@@ -117,7 +120,7 @@ class UpdateProfile extends Component {
                 <Input
                   bordered
                   placeholder="Address"
-                  onChangeText={value => this.handleChange('address', value)}
+                  onChangeText={value => this.handleChange("address", value)}
                   style={styles.rootInput}
                   value={values.address}
                 />
@@ -127,7 +130,7 @@ class UpdateProfile extends Component {
                 <Input
                   bordered
                   placeholder="City"
-                  onChangeText={value => this.handleChange('city', value)}
+                  onChangeText={value => this.handleChange("city", value)}
                   style={styles.rootInput}
                   value={values.city}
                 />
@@ -137,7 +140,7 @@ class UpdateProfile extends Component {
                 <Textarea
                   rowSpan={3}
                   placeholder="Your hobbies, favourites"
-                  onChangeText={value => this.handleChange('hobby', value)}
+                  onChangeText={value => this.handleChange("hobby", value)}
                   style={styles.rootInput}
                   value={values.hobby}
                 />
@@ -155,12 +158,12 @@ class UpdateProfile extends Component {
 
 const styles = {
   rootInput: {
-    width: '100%'
+    width: "100%"
   },
 
   root: {
-    width: '100%',
-    height: '100%'
+    width: "100%",
+    height: "100%"
   }
 };
 

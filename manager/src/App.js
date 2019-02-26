@@ -5,6 +5,7 @@ import { StyleProvider } from 'native-base';
 import { createLogger } from 'redux-logger';
 import firebase from 'firebase';
 import ReduxThunk from 'redux-thunk';
+
 import reducers from './reducers';
 import Router from './Router';
 import getTheme from '../native-base-theme/components';

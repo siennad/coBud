@@ -8,15 +8,13 @@ import {
   Body,
   Button,
   Text,
-  Spinner,
-  Item
+  Spinner
 } from 'native-base';
 import { Actions } from 'react-native-router-flux';
 import { GiftedChat } from 'react-native-gifted-chat';
 import { connect } from 'react-redux';
 import UserAvatar from 'react-native-user-avatar';
 
-import { Grid } from 'react-native-easy-grid';
 import {
   turnOffChat,
   loadMessages,
@@ -85,7 +83,7 @@ class LocalChat extends Component {
       />
     );
   }
-  
+
   render() {
     const { messages, user } = this.props;
     console.log(this.state);

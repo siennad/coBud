@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import {
   Container,
   Content,
@@ -14,32 +14,32 @@ import {
   ListItem,
   Card,
   CardItem
-} from 'native-base';
-import { Dimensions } from 'react-native';
-import { connect } from 'react-redux';
-import { Actions } from 'react-native-router-flux';
-import UserAvatar from 'react-native-user-avatar';
+} from "native-base";
+import { Dimensions } from "react-native";
+import { connect } from "react-redux";
+import { Actions } from "react-native-router-flux";
+import UserAvatar from "react-native-user-avatar";
 
-import { accordionBorderColor } from '../../../native-base-theme/variables/commonColor';
-import { getUserProfile } from '../../actions/UserProfileActions';
+import { accordionBorderColor } from "../../../native-base-theme/variables/commonColor";
+import { getUserProfile } from "../../actions/UserProfileActions";
 
-const viewport = Dimensions.get('window').width;
+const viewport = Dimensions.get("window").width;
 
 const styles = {
   listHeader: {
-    backgroundColor: 'rgba(0,0,0,0.1)',
+    backgroundColor: "rgba(0,0,0,0.1)",
     height: 24,
     paddingLeft: 5,
     marginBottom: 5
   },
   link: {
     fontSize: 0.0275 * viewport,
-    fontStyle: 'italic',
-    color: 'rgba(0,0,0,0.7)'
+    fontStyle: "italic",
+    color: "rgba(0,0,0,0.7)"
   },
   textHeader: {
     fontSize: 14,
-    color: 'rgba(0,0,0,0.8)'
+    color: "rgba(0,0,0,0.8)"
   }
 };
 
@@ -69,12 +69,20 @@ class ViewProfile extends Component {
           </Left>
           <Body>
             {!isMyProfile && (
-              <Text numberOfLines={1} ellipsizeMode="tail" style={{ color: 'white' }}>
+              <Text
+                numberOfLines={1}
+                ellipsizeMode="tail"
+                style={{ color: "white" }}
+              >
                 View Profile
               </Text>
             )}
             {isMyProfile && (
-              <Text numberOfLines={1} ellipsizeMode="tail" style={{ color: 'white' }}>
+              <Text
+                numberOfLines={1}
+                ellipsizeMode="tail"
+                style={{ color: "white" }}
+              >
                 View My Profile
               </Text>
             )}
@@ -94,10 +102,16 @@ class ViewProfile extends Component {
             <Content>
               <Card>
                 <CardItem>
-                  <Body style={{ justifyContent: 'center', alignItems: 'center' }}>
+                  <Body
+                    style={{ justifyContent: "center", alignItems: "center" }}
+                  >
                     <UserAvatar
-                      colors={['#ccc', '#fafafa', '#ccaabb']}
-                      name={userProfile ? userProfile.name && userProfile.name : user.user.email}
+                      colors={["#ccc", "#fafafa", "#ccaabb"]}
+                      name={
+                        userProfile
+                          ? userProfile.name && userProfile.name
+                          : user.user.email
+                      }
                       size="50"
                     />
                   </Body>
@@ -107,7 +121,9 @@ class ViewProfile extends Component {
                 {userProfile && (
                   <React.Fragment>
                     <ListItem itemHeader style={styles.listHeader}>
-                      <Text style={styles.textHeader}>Personal Information</Text>
+                      <Text style={styles.textHeader}>
+                        Personal Information
+                      </Text>
                     </ListItem>
 
                     <ListItem itemHeader style={styles.listHeader}>
@@ -159,7 +175,7 @@ class ViewProfile extends Component {
                     </ListItem>
                     <ListItem>
                       <Button
-                        style={{ margin: 'auto' }}
+                        style={{ margin: "auto" }}
                         iconRight
                         onPress={() => Actions.updateprofile()}
                       >
@@ -173,7 +189,9 @@ class ViewProfile extends Component {
                 {!isMyProfile && !userProfile && (
                   <React.Fragment>
                     <ListItem>
-                      <Text danger>There's something wrong. Please try again later!</Text>
+                      <Text danger>
+                        There's something wrong. Please try again later!
+                      </Text>
                     </ListItem>
                     <ListItem padder button>
                       <Button>
