@@ -1,29 +1,12 @@
 /* eslint-disable no-mixed-operators */
 /* eslint-disable prefer-const */
-import React, { Component } from "react";
-import firebase from "firebase";
-import {
-  Container,
-  Content,
-  Header,
-  Item,
-  Text,
-  Icon,
-  Input,
-  Card,
-  CardItem
-} from "native-base";
-import {
-  Keyboard,
-  Image,
-  View,
-  ScrollView,
-  Animated,
-  StyleSheet
-} from "react-native";
-import { Actions } from "react-native-router-flux";
-import { viewportWidth, viewportHeight } from "../common/constVar";
-import { placeBanner, placeData } from "../PlaceData/placeData";
+import React, { Component } from 'react';
+import firebase from 'firebase';
+import { Container, Content, Header, Item, Text, Icon, Input, Card, CardItem } from 'native-base';
+import { Keyboard, Image, View, ScrollView, Animated, StyleSheet } from 'react-native';
+import { Actions } from 'react-native-router-flux';
+import { viewportWidth, viewportHeight } from '../common/constVar';
+import { placeBanner, placeData } from '../PlaceData/placeData';
 
 const FIXED_BAR_WIDTH = 280;
 const BAR_SPACE = 10;
@@ -64,7 +47,7 @@ class Home extends Component {
       const scrollBarVal = this.animVal.interpolate({
         inputRange: [viewportWidth * (i - 1), viewportWidth * (i + 1)],
         outputRange: [-this.itemWidth, this.itemWidth],
-        extrapolate: "clamp"
+        extrapolate: 'clamp'
       });
 
       const thisBar = (
@@ -123,7 +106,7 @@ class Home extends Component {
           <Item>
             <Text>Most popular</Text>
           </Item>
-          <View style={{ flexWrap: "wrap", flexDirection: "row" }}>
+          <View style={{ flexWrap: 'wrap', flexDirection: 'row' }}>
             {this.state.listData.map((item, index) => (
               <Card
                 key={index}
@@ -131,21 +114,16 @@ class Home extends Component {
                   flex: 0,
                   width: viewportWidth / 2 - 10,
                   height: viewportHeight / 3 - 20,
-                  alignItems: "center",
-                  justifyContent: "center",
+                  alignItems: 'center',
+                  justifyContent: 'center',
                   margin: 15
                 }}
               >
                 <CardItem cardBody style={{ marginTop: 5 }}>
-                  <Image
-                    source={item.imageUri}
-                    style={{ height: 125, width: 175 }}
-                  />
+                  <Image source={item.imageUri} style={{ height: 125, width: 175 }} />
                 </CardItem>
                 <CardItem>
-                  <Text style={{ textAlign: "center", fontSize: 15 }}>
-                    {item.name}
-                  </Text>
+                  <Text style={{ textAlign: 'center', fontSize: 15 }}>{item.name}</Text>
                 </CardItem>
               </Card>
             ))}
@@ -159,25 +137,25 @@ class Home extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: 'center',
+    justifyContent: 'center',
     margin: 10
   },
   barContainer: {
-    position: "absolute",
+    position: 'absolute',
     zIndex: 2,
     top: viewportHeight / 4 + 40,
-    flexDirection: "row"
+    flexDirection: 'row'
   },
   track: {
-    backgroundColor: "#ccc",
-    overflow: "hidden",
+    backgroundColor: '#ccc',
+    overflow: 'hidden',
     height: 2
   },
   bar: {
-    backgroundColor: "#5294d6",
+    backgroundColor: '#5294d6',
     height: 2,
-    position: "absolute",
+    position: 'absolute',
     left: 0,
     top: 0
   }
