@@ -1,6 +1,9 @@
 import React from 'react';
 import { Scene, Router } from 'react-native-router-flux';
 import { Icon } from 'native-base';
+
+import themeColor from './../native-base-theme/variables/commonColor';
+
 import Home from './components/Home/index';
 import Map from './components/Map/index';
 import Login from './components/Login/index';
@@ -10,8 +13,6 @@ import Notifcations from './components/Notifcations/index';
 import Chat from './components/Connections/Chat';
 import ViewProfile from './components/UserMenu/ViewProfile';
 import UpdateProfile from './components/UserMenu/UpdateProfile';
-
-import themeColor from './../native-base-theme/variables/commonColor';
 import LocalChat from './components/Connections/LocalChat';
 
 const TabIcon = ({ name, selected }) => {

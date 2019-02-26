@@ -69,12 +69,20 @@ class ViewProfile extends Component {
           </Left>
           <Body>
             {!isMyProfile && (
-              <Text numberOfLines={1} ellipsizeMode="tail" style={{ color: 'white' }}>
+              <Text
+                numberOfLines={1}
+                ellipsizeMode="tail"
+                style={{ color: 'white' }}
+              >
                 View Profile
               </Text>
             )}
             {isMyProfile && (
-              <Text numberOfLines={1} ellipsizeMode="tail" style={{ color: 'white' }}>
+              <Text
+                numberOfLines={1}
+                ellipsizeMode="tail"
+                style={{ color: 'white' }}
+              >
                 View My Profile
               </Text>
             )}
@@ -94,10 +102,16 @@ class ViewProfile extends Component {
             <Content>
               <Card>
                 <CardItem>
-                  <Body style={{ justifyContent: 'center', alignItems: 'center' }}>
+                  <Body
+                    style={{ justifyContent: 'center', alignItems: 'center' }}
+                  >
                     <UserAvatar
                       colors={['#ccc', '#fafafa', '#ccaabb']}
-                      name={userProfile ? userProfile.name && userProfile.name : user.user.email}
+                      name={
+                        userProfile
+                          ? userProfile.name && userProfile.name
+                          : user.user.email
+                      }
                       size="50"
                     />
                   </Body>
@@ -107,7 +121,9 @@ class ViewProfile extends Component {
                 {userProfile && (
                   <React.Fragment>
                     <ListItem itemHeader style={styles.listHeader}>
-                      <Text style={styles.textHeader}>Personal Information</Text>
+                      <Text style={styles.textHeader}>
+                        Personal Information
+                      </Text>
                     </ListItem>
 
                     <ListItem itemHeader style={styles.listHeader}>
@@ -173,7 +189,9 @@ class ViewProfile extends Component {
                 {!isMyProfile && !userProfile && (
                   <React.Fragment>
                     <ListItem>
-                      <Text danger>There's something wrong. Please try again later!</Text>
+                      <Text danger>
+                        There's something wrong. Please try again later!
+                      </Text>
                     </ListItem>
                     <ListItem padder button>
                       <Button>

@@ -2,8 +2,25 @@
 /* eslint-disable prefer-const */
 import React, { Component } from 'react';
 import firebase from 'firebase';
-import { Container, Content, Header, Item, Text, Icon, Input, Card, CardItem } from 'native-base';
-import { Keyboard, Image, View, ScrollView, Animated, StyleSheet } from 'react-native';
+import {
+  Container,
+  Content,
+  Header,
+  Item,
+  Text,
+  Icon,
+  Input,
+  Card,
+  CardItem
+} from 'native-base';
+import {
+  Keyboard,
+  Image,
+  View,
+  ScrollView,
+  Animated,
+  StyleSheet
+} from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { viewportWidth, viewportHeight } from '../common/constVar';
 import { placeBanner, placeData } from '../PlaceData/placeData';
@@ -20,16 +37,10 @@ class Home extends Component {
   }
 
   componentDidMount() {
-    this.props.navigateToHome();
-    console.log(firebase.auth().currentUser);
     Keyboard.dismiss();
     if (!firebase.auth().currentUser) {
       Actions.auth();
     }
-  }
-
-  componentWillUnmount() {
-    //Actions.pop();
   }
 
   numItems = placeBanner.length;
@@ -82,9 +93,6 @@ class Home extends Component {
       barArray.push(thisBar);
     });
 
-    console.log(this.ds);
-    console.log(this.state.listViewData);
-
     return (
       <Container>
         <Header searchBar rounded>
@@ -129,10 +137,15 @@ class Home extends Component {
                 }}
               >
                 <CardItem cardBody style={{ marginTop: 5 }}>
-                  <Image source={item.imageUri} style={{ height: 125, width: 175 }} />
+                  <Image
+                    source={item.imageUri}
+                    style={{ height: 125, width: 175 }}
+                  />
                 </CardItem>
                 <CardItem>
-                  <Text style={{ textAlign: 'center', fontSize: 15 }}>{item.name}</Text>
+                  <Text style={{ textAlign: 'center', fontSize: 15 }}>
+                    {item.name}
+                  </Text>
                 </CardItem>
               </Card>
             ))}
