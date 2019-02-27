@@ -9,7 +9,7 @@ const initialState = {
   receivedAt: ''
 };
 
-const ChatReducer = (state = initialState, action) => {
+const ChatPrivateReducer = (state = initialState, action) => {
   // console.log('------ reducer');
   // console.log(action);
   switch (action.type) {
@@ -36,4 +36,4 @@ const ChatReducer = (state = initialState, action) => {
   }
 };
 
-export default ChatReducer;
+export default ChatPrivateReducer;

@@ -4,7 +4,7 @@ import PlaceFormReducer from './PlaceFormReducer';
 import PlaceReducer from './PlaceReducer';
 import NavigationReducer from './NavigationReducer';
 import UsersProfileReducer from './UsersProfileReducer';
-import ChatReducer from './ChatReducer';
+import ChatPrivateReducer from './ChatPrivateReducer';
 import ListReducer from './ListReducer';
 
 export default combineReducers({
@@ -13,6 +13,6 @@ export default combineReducers({
   places: PlaceReducer,
   navigation: NavigationReducer,
   userProfile: UsersProfileReducer,
-  chat: ChatReducer,
+  chatPrivate: ChatPrivateReducer,
   list: ListReducer
 });

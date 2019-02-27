@@ -19,8 +19,8 @@ import MainFooterBar from '../common/MainFooterBar';
 import { navigateToConnections } from '../../actions/NavigationActions';
 import { UserInputHandle, sendMessage, loadMessages } from '../../actions';
 
-class Chat extends Component {
-  state = { messageInput: '', uid: '6NYDC1ugsGRUNNtMfaJJI438iGG3' };
+class ChatPrivate extends Component {
+  state = { messageInput: '' };
   componentDidMount() {
     this.props.navigateToConnections();
     this.props.loadMessages(this.props.uid);
@@ -70,7 +70,7 @@ class Chat extends Component {
       <Container>
         <Header searchBar rounded>
           <Left>
-            <Button iconLeft onPress={() => Actions.pop()} transparent>
+            <Button iconLeft onPress={() => Actions.connectionsHome()} transparent>
               <Icon ios="ios-arrow-back" android="md-arrow-back" />
               <Text>Back</Text>
             </Button>
@@ -99,11 +99,11 @@ class Chat extends Component {
     );
   }
 }
-const mapStateToProps = ({ chat }) => {
-  const { messageInput, messageOutput } = chat;
+const mapStateToProps = ({ chatPrivate }) => {
+  const { messageInput, messageOutput } = chatPrivate;
   return { messageInput, messageOutput };
 };
 export default connect(
   mapStateToProps,
   { sendMessage, loadMessages, navigateToConnections }
-)(Chat);
+)(ChatPrivate);
