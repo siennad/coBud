@@ -1,15 +1,15 @@
-import firebase from 'firebase';
-import * as _ from 'lodash';
+import firebase from "firebase";
+import * as _ from "lodash";
 
-import { Actions } from 'react-native-router-flux';
-import * as types from './types';
+import { Actions } from "react-native-router-flux";
+import * as types from "./types";
 
 // export const UserInputHandle = text => ({
 //   type: types.USER_INPUT_HANDLE,
 //   payload: text
 // });
 
-export const loadMessagesSuccess = messageArray =>
+export const loadPrivateMessagesSuccess = messageArray =>
   // console.log('------ actions');
 
   // console.log(messageArray);
@@ -19,7 +19,7 @@ export const loadMessagesSuccess = messageArray =>
     payload: _.values(messageArray)
   });
 
-export const loadMessagesError = error => ({
+export const loadPrivateMessagesError = error => ({
   type: types.LOAD_MESSAGE_ERROR,
   error
 });
@@ -29,7 +29,7 @@ const generateRoomToken = (currentUserId, uid) => {
   return currentUserId > uid ? roomToken1 : roomToken2;
 };
 
-export const sendMessage = (messageInput, uid) => dispatch => {
+export const sendPrivateMessage = (messageInput, uid) => dispatch => {
   dispatch({ type: types.USER_INPUT_HANDLE });
   const currentUser = firebase.auth().currentUser;
   const chatMessage = {
@@ -41,28 +41,28 @@ export const sendMessage = (messageInput, uid) => dispatch => {
     }
   };
   const refUid = generateRoomToken(currentUser.uid, uid);
-  const ref = firebase.database().ref(`users/message/${refUid}`);
+  const ref = firebase.database().ref(`message/privateMessage/${refUid}`);
   const newref = ref.push(chatMessage);
 };
 
 // FetchMessage
 
-export const loadMessages = uid => dispatch => {
+export const loadPrivateMessages = uid => dispatch => {
   const currentUser = firebase.auth().currentUser;
   const refUid = generateRoomToken(currentUser.uid, uid);
   // const check = checkUid(currentUser.uid, uid1, uid2);
   const ref = firebase
     .database()
     // .ref(`users/message/${currentUser.uid}`)
-    .ref(`users/message/${refUid}`)
+    .ref(`message/privateMessage/${refUid}`)
     .on(
-      'value',
+      "value",
       snapshot => {
         // console.log(snapshot.val());
-        dispatch(loadMessagesSuccess(snapshot.val()));
+        dispatch(loadPrivateMessagesSuccess(snapshot.val()));
       },
       errorObject => {
-        dispatch(loadMessagesError(errorObject.message));
+        dispatch(loadPrivateMessagesError(errorObject.message));
       }
     );
 };

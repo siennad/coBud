@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import {
   Container,
   Content,
@@ -12,15 +12,19 @@ import {
   Left,
   Label,
   Row
-} from 'native-base';
-import { connect } from 'react-redux';
-import { Actions } from 'react-native-router-flux';
-import MainFooterBar from '../common/MainFooterBar';
-import { navigateToConnections } from '../../actions/NavigationActions';
-import { UserInputHandle, sendMessage, loadMessages } from '../../actions';
+} from "native-base";
+import { connect } from "react-redux";
+import { Actions } from "react-native-router-flux";
+import MainFooterBar from "../common/MainFooterBar";
+import { navigateToConnections } from "../../actions/NavigationActions";
+import {
+  UserInputHandle,
+  sendPrivateMessage,
+  loadPrivateMessages
+} from "../../actions";
 
 class ChatPrivate extends Component {
-  state = { messageInput: '' };
+  state = { messageInput: "" };
   componentDidMount() {
     this.props.navigateToConnections();
     this.props.loadMessages(this.props.uid);
@@ -35,11 +39,11 @@ class ChatPrivate extends Component {
     const { uid } = this.props;
 
     // this.props.UserInputHandle(messageInput);
-    this.props.sendMessage(messageInput, uid);
+    this.props.sendPrivateMessage(messageInput, uid);
     this.setState({
-      messageInput: ''
+      messageInput: ""
     });
-    this.props.loadMessages(uid);
+    this.props.loadPrivateMessages(uid);
   }
 
   UserInputHandle(text) {
@@ -70,7 +74,11 @@ class ChatPrivate extends Component {
       <Container>
         <Header searchBar rounded>
           <Left>
-            <Button iconLeft onPress={() => Actions.connectionsHome()} transparent>
+            <Button
+              iconLeft
+              onPress={() => Actions.connectionsHome()}
+              transparent
+            >
               <Icon ios="ios-arrow-back" android="md-arrow-back" />
               <Text>Back</Text>
             </Button>
@@ -82,7 +90,10 @@ class ChatPrivate extends Component {
           </Item>
           <Form>
             <Item>
-              <Input onChangeText={this.UserInputHandle.bind(this)} value={messageInput} />
+              <Input
+                onChangeText={this.UserInputHandle.bind(this)}
+                value={messageInput}
+              />
 
               <Button onPress={() => this.onButtonPress()}>
                 <Text>Send chat</Text>
@@ -105,5 +116,5 @@ const mapStateToProps = ({ chatPrivate }) => {
 };
 export default connect(
   mapStateToProps,
-  { sendMessage, loadMessages, navigateToConnections }
+  { sendPrivateMessage, loadPrivateMessages, navigateToConnections }
 )(ChatPrivate);
