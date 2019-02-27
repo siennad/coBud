@@ -9,6 +9,7 @@ import UserMenu from './components/UserMenu';
 import Connections from './components/Connections/index';
 import Notifcations from './components/Notifcations/index';
 import Chat from './components/Connections/Chat';
+import ChatPrivate from './components/Connections/ChatPrivate';
 import ViewProfile from './components/UserMenu/ViewProfile';
 import UpdateProfile from './components/UserMenu/UpdateProfile';
 import LocalChat from './components/Connections/LocalChat';
@@ -92,6 +93,7 @@ const RouterComponent = () => (
       <Scene key="connections" hideNavBar="true" icon={TabIcon}>
         <Scene key="connectionsHome" component={Connections} inital />
         <Scene key="chat" component={Chat} hideTabBar />
+        <Scene key="chatPrivate" component={ChatPrivate} />
         <Scene
           key="localChat"
           component={LocalChat}
@@ -113,22 +115,11 @@ const RouterComponent = () => (
           )}
         />
       </Scene>
-      <Scene
-        key="notifications"
-        component={Notifcations}
-        hideNavBar="true"
-        icon={TabIcon}
-      />
+      <Scene key="notifications" component={Notifcations} hideNavBar="true" icon={TabIcon} />
       <Scene key="usermenu" hideNavBar="true" icon={TabIcon}>
         <Scene key="mainmenu" component={UserMenu} initial />
-        <Scene
-          key="updateprofile"
-          component={props => <UpdateProfile {...props} />}
-        />
-        <Scene
-          key="viewprofile"
-          component={props => <ViewProfile {...props} />}
-        />
+        <Scene key="updateprofile" component={props => <UpdateProfile {...props} />} />
+        <Scene key="viewprofile" component={props => <ViewProfile {...props} />} />
       </Scene>
     </Scene>
   </Router>
