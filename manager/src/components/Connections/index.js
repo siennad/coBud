@@ -15,14 +15,9 @@ import {
   Thumbnail,
   Button
 } from 'native-base';
-import {
-  Alert,
-  ListView,
-  TouchableOpacity,
-  StyleSheet,
-  Keyboard
-} from 'react-native';
+import { Alert, ListView, TouchableOpacity, StyleSheet, Keyboard } from 'react-native';
 import { Actions } from 'react-native-router-flux';
+import { connect } from 'react-redux';
 import { viewportWidth } from '../common/constVar';
 
 const image1 = require('./images/business.png');
@@ -90,6 +85,26 @@ class Connections extends Component {
   }
 
   render() {
+    const { userDetails } = this.props;
+    console.log('userDetails load from connection');
+    console.log(userDetails);
+    console.log('userDetails load from connection');
+
+    const showUserList = userDetails.map(val => {
+      console.log(val);
+      return (
+        <ListItem avatar>
+          <Left>
+            <Thumbnail source={image1} />
+          </Left>
+          <Body>
+            <Button id={val.userUid} onPress={() => Actions.chatPrivate({ uid: val.userUid })}>
+              <Text>{val.userName ? val.userName : val.userEmail}</Text>
+            </Button>
+          </Body>
+        </ListItem>
+      );
+    });
     return (
       <Container>
         <Header searchBar rounded>
@@ -178,6 +193,7 @@ class Connections extends Component {
               </Button>
             )}
           />
+          {showUserList}
         </Content>
       </Container>
     );
@@ -194,5 +210,11 @@ const styles = StyleSheet.create({
     marginLeft: 28
   }
 });
-
-export default Connections;
+const mapStateToProps = ({ auth }) => {
+  const { userDetails } = auth;
+  return { userDetails };
+};
+export default connect(
+  mapStateToProps,
+  {}
+)(Connections);
