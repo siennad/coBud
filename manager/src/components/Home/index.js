@@ -2,40 +2,18 @@
 /* eslint-disable prefer-const */
 import React, { Component } from 'react';
 import firebase from 'firebase';
-import {
-  Container,
-  Content,
-  Header,
-  Item,
-  Text,
-  Icon,
-  Input,
-  Card,
-  CardItem
-} from 'native-base';
-import {
-  Keyboard,
-  Image,
-  View,
-  ScrollView,
-  Animated,
-  StyleSheet
-} from 'react-native';
+import { Container, Content, Header, Item, Icon, Input, Tab, Tabs } from 'native-base';
+import { Keyboard, Image, View, ScrollView, Animated, StyleSheet } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { viewportWidth, viewportHeight } from '../common/constVar';
-import { placeBanner, placeData } from '../PlaceData/placeData';
+import { placeBanner } from '../PlaceData/placeData';
+import Feature from './feature';
+import Newsfeed from './newsfeed';
 
 const FIXED_BAR_WIDTH = 280;
 const BAR_SPACE = 10;
 
 class Home extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      listData: placeData
-    };
-  }
-
   componentDidMount() {
     Keyboard.dismiss();
     if (!firebase.auth().currentUser) {
@@ -94,62 +72,40 @@ class Home extends Component {
     });
 
     return (
-      <Container>
+      <Container style={{ paddingBottom: 50 }}>
         <Header searchBar rounded>
           <Item>
             <Icon ios="ios-search" android="md-search" />
             <Input placeholder="Search..." />
           </Item>
         </Header>
-        <View style={styles.container} flex={1}>
-          <ScrollView
-            horizontal
-            showsHorizontalScrollIndicator={false}
-            scrollEventThrottle={10}
-            pagingEnabled
-            onScroll={Animated.event([
-              {
-                nativeEvent: {
-                  contentOffset: { x: this.animVal }
-                }
-              }
-            ])}
-          >
-            {imageArray}
-          </ScrollView>
-          <View style={styles.barContainer}>{barArray}</View>
-        </View>
         <Content>
-          <Item>
-            <Text>Most popular</Text>
-          </Item>
-          <View style={{ flexWrap: 'wrap', flexDirection: 'row' }}>
-            {this.state.listData.map((item, index) => (
-              <Card
-                key={index}
-                style={{
-                  flex: 0,
-                  width: viewportWidth / 2 - 10,
-                  height: viewportHeight / 3 - 20,
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  margin: 15
-                }}
-              >
-                <CardItem cardBody style={{ marginTop: 5 }}>
-                  <Image
-                    source={item.imageUri}
-                    style={{ height: 125, width: 175 }}
-                  />
-                </CardItem>
-                <CardItem>
-                  <Text style={{ textAlign: 'center', fontSize: 15 }}>
-                    {item.name}
-                  </Text>
-                </CardItem>
-              </Card>
-            ))}
+          <View style={styles.container}>
+            <ScrollView
+              horizontal
+              showsHorizontalScrollIndicator={false}
+              scrollEventThrottle={10}
+              pagingEnabled
+              onScroll={Animated.event([
+                {
+                  nativeEvent: {
+                    contentOffset: { x: this.animVal }
+                  }
+                }
+              ])}
+            >
+              {imageArray}
+            </ScrollView>
+            <View style={styles.barContainer}>{barArray}</View>
           </View>
+          <Tabs>
+            <Tab heading="Most Popular">
+              <Feature />
+            </Tab>
+            <Tab heading="Newsfeed">
+              <Newsfeed />
+            </Tab>
+          </Tabs>
         </Content>
       </Container>
     );
@@ -166,7 +122,7 @@ const styles = StyleSheet.create({
   barContainer: {
     position: 'absolute',
     zIndex: 2,
-    top: viewportHeight / 4 + 40,
+    top: viewportHeight / 4 + 75,
     flexDirection: 'row'
   },
   track: {
@@ -175,11 +131,25 @@ const styles = StyleSheet.create({
     height: 2
   },
   bar: {
-    backgroundColor: '#5294d6',
+    backgroundColor: '#9b0513',
     height: 2,
     position: 'absolute',
     left: 0,
     top: 0
+  },
+  title: {
+    fontWeight: 'bold',
+    fontSize: 18,
+    textAlign: 'center',
+    lineHeight: 40
+  },
+  itemAlign: {
+    flex: 0,
+    width: viewportWidth / 2 - 10,
+    height: viewportHeight / 3 - 30,
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginHorizontal: 15
   }
 });
 
