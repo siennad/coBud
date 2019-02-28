@@ -5,7 +5,8 @@
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "test": "jest",
-    "android": "react-native run-android"
+    "android": "react-native run-android",
+    "android-no-cache": "react-native run-android && react-native start --reset-cache"
   },
   "dependencies": {
     "color": "^3.1.0",

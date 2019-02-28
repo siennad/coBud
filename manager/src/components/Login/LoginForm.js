@@ -2,16 +2,7 @@
 import React, { Component } from 'react';
 import { Keyboard, View, KeyboardAvoidingView } from 'react-native';
 import { connect } from 'react-redux';
-import {
-  Form,
-  Input,
-  Text,
-  Item,
-  Button,
-  Container,
-  Grid,
-  Row
-} from 'native-base';
+import { Form, Input, Text, Item, Button, Container, Grid, Row } from 'native-base';
 
 import { emailChanged, passwordChanged, loginUser } from '../../actions';
 import { Spinner } from '../common';
@@ -23,6 +14,11 @@ class LoginForm extends Component {
     email: '',
     password: ''
   };
+
+  componentDidMount() {
+    this.props.loginUser({ email: 'l@m.com', password: '123456' });
+  }
+
   componentWillUnmount() {}
 
   onEmailChange(text) {
@@ -53,20 +49,11 @@ class LoginForm extends Component {
     const { error, loading } = this.props;
     return (
       <Container>
-        <KeyboardAvoidingView
-          enabled
-          behavior="padding"
-          style={{ height: '100%' }}
-        >
+        <KeyboardAvoidingView enabled behavior="padding" style={{ height: '100%' }}>
           <Form>
             <Grid style={{ width: '100%', padding: 10 }}>
               <Row style={{ height: 50, width: '100%', marginBottom: 10 }}>
-                <Item
-                  last
-                  padder
-                  rounded
-                  style={{ width: '100%', backgroundColor: 'white' }}
-                >
+                <Item last padder rounded style={{ width: '100%', backgroundColor: 'white' }}>
                   <Input
                     onChangeText={this.onEmailChange.bind(this)}
                     value={this.state.email}
@@ -77,12 +64,7 @@ class LoginForm extends Component {
                 </Item>
               </Row>
               <Row style={{ height: 50, width: '100%', marginBottom: 10 }}>
-                <Item
-                  last
-                  padder
-                  rounded
-                  style={{ width: '100%', backgroundColor: 'white' }}
-                >
+                <Item last padder rounded style={{ width: '100%', backgroundColor: 'white' }}>
                   <Input
                     secureTextEntry
                     onChangeText={this.onPasswordChange.bind(this)}

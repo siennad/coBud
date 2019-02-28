@@ -14,7 +14,8 @@ import {
   ListItem,
   Thumbnail,
   Left,
-  Body
+  Body,
+  Badge
 } from 'native-base';
 import { Keyboard } from 'react-native';
 
@@ -103,7 +104,10 @@ class Notifications extends Component {
       shows = this.state.listChat.map((item, i) => (
         <List key={i}>
           <ListItem thumbnail>
-            <Left>
+            <Left badge>
+              <Badge>
+                <Text>{i}</Text>
+              </Badge>
               <Thumbnail square source={item.image} />
             </Left>
             <Body>

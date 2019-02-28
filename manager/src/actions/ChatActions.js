@@ -34,8 +34,7 @@ export const sendMessage = (messages, local, userSelectedID = null) => dispatch 
       firebase
         .database()
         .ref('messages')
-        .push()
-        .set(chatMessage, error => {
+        .push(chatMessage, error => {
           if (error) {
             dispatch(chatMessageError(error.message));
           } else {

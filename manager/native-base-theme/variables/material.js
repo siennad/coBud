@@ -6,8 +6,7 @@ const deviceHeight = Dimensions.get('window').height;
 const deviceWidth = Dimensions.get('window').width;
 const platform = Platform.OS;
 const platformStyle = 'material';
-const isIphoneX =
-  platform === 'ios' && (deviceHeight === 812 || deviceWidth === 812);
+const isIphoneX = platform === 'ios' && (deviceHeight === 812 || deviceWidth === 812);
 
 export default {
   platformStyle,
@@ -211,23 +210,23 @@ export default {
   },
 
   // Segment
-  segmentBackgroundColor: platform === 'ios' ? '#F8F8F8' : '#3F51B5',
-  segmentActiveBackgroundColor: platform === 'ios' ? '#007aff' : '#fff',
-  segmentTextColor: platform === 'ios' ? '#007aff' : '#fff',
-  segmentActiveTextColor: platform === 'ios' ? '#fff' : '#3F51B5',
+  segmentBackgroundColor: platform === 'ios' ? '#F8F8F8' : '#ebcdcf',
+  segmentActiveBackgroundColor: platform === 'ios' ? '#007aff' : 'rgba(155,5,19,1)',
+  segmentTextColor: platform === 'ios' ? '#007aff' : 'rgba(0,0,0,0.4)',
+  segmentActiveTextColor: platform === 'ios' ? '#fff' : '#fff',
   segmentBorderColor: platform === 'ios' ? '#007aff' : '#fff',
-  segmentBorderColorMain: platform === 'ios' ? '#a7a6ab' : '#3F51B5',
+  segmentBorderColorMain: platform === 'ios' ? '#a7a6ab' : 'rgba(155,5,19,1)',
 
   // Spinner
   defaultSpinnerColor: '#45D56E',
   inverseSpinnerColor: '#1A191B',
 
   // Tab
-  tabDefaultBg: platform === 'ios' ? '#F8F8F8' : '#3F51B5',
-  topTabBarTextColor: platform === 'ios' ? '#6b6b6b' : '#b3c7f9',
-  topTabBarActiveTextColor: platform === 'ios' ? '#007aff' : '#fff',
+  tabDefaultBg: platform === 'ios' ? '#F8F8F8' : '#ebcdcf',
+  topTabBarTextColor: platform === 'ios' ? '#6b6b6b' : '#4c3c3c',
+  topTabBarActiveTextColor: platform === 'ios' ? '#007aff' : '#2f2626',
   topTabBarBorderColor: platform === 'ios' ? '#a7a6ab' : '#fff',
-  topTabBarActiveBorderColor: platform === 'ios' ? '#007aff' : '#fff',
+  topTabBarActiveBorderColor: platform === 'ios' ? '#007aff' : '#9b0513',
 
   // Tabs
   tabBgColor: '#F8F8F8',
