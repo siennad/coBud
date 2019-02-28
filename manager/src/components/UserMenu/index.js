@@ -19,18 +19,17 @@ import { Keyboard } from 'react-native';
 import UserAvatar from 'react-native-user-avatar';
 
 import { logoutUser } from '../../actions/AuthActions';
-import { getUserProfile } from '../../actions/UserProfileActions';
+import { getUserProfile, reset } from '../../actions/UserProfileActions';
 
 class UserMenu extends Component {
   async componentDidMount() {
     Keyboard.dismiss();
 
-    if (!this.props.userProfile) {
-      await this.props.getUserProfile(this.props.user.user.uid);
-    } else if (this.props.userProfile._id === this.props.user.user.uid) {
-      await this.setState({
-        userProf: this.props.userProfile
-      });
+    const { uid, user } = this.props;
+    if (uid) {
+      this.props.getUserProfile(uid);
+    } else {
+      this.props.getUserProfile(user.user.uid);
     }
   }
 
@@ -51,6 +50,7 @@ class UserMenu extends Component {
   }
 
   componentWillUnmount() {
+    this.props.reset();
     //Actions.pop();
   }
 
@@ -71,20 +71,12 @@ class UserMenu extends Component {
               <Left>
                 <UserAvatar
                   colors={['#2EDFB7', '#FF484A', '#DA5F8E']}
-                  name={
-                    userProfile
-                      ? userProfile.name && userProfile.name
-                      : user.user.email
-                  }
+                  name={userProfile ? userProfile.name && userProfile.name : user.user.email}
                   size="50"
                 />
               </Left>
               <Body>
-                <Text>
-                  {userProfile
-                    ? userProfile.name && userProfile.name
-                    : user.user.email}
-                </Text>
+                <Text>{userProfile ? userProfile.name && userProfile.name : user.user.email}</Text>
               </Body>
             </ListItem>
 
@@ -173,5 +165,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { logoutUser, getUserProfile }
+  { logoutUser, getUserProfile, reset }
 )(UserMenu);

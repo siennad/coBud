@@ -17,7 +17,8 @@ import {
   Body,
   Badge
 } from 'native-base';
-import { Keyboard } from 'react-native';
+import { Keyboard, View } from 'react-native';
+//import { themeSegment } from '../../../native-base-theme/components';
 
 const newsData = [
   {
@@ -138,14 +139,23 @@ class Notifications extends Component {
             <Input placeholder="Search..." />
           </Item>
         </Header>
-        <Segment style={{ paddingBottom: 10 }}>
-          <Button first active={this.state.firstpageactive} onPress={this.firstpage}>
-            <Text>Yours</Text>
-          </Button>
-          <Button last active={this.state.secondpageactive} onPress={this.secondpage}>
-            <Text>News</Text>
-          </Button>
-        </Segment>
+        <View
+          style={{
+            shadowOpacity: 0.1,
+            shadowRadius: 1.5,
+            shadowOffset: { width: 0, height: 2 },
+            shadowColor: 'rgba(255,255,255,0.4)'
+          }}
+        >
+          <Segment style={{ paddingBottom: 10 }}>
+            <Button first active={this.state.firstpageactive} onPress={this.firstpage}>
+              <Text>Yours</Text>
+            </Button>
+            <Button last active={this.state.secondpageactive} onPress={this.secondpage}>
+              <Text>News</Text>
+            </Button>
+          </Segment>
+        </View>
         <Content padder>{shows}</Content>
       </Container>
     );

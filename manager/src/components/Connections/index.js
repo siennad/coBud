@@ -18,7 +18,6 @@ import {
 } from 'native-base';
 import { Actions } from 'react-native-router-flux';
 import UserAvatar from 'react-native-user-avatar';
-import firebase from 'firebase';
 import { connect } from 'react-redux';
 
 import _ from 'lodash';
@@ -36,9 +35,6 @@ class Connections extends Component {
 
   componentDidMount() {
     Keyboard.dismiss();
-    if (!firebase.auth().currentUser) {
-      Actions.auth();
-    }
     const { userDetails } = this.props;
     if (userDetails) {
       this.setState({

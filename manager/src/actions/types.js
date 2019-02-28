@@ -30,3 +30,6 @@ export const CHAT_LOAD_MESSAGES_SUCCESS = 'chat_load_messages_success';
 export const CHAT_LOAD_MESSAGES_ERROR = 'chat_load_messages_error';
 export const LOAD_MESSAGE_SUCCESS = 'load_message_success';
 export const LOAD_MESSAGE_ERROR = 'load_message_error';
+
+// RESET
+export const RESET_DATA = 'RESET_DATA';
