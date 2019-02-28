@@ -1,12 +1,26 @@
-import React, { Component } from 'react';
-import { Text, View } from 'react-native';
+import React from 'react';
+import { TouchableOpacity, FlatList, StyleSheet, Text, View, Image } from 'react-native';
+import PhotoList from './PhotoList';
 
-export default class Newsfeed extends Component {
+class NewsFeed extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      photo_feed: [],
+      refresh: false,
+      loading: true
+    };
+  }
+
+  componentDidMount = () => {};
+
   render() {
     return (
-      <View>
-        <Text>This is newsfeed tab</Text>
+      <View style={{ flex: 1 }}>
+        <PhotoList isUser={false} navigation={this.props.navigation} />
       </View>
     );
   }
 }
+
+export default NewsFeed;

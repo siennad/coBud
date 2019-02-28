@@ -16,9 +16,8 @@ class LoginForm extends Component {
   };
 
   componentDidMount() {
-    this.props.loginUser({ email: 'l@m.com', password: '123456' });
+    this.props.loginUser({ email: 's@m.com', password: '123456' });
   }
-
   componentWillUnmount() {}
 
   onEmailChange(text) {
