@@ -1,18 +1,10 @@
 import React, { Component } from 'react';
 import { Spinner, Icon, Text, Container, View } from 'native-base';
 import { Actions } from 'react-native-router-flux';
-import {
-  GiftedChat,
-  Send,
-  Actions as chatActions
-} from 'react-native-gifted-chat';
+import { GiftedChat, Send } from 'react-native-gifted-chat';
 import { connect } from 'react-redux';
 import themeColor from './../../../native-base-theme/variables/material';
-import {
-  turnOffChat,
-  loadMessages,
-  sendMessage
-} from '../../actions/ChatActions';
+import { turnOffChat, loadMessages, sendMessage } from '../../actions/ChatActions';
 import { viewportWidth } from '../common/constVar';
 
 class LocalChat extends Component {
@@ -59,10 +51,6 @@ class LocalChat extends Component {
     //console.log('send msg');
     this.props.sendMessage(obj, true);
   }
-
-  renderInputToolbar() {}
-
-  renderActions() {}
 
   renderChat(messages, user) {
     return (
@@ -111,8 +99,10 @@ class LocalChat extends Component {
     //console.log(this.state);
     return (
       <React.Fragment>
-        {!this.state.initLoading && this.renderChat(messages, user)}
-        {this.state.initLoading && <Spinner />}
+        <View flex={1} style={{ marginTop: 50 }}>
+          {!this.state.initLoading && this.renderChat(messages, user)}
+          {this.state.initLoading && <Spinner />}
+        </View>
       </React.Fragment>
     );
   }

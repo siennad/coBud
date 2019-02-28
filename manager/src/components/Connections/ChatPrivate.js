@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Spinner, Icon, Text, Container, View } from 'native-base';
 import { Actions } from 'react-native-router-flux';
-import { GiftedChat, Send, Actions as chatActions } from 'react-native-gifted-chat';
+import { GiftedChat, Send } from 'react-native-gifted-chat';
 import { connect } from 'react-redux';
 import themeColor from './../../../native-base-theme/variables/material';
 import { turnOffChat, loadMessages, sendMessage } from '../../actions/ChatActions';
@@ -11,7 +11,6 @@ class ChatPrivate extends Component {
   state = { messages: [], initLoading: true };
 
   componentDidMount() {
-    console.log('did mount');
     const { messages, loading } = this.props;
     this.setState({ initLoading: true });
     this.props.loadMessages(false, this.props.uid);
@@ -27,7 +26,6 @@ class ChatPrivate extends Component {
 
   componentWillReceiveProps(nextProps, nextContext) {
     const { loading, messages } = nextProps;
-    console.log(nextProps.messages);
     if (nextProps.messages) {
       this.setState(prevState => ({
         messages
@@ -39,24 +37,14 @@ class ChatPrivate extends Component {
   }
 
   componentWillUnmount() {
-    //Actions.pop()
     turnOffChat();
   }
 
   onSendMessage(obj) {
-    console.log('--send msg');
-    console.log(obj);
     const { uid } = this.props;
-    //const { messageIdGenerator, user, text } = obj;
-    //console.log('send msg');
     this.props.sendMessage(obj, false, uid);
     this.props.loadMessages(false, this.props.uid);
   }
-
-  renderInputToolbar() {}
-
-  renderActions() {}
-
   renderChat(messages, user) {
     return (
       <GiftedChat
@@ -105,8 +93,10 @@ class ChatPrivate extends Component {
 
     return (
       <React.Fragment>
-        {!this.state.initLoading && this.renderChat(messages, user)}
-        {this.state.initLoading && <Spinner />}
+        <View flex={1} style={{ marginTop: 50 }}>
+          {!this.state.initLoading && this.renderChat(messages, user)}
+          {this.state.initLoading && <Spinner />}
+        </View>
       </React.Fragment>
     );
   }

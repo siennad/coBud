@@ -18,46 +18,11 @@ import {
 } from 'native-base';
 import { Actions } from 'react-native-router-flux';
 import UserAvatar from 'react-native-user-avatar';
-
+import firebase from 'firebase';
 import { connect } from 'react-redux';
 
 import _ from 'lodash';
 import { viewportWidth } from '../common/constVar';
-
-const image1 = require('./images/business.png');
-
-const image2 = require('./images/facebook.png');
-
-const image3 = require('./images/linkedin.png');
-
-const image4 = require('./images/tweet.png');
-
-const data = [
-  {
-    id: 1,
-    first_name: 'Google Business',
-    message: 'I just need to be alone',
-    image: image1
-  },
-  {
-    id: 2,
-    first_name: 'Facebook',
-    message: 'What is in your mind ?',
-    image: image2
-  },
-  {
-    id: 2,
-    first_name: 'LinkedIn',
-    message: 'I got a new connection for you',
-    image: image3
-  },
-  {
-    id: 2,
-    first_name: 'Twitter',
-    message: 'Hashtag has changed your business',
-    image: image4
-  }
-];
 
 class Connections extends Component {
   constructor(props) {
@@ -65,16 +30,29 @@ class Connections extends Component {
     this.ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
     this.state = {
       basic: true,
-      listViewData: data
+      listViewData: []
     };
   }
 
   componentDidMount() {
     Keyboard.dismiss();
+    if (!firebase.auth().currentUser) {
+      Actions.auth();
+    }
     const { userDetails } = this.props;
-    this.setState({
-      listViewData: userDetails
-    });
+    if (userDetails) {
+      this.setState({
+        listViewData: _.slice(userDetails, 0, 10)
+      });
+    }
+  }
+
+  shouldComponentUpdate(nextProps, nextState, nextContext) {
+    if (!nextProps.user) {
+      Actions.main();
+      return false;
+    }
+    return true;
   }
 
   componentWillUnmount() {
@@ -135,8 +113,13 @@ class Connections extends Component {
             leftOpenValue={75}
             rightOpenValue={-75}
             dataSource={this.ds.cloneWithRows(this.state.listViewData)}
-            renderRow={rowData =>
-              rowData.userUid !== user.uid && ( // todo check
+            renderRow={rowData => {
+              console.log(rowData);
+              if (rowData.userUid === user.user.uid) {
+                return <React.Fragment />;
+              }
+              const name = rowData.userName ? rowData.userName : rowData.userEmail;
+              return (
                 <TouchableOpacity style={{ marginHorizontal: 28 }}>
                   <ListItem
                     avatar
@@ -144,10 +127,10 @@ class Connections extends Component {
                     onPress={() => Actions.chatPrivate({ uid: rowData.userUid })}
                   >
                     <Left>
-                      {rowData && (
+                      {name && (
                         <UserAvatar
                           colors={['#2EDFB7', '#FF484A', '#DA5F8E']}
-                          name={rowData.userName ? rowData.userName : rowData.userEmail}
+                          name={name}
                           size="50"
                         />
                       )}
@@ -158,8 +141,8 @@ class Connections extends Component {
                     </Body>
                   </ListItem>
                 </TouchableOpacity>
-              )
-            }
+              );
+            }}
             renderLeftHiddenRow={rowData => (
               <Button
                 full
@@ -227,6 +210,7 @@ const mapStateToProps = state => ({
   userDetails: state.auth.userDetails,
   user: state.auth.user
 });
+
 export default connect(
   mapStateToProps,
   {}
