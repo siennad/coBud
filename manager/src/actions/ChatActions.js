@@ -11,7 +11,13 @@ import {
 //const FIREBASE_REF_LOCAL_MESSAGES = firebase.database().ref('messages');
 const FIREBASE_REF_MESSAGES_LIMIT = 20;
 
-export const sendMessage = (messages, local, opt = null) => dispatch => {
+const generateRoomToken = (currentUserId, uid) => {
+  const roomToken1 = `${currentUserId}-${uid}`;
+  const roomToken2 = `${uid}-${currentUserId}`;
+  return currentUserId > uid ? roomToken1 : roomToken2;
+};
+
+export const sendMessage = (messages, local, userSelectedID = null) => dispatch => {
   dispatch(chatMessageLoading());
   console.log(messages);
   _.forEach(messages, message => {
@@ -37,12 +43,16 @@ export const sendMessage = (messages, local, opt = null) => dispatch => {
           }
         });
     } else {
+      const currentUser = firebase.auth().currentUser;
+      const refUid = generateRoomToken(currentUser.uid, userSelectedID);
+      const ref = firebase.database().ref(`privateMessage/${refUid}`);
+      const newref = ref.push(chatMessage);
       //this is the private chat
     }
   });
 };
 
-export const loadMessages = local => dispatch => {
+export const loadMessages = (local, uid = null) => dispatch => {
   if (local) {
     dispatch(chatMessageLoading());
 
@@ -50,6 +60,33 @@ export const loadMessages = local => dispatch => {
       .database()
       .ref('messages')
       .limitToLast(FIREBASE_REF_MESSAGES_LIMIT)
+      .on(
+        'value',
+        snapshot => {
+          let msg = _.values(snapshot.val());
+          _.map(_.values(snapshot.val()), obj => ({
+            _id: obj._id,
+            text: obj.text,
+            createdAt: obj.createdAt
+          }));
+          msg = _.orderBy(msg, ['createdAt'], ['desc']);
+          dispatch(loadMessagesSuccess(msg));
+          return msg;
+        },
+        errorObject => {
+          dispatch(loadMessagesError(errorObject.message));
+          return null;
+        }
+      );
+  } else if (!local) {
+    const currentUser = firebase.auth().currentUser;
+    const refUid = generateRoomToken(currentUser.uid, uid);
+    console.log('loadmessage refUid here----');
+    console.log(refUid);
+    console.log('loadmessage refUid here----');
+    firebase
+      .database()
+      .ref(`privateMessage/${refUid}`)
       .on(
         'value',
         snapshot => {

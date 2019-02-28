@@ -93,7 +93,26 @@ const RouterComponent = () => (
       <Scene key="connections" hideNavBar="true" icon={TabIcon}>
         <Scene key="connectionsHome" component={Connections} inital />
         <Scene key="chat" component={Chat} hideTabBar />
-        <Scene key="chatPrivate" component={ChatPrivate} />
+        <Scene
+          key="chatPrivate"
+          component={ChatPrivate}
+          hideTabBar
+          hideNavBar={false}
+          title="Private Chat"
+          navigationBarStyle={{
+            backgroundColor: themeColor.brandPrimary,
+            paddingLeft: 0,
+            paddingTop: 0
+          }}
+          titleStyle={{
+            color: themeColor.btnPrimaryColor
+          }}
+          renderLeftButton={() => (
+            <Button icon onPress={() => Actions.pop()}>
+              <Icon name="sign-out" type="FontAwesome" />
+            </Button>
+          )}
+        />
         <Scene
           key="localChat"
           component={LocalChat}

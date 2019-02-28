@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Alert, ListView, TouchableOpacity, StyleSheet, Keyboard } from 'react-native';
 import {
   Container,
   Content,
@@ -15,9 +16,12 @@ import {
   Thumbnail,
   Button
 } from 'native-base';
-import { Alert, ListView, TouchableOpacity, StyleSheet, Keyboard } from 'react-native';
 import { Actions } from 'react-native-router-flux';
+import UserAvatar from 'react-native-user-avatar';
+
 import { connect } from 'react-redux';
+
+import _ from 'lodash';
 import { viewportWidth } from '../common/constVar';
 
 const image1 = require('./images/business.png');
@@ -67,6 +71,10 @@ class Connections extends Component {
 
   componentDidMount() {
     Keyboard.dismiss();
+    const { userDetails } = this.props;
+    this.setState({
+      listViewData: userDetails
+    });
   }
 
   componentWillUnmount() {
@@ -85,28 +93,14 @@ class Connections extends Component {
   }
 
   render() {
-    const { userDetails } = this.props;
-    console.log('userDetails load from connection');
-    console.log(userDetails);
-    console.log('userDetails load from connection');
+    const { user } = this.props;
+    // console.log('userDetails load from connection');
+    // console.log(userDetails);
+    // console.log(user);
+    // console.log('userDetails load from connection');
 
-    const showUserList = userDetails.map(val => {
-      console.log(val);
-      return (
-        <ListItem avatar>
-          <Left>
-            <Thumbnail source={image1} />
-          </Left>
-          <Body>
-            <Button id={val.userUid} onPress={() => Actions.chatPrivate({ uid: val.userUid })}>
-              <Text>{val.userName ? val.userName : val.userEmail}</Text>
-            </Button>
-          </Body>
-        </ListItem>
-      );
-    });
     return (
-      <Container>
+      <Container style={{ marginBottom: 50 }}>
         <Header searchBar rounded>
           <Item>
             <Icon ios="ios-search" android="md-search" />
@@ -141,27 +135,41 @@ class Connections extends Component {
             leftOpenValue={75}
             rightOpenValue={-75}
             dataSource={this.ds.cloneWithRows(this.state.listViewData)}
-            renderRow={rowData => (
-              <TouchableOpacity style={{ marginHorizontal: 28 }}>
-                <ListItem avatar>
-                  <Left>
-                    <Thumbnail source={rowData.image} />
-                  </Left>
-                  <Body>
-                    <Text>{rowData.first_name}</Text>
-                    <Text note>{rowData.message}</Text>
-                  </Body>
-                </ListItem>
-              </TouchableOpacity>
-            )}
+            renderRow={rowData =>
+              rowData.userUid !== user.uid && ( // todo check
+                <TouchableOpacity style={{ marginHorizontal: 28 }}>
+                  <ListItem
+                    avatar
+                    key={rowData.userUid}
+                    onPress={() => Actions.chatPrivate({ uid: rowData.userUid })}
+                  >
+                    <Left>
+                      {rowData && (
+                        <UserAvatar
+                          colors={['#2EDFB7', '#FF484A', '#DA5F8E']}
+                          name={rowData.userName ? rowData.userName : rowData.userEmail}
+                          size="50"
+                        />
+                      )}
+                    </Left>
+                    <Body>
+                      <Text>{rowData.userName ? rowData.userName : rowData.userEmail}</Text>
+                      <Text note>Tap to chat</Text>
+                    </Body>
+                  </ListItem>
+                </TouchableOpacity>
+              )
+            }
             renderLeftHiddenRow={rowData => (
               <Button
                 full
                 success
                 onPress={() =>
-                  Alert.alert('User info', rowData.first_name, [
-                    { text: 'OK', onPress: () => console.log('OK Pressed!') }
-                  ])
+                  Alert.alert(
+                    'User info',
+                    rowData.userName ? rowData.userName : rowData.userEmail,
+                    [{ text: 'OK', onPress: () => Actions.viewprofile({ uid: rowData.userUid }) }]
+                  )
                 }
               >
                 <Icon active name="information-circle" />
@@ -174,7 +182,7 @@ class Connections extends Component {
                 onPress={() =>
                   Alert.alert(
                     'Warning',
-                    'Do you want to delete it ?',
+                    'Do you want to delete this user out of list?',
                     [
                       {
                         text: 'Cancel',
@@ -182,7 +190,12 @@ class Connections extends Component {
                       },
                       {
                         text: 'OK',
-                        onPress: () => this.deleteRow(secId, rowId, rowMap)
+                        onPress: () => {
+                          this.deleteRow(secId, rowId, rowMap);
+                          this.setState({
+                            listViewData: _.pull(this.state.listViewData, rowData)
+                          });
+                        }
                       }
                     ],
                     { cancelable: true }
@@ -193,7 +206,6 @@ class Connections extends Component {
               </Button>
             )}
           />
-          {showUserList}
         </Content>
       </Container>
     );
@@ -210,10 +222,11 @@ const styles = StyleSheet.create({
     marginLeft: 28
   }
 });
-const mapStateToProps = ({ auth }) => {
-  const { userDetails } = auth;
-  return { userDetails };
-};
+
+const mapStateToProps = state => ({
+  userDetails: state.auth.userDetails,
+  user: state.auth.user
+});
 export default connect(
   mapStateToProps,
   {}
