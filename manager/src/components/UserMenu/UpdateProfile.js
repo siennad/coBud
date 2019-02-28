@@ -22,10 +22,7 @@ import { Keyboard } from 'react-native';
 
 import { accordionBorderColor } from '../../../native-base-theme/variables/material';
 
-import {
-  updateProfile,
-  getUserProfile
-} from '../../actions/UserProfileActions';
+import { updateProfile, getUserProfile } from '../../actions/UserProfileActions';
 
 class UpdateProfile extends Component {
   constructor(props) {
@@ -59,7 +56,7 @@ class UpdateProfile extends Component {
   }
 
   componentWillUnmount() {
-    // Actions.pop();
+    Actions.pop();
   }
 
   handleChange(props, val) {
@@ -149,11 +146,7 @@ class UpdateProfile extends Component {
                   value={values.hobby}
                 />
               </Item>
-              <Button
-                block
-                onPress={() => this.updateProfile()}
-                disabled={!this.state.values.name}
-              >
+              <Button block onPress={() => this.updateProfile()} disabled={!this.state.values.name}>
                 <Text>Save</Text>
               </Button>
             </Form>

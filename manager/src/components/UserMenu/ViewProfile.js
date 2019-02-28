@@ -59,7 +59,7 @@ class ViewProfile extends Component {
      * if my profile: check if there's exists
      * if exists, check if there is the record of my profile
      */
-    if (!isMyProfile) {
+    /* if (!isMyProfile) {
       this.props.getUserProfile(uid);
     } else if (userProfile) {
       if (!userProfile._id === user.user.uid) {
@@ -67,6 +67,11 @@ class ViewProfile extends Component {
       } else {
         this.props.getUserProfile(user.user.uid);
       }
+    } */
+    if (uid) {
+      this.props.getUserProfile(uid);
+    } else {
+      this.props.getUserProfile(user.user.uid);
     }
   }
 

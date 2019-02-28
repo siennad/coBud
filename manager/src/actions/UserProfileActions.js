@@ -1,7 +1,14 @@
 import firebase from 'firebase';
 import { Actions, ActionConst } from 'react-native-router-flux';
 
-import { UPDATE_PROFILE, GET_PROFILE, FETCH_ERROR, UPDATE_ERROR, ON_PROCESS } from './types';
+import {
+  UPDATE_PROFILE,
+  GET_PROFILE,
+  FETCH_ERROR,
+  UPDATE_ERROR,
+  ON_PROCESS,
+  RESET_DATA
+} from './types';
 
 export const getUserProfile = id => async dispatch => {
   dispatch({ type: ON_PROCESS });
@@ -45,8 +52,10 @@ export const updateProfile = ({ userId, value }) => async dispatch => {
           })
           .then(() => {
             dispatch({ type: UPDATE_PROFILE });
-            Actions.viewprofile({ type: ActionConst.REFRESH });
+            Actions.viewprofile({ type: 'reset' });
           });
       }
     );
 };
+
+export const reset = () => ({ type: RESET_DATA });

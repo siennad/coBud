@@ -3,7 +3,8 @@ import {
   GET_PROFILE,
   FETCH_ERROR,
   UPDATE_ERROR,
-  ON_PROCESS
+  ON_PROCESS,
+  RESET_DATA
 } from '../actions/types';
 
 const initState = { loading: false, error: '', userinfo: null };
@@ -19,6 +20,8 @@ export default (state = initState, action) => {
       return { loading: false, error: action.err };
     case UPDATE_PROFILE:
       return { loading: false };
+    case RESET_DATA:
+      return initState;
     default:
       return state;
   }
