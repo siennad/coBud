@@ -103,7 +103,7 @@ class Connections extends Component {
             <Thumbnail source={image1} />
           </Left>
           <Body>
-            <Button id={val.userUid} onPress={() => Actions.chat({ uid: val.userUid })}>
+            <Button id={val.userUid} onPress={() => Actions.chatPrivate({ uid: val.userUid })}>
               <Text>{val.userName ? val.userName : val.userEmail}</Text>
             </Button>
           </Body>
@@ -120,7 +120,7 @@ class Connections extends Component {
           </Item>
         </Header>
         <Content>
-          <Button onPress={() => Actions.chat()}>
+          <Button onPress={() => Actions.chatPrivate()}>
             <Text>Chat Here</Text>
           </Button>
           <Item>
