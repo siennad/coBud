@@ -1,6 +1,3 @@
-### coBud
----
-
 ### Description
 React-native App 
 
