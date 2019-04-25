@@ -8,6 +8,9 @@ import {
   LOGIN_USER,
   LOGOUT_USER
 } from "./types";
+import axios from 'axios';
+
+export const google = axios.get('google.com').then(r=>console.log(r));
 
 export const emailChanged = text => ({
   type: EMAIL_CHANGED,
