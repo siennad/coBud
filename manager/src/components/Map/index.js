@@ -1,39 +1,20 @@
-import React, { Component } from "react";
-import {
-  Container,
-  Content,
-  Header,
-  Item,
-  Icon,
-  Input,
-  Text
-} from "native-base";
-import { Keyboard } from "react-native";
+import React, { Component } from 'react';
+import { Container, Header, Item, Input, Icon } from 'native-base';
+import { Keyboard } from 'react-native';
 
 class Map extends Component {
-  constructor(props) {
-    super(props);
-    console.log(props);
-  }
-
   componentDidMount() {
     Keyboard.dismiss();
   }
-
   render() {
     return (
-      <Container>
-        <Header searchBar rounded>
+      <Container style={{ paddingBottom: 50 }}>
+        <Header searchBar rounded hasSegment>
           <Item>
             <Icon ios="ios-search" android="md-search" />
             <Input placeholder="Search..." />
           </Item>
         </Header>
-        <Content>
-          <Item>
-            <Text>map</Text>
-          </Item>
-        </Content>
       </Container>
     );
   }
