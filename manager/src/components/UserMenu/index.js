@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 import {
   Container,
   Content,
@@ -12,23 +12,33 @@ import {
   Right,
   Body,
   Text
-} from "native-base";
-import { connect } from "react-redux";
-import { Actions } from "react-native-router-flux";
-import { Keyboard } from "react-native";
-import UserAvatar from "react-native-user-avatar";
+} from 'native-base';
+import { connect } from 'react-redux';
+import { Actions } from 'react-native-router-flux';
+import { Keyboard } from 'react-native';
+import UserAvatar from 'react-native-user-avatar';
 
-import { logoutUser, getUserProfile } from "../../actions/AuthActions";
+import { logoutUser } from '../../actions/AuthActions';
+import { getUserProfile, reset } from '../../actions/UserProfileActions';
 
 class UserMenu extends Component {
   async componentDidMount() {
     Keyboard.dismiss();
-    if (!this.props.userProfile) {
-      this.props.getUserProfile(this.props.user.user.uid);
+
+    const { uid, user } = this.props;
+    if (uid) {
+      this.props.getUserProfile(uid);
+    } else {
+      this.props.getUserProfile(user.user.uid);
     }
-    this.setState({
-      userProf: this.props.userProfile ? this.props.userProfile : null
-    });
+  }
+
+  componentWillReceiveProps(nextProps, nextContext) {
+    if (nextProps.userProfile) {
+      this.setState({
+        userProf: nextProps.userProfile
+      });
+    }
   }
 
   shouldComponentUpdate(nextProps, nextState, nextContext) {
@@ -40,6 +50,7 @@ class UserMenu extends Component {
   }
 
   componentWillUnmount() {
+    this.props.reset();
     //Actions.pop();
   }
 
@@ -59,21 +70,13 @@ class UserMenu extends Component {
             <ListItem thumbnail>
               <Left>
                 <UserAvatar
-                  colors={["#ccc", "#fafafa", "#ccaabb"]}
-                  name={
-                    userProfile
-                      ? userProfile.name && userProfile.name
-                      : user.user.email
-                  }
+                  colors={['#2EDFB7', '#FF484A', '#DA5F8E']}
+                  name={userProfile ? userProfile.name && userProfile.name : user.user.email}
                   size="50"
                 />
               </Left>
               <Body>
-                <Text>
-                  {userProfile
-                    ? userProfile.name && userProfile.name
-                    : user.user.email}
-                </Text>
+                <Text>{userProfile ? userProfile.name && userProfile.name : user.user.email}</Text>
               </Body>
             </ListItem>
 
@@ -162,5 +165,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { logoutUser, getUserProfile }
+  { logoutUser, getUserProfile, reset }
 )(UserMenu);

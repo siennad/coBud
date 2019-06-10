@@ -1,13 +1,14 @@
-import firebase from "firebase";
-import { Actions } from "react-native-router-flux";
+import firebase from 'firebase';
+import { Actions } from 'react-native-router-flux';
 import {
   EMAIL_CHANGED,
   PASSWORD_CHANGED,
   LOGIN_USER_SUCCESS,
   LOGIN_USER_FAIL,
   LOGIN_USER,
-  LOGOUT_USER
-} from "./types";
+  LOGOUT_USER,
+  SAVE_USER_DETAIL
+} from './types';
 
 export const emailChanged = text => ({
   type: EMAIL_CHANGED,
@@ -49,8 +50,30 @@ const loginUserSuccess = async (dispatch, user) => {
     type: LOGIN_USER_SUCCESS,
     payload: user
   });
-
+  console.log(user);
+  await dispatch(saveUserDetail(user.user.uid, user.user.email, user.user.displayName));
   Actions.main();
+};
+
+const saveUserDetail = (uid, email, displayName = null) => dispatch => {
+  const userDetail = {
+    userUid: uid,
+    userEmail: email,
+    userName: displayName || null
+  };
+  const ref = firebase.database().ref(`userDetail/${uid}`);
+  const newRef = ref.set(userDetail);
+  const loadUserDetails = firebase.database().ref('userDetail');
+  const newLoad = loadUserDetails.on('value', snapshot => {
+    console.log('dispatch loadUserDetails-------');
+    console.log(snapshot.val());
+    console.log('end dispatch loadUserDetails-------');
+
+    dispatch({
+      type: SAVE_USER_DETAIL,
+      payload: _.values(snapshot.val())
+    });
+  });
 };
 
 export const logoutUser = () => dispatch => {

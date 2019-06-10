@@ -5,7 +5,8 @@
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "test": "jest",
-    "android": "react-native run-android"
+    "android": "react-native run-android",
+    "android-no-cache": "react-native run-android && react-native start --reset-cache"
   },
   "dependencies": {
     "color": "^3.1.0",
@@ -17,7 +18,10 @@
     "react-native": "^0.55.1",
     "react-native-communications": "^2.2.1",
     "react-native-easy-grid": "^0.2.1",
-    "react-native-gifted-chat": "^0.3.0",
+    "react-native-gifted-chat": "^0.7.0",
+    "react-native-image-picker": "^0.28.0",
+    "react-native-maps": "^0.23.0",
+    "react-native-permissions": "^1.1.1",
     "react-native-router-flux": "^3.43.0",
     "react-native-user-avatar": "^1.0.3",
     "react-native-vector-icons": "^6.3.0",
