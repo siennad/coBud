@@ -59,7 +59,7 @@ class UpdateProfile extends Component {
   }
 
   componentWillUnmount() {
-    // Actions.pop();
+    Actions.pop();
   }
 
   handleChange(props, val) {
@@ -69,6 +69,10 @@ class UpdateProfile extends Component {
       formDirty: true,
       values
     });
+  }
+  
+  testConsole() {
+    console.log('abc')
   }
 
   updateProfile() {
@@ -81,7 +85,7 @@ class UpdateProfile extends Component {
 
   render() {
     const { values } = this.state;
-
+    this.testConsole()
     return (
       <Container>
         <Header>
