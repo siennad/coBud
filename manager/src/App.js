@@ -30,6 +30,18 @@ class App extends Component {
     console.log('test');
   }
 
+  testSetup() {
+    const config = {
+      apiKey: 'AIzaSyDfuR6HkFNFAzlSeP30KVU8jRT-KFuPQfo',
+      authDomain: 'manager-bc45f.firebaseapp.com',
+      databaseURL: 'https://manager-bc45f.firebaseio.com',
+      projectId: 'manager-bc45f',
+      storageBucket: 'manager-bc45f.appspot.com',
+      messagingSenderId: '955345807214'
+    };
+    firebase.initializeApp(config);
+  }
+  
   render() {
     const composeEnhancers =
       global.window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
