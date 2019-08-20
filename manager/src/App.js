@@ -25,6 +25,10 @@ class App extends Component {
     };
     firebase.initializeApp(config);
   }
+  
+  testFunc() {
+    console.log('test');
+  }
 
   render() {
     const composeEnhancers =
